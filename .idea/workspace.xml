@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections" />
+    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,27 +24,33 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2ZP9VHLQjGHSyHX8qfVHnxNwmtW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lee/byu/cs240/chess/server/lib&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.BishopMoveTests.bishopMoveUntilEdge.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/lee/byu/cs240/chess/server/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/lib" />
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.BishopMoveTests.bishopMoveUntilEdge">
     <configuration name="All in shared" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <option name="PACKAGE_NAME" value="" />
@@ -49,11 +59,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BishopMoveTests.bishopMoveUntilEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.chessTests.chessPieceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.BishopMoveTests" />
+      <option name="METHOD_NAME" value="bishopMoveUntilEdge" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BishopMoveTests.bishopMoveUntilEdge" />
         <item itemvalue="JUnit.All in shared" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.1-corretto-21.0.1-f644763e9732-557044da" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-f644763e9732-2f79fb23" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
