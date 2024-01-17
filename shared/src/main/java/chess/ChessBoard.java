@@ -9,7 +9,12 @@ package chess;
 public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
     public ChessBoard() {
-        
+        //Might be a good idea to construct it with the starting positions correct
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7; j++) {
+                squares[i][j] = new ChessPiece();
+            }
+        }
     }
 
     /**
