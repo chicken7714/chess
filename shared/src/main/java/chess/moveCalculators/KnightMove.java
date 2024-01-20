@@ -15,7 +15,42 @@ public class KnightMove extends MoveCalculator {
     }
 
     public HashSet<ChessMove> generateMoves() {
-        return new HashSet<>();
+        //Every knight has 8 possible moves
+        //Move 1: row+2, col+1
+        //Move 2: row+1, col+2
+        //Move 3: row-1, col+1
+        //Move 4: row-2, col+1
+        //Move 5: row-2, col-1
+        //Move 6: row-1, col-2
+        //Move 7: row+1, col-2
+        //Move 8: row+2, col-1
+        int row = position.getRow();
+        int col = position.getColumn();
+        for (int i = -2; i <= 2; i++) {
+            for (int j = -2; j <= 2; j++) {
+                if (i == j || i == 0 || j == 0 || (i+j == 0)) {
+                    continue;
+                }
+                if (validMoveCheck(row + i, col + j)) {
+                    moves.add(new ChessMove(position, new ChessPosition(row+i,col+j)));
+                }
+            }
+        }
+        return moves;
+    }
+
+    private boolean validMoveCheck(int row, int col) {
+        ChessPosition potentialLanding = new ChessPosition(row, col);
+        if (row > 8 || col > 8) {
+            return false;
+        }
+        if (row < 1 || col < 1) {
+            return false;
+        }
+        if (board.getPiece(potentialLanding) != null) {
+            return board.getPiece(potentialLanding).getTeamColor() != pieceColor;
+        }
+        return true;
     }
 
 }
