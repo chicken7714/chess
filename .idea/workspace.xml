@@ -5,15 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/BishopMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KingMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/RookMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/BishopMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/BishopMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KingMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KingMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/RookMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/RookMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,24 +45,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.BishopMoveTests.bishopMoveUntilEdge.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lee/byu/cs240/chess/server/lib&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.BishopMoveTests.bishopCaptureEnemy.executor": "Debug",
+    "JUnit.BishopMoveTests.bishopMoveUntilEdge.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/lee/byu/cs240/chess/server/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/lib" />
@@ -71,6 +75,22 @@
       <module name="shared" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BishopMoveTests.bishopCaptureEnemy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.chessTests.chessPieceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.BishopMoveTests" />
+      <option name="METHOD_NAME" value="bishopCaptureEnemy" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -94,6 +114,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.BishopMoveTests.bishopMoveUntilEdge" />
+        <item itemvalue="JUnit.BishopMoveTests.bishopCaptureEnemy" />
         <item itemvalue="JUnit.All in shared" />
       </list>
     </recent_temporary>
@@ -117,7 +138,7 @@
       <workItem from="1705471679780" duration="6000" />
       <workItem from="1705517644139" duration="1721000" />
       <workItem from="1705521602590" duration="4086000" />
-      <workItem from="1705764772336" duration="1196000" />
+      <workItem from="1705764772336" duration="7820000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

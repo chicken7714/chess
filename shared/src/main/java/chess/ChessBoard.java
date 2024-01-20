@@ -9,7 +9,11 @@ package chess;
 public class ChessBoard {
     private ChessPiece[][] squares = new ChessPiece[8][8];
     public ChessBoard() {
-        //Might be a good idea to construct it with the starting positions correct
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7 ; j++) {
+                squares[i][j] = null;
+            }
+        }
     }
 
     /**
@@ -19,7 +23,7 @@ public class ChessBoard {
      * @param piece    the piece to add
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
-        squares[position.getRow()][position.getColumn()] = piece;
+        squares[position.getRow()-1][position.getColumn()-1] = piece;
     }
 
     /**
@@ -30,7 +34,7 @@ public class ChessBoard {
      * position
      */
     public ChessPiece getPiece(ChessPosition position) {
-        return squares[position.getRow()][position.getColumn()];
+        return squares[position.getRow()-1][position.getColumn()-1];
     }
 
     /**
@@ -39,5 +43,22 @@ public class ChessBoard {
      */
     public void resetBoard() {
         throw new RuntimeException("Not implemented");
+    }
+
+    public String toString() {
+        StringBuilder totalStringBuilder = new StringBuilder();
+
+        for (int i = 1; i <= 8; i++) {
+            StringBuilder rowStringBuilder = new StringBuilder();
+            rowStringBuilder.append("Row ").append(i).append(": ");
+            for (int j = 1; j <= 8; j++) {
+                rowStringBuilder.append(squares[i-1][j-1]);
+                if (j <= 7) {
+                    rowStringBuilder.append(", ");
+                }
+            }
+            totalStringBuilder.append(rowStringBuilder.toString()).append(System.lineSeparator());
+        }
+        return totalStringBuilder.toString();
     }
 }

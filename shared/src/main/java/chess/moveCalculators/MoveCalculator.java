@@ -1,28 +1,27 @@
 package chess.moveCalculators;
 
+import chess.ChessGame;
 import chess.ChessMove;
 import chess.ChessPosition;
 import chess.ChessBoard;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
-public class MoveCalculator {
-    private ArrayList<ChessMove> moves;
-    private ChessBoard board;
-    private ChessPosition position;
+public abstract class MoveCalculator {
+    protected ChessBoard board;
+    protected ChessPosition position;
+    protected  ChessGame.TeamColor pieceColor;
+    protected HashSet<ChessMove> moves;
 
-    public MoveCalculator(ChessBoard board, ChessPosition position){
+    public MoveCalculator(ChessBoard board, ChessPosition position, ChessGame.TeamColor pieceColor) {
         this.board = board;
         this.position = position;
-        this.moves = new ArrayList<>();
+        this.pieceColor = pieceColor;
+        this.moves = new HashSet<>();
     }
 
-    public void generateRules() {
-
-    }
-
-    public ArrayList<ChessMove> getMoves() {
-        return this.moves;
-    }
+    public abstract HashSet<ChessMove> generateMoves();
 }

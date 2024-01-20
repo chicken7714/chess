@@ -18,6 +18,12 @@ public class ChessMove {
         this.promotionPiece = promotionPiece;
     }
 
+    public ChessMove(ChessPosition startPosition, ChessPosition endPosition) {
+        this.startPosition = startPosition;
+        this.endPosition = endPosition;
+        this.promotionPiece = null;
+    }
+
     /**
      * @return ChessPosition of starting location
      */
@@ -40,6 +46,9 @@ public class ChessMove {
      */
     public ChessPiece.PieceType getPromotionPiece() {
         return this.promotionPiece;
+    }
 
+    public String toString() {
+        return getClass().getName() + "[startPosition =" + startPosition.toString() + ",endPosition = " + endPosition + "]";
     }
 }

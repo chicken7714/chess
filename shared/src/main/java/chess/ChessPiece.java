@@ -2,6 +2,7 @@ package chess;
 
 import chess.moveCalculators.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -55,13 +56,17 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         MoveCalculator moves = switch (this.type) {
-            case PieceType.KING -> new KingMove(board, myPosition);
-            case PieceType.QUEEN -> new QueenMove(board, myPosition);
-            case PieceType.BISHOP -> new BishopMove(board, myPosition);
-            case PieceType.KNIGHT -> new KnightMove(board, myPosition);
-            case PieceType.ROOK -> new RookMove(board, myPosition);
-            case PieceType.PAWN -> new PawnMove(board, myPosition);
+            case PieceType.KING -> new KingMove(board, myPosition, this.pieceColor);
+            case PieceType.QUEEN -> new QueenMove(board, myPosition, this.pieceColor);
+            case PieceType.BISHOP -> new BishopMove(board, myPosition, this.pieceColor);
+            case PieceType.KNIGHT -> new KnightMove(board, myPosition, this.pieceColor);
+            case PieceType.ROOK -> new RookMove(board, myPosition, this.pieceColor);
+            case PieceType.PAWN -> new PawnMove(board, myPosition, this.pieceColor);
             };
-        return moves.getMoves();
+        return moves.generateMoves();
+    }
+
+    public String toString() {
+        return getClass().getName() + "[pieceColor =" + pieceColor + ",type = " + type + "]";
     }
 }
