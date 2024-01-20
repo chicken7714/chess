@@ -24,4 +24,18 @@ public abstract class MoveCalculator {
     }
 
     public abstract HashSet<ChessMove> generateMoves();
+
+    public boolean validMoveCheck(int row, int col) {
+        ChessPosition potentialLanding = new ChessPosition(row, col);
+        if (row > 8 || col > 8) {
+            return false;
+        }
+        if (row < 1 || col < 1) {
+            return false;
+        }
+        if (board.getPiece(potentialLanding) != null) {
+            return board.getPiece(potentialLanding).getTeamColor() != pieceColor;
+        }
+        return true;
+    }
 }

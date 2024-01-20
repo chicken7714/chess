@@ -7,6 +7,9 @@
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +59,25 @@
     "JUnit.KingMoveTests.kingBlocked.executor": "Debug",
     "JUnit.KingMoveTests.kingCaptureEnemy.executor": "Debug",
     "JUnit.KingMoveTests.kingMoveUntilEdge.executor": "Debug",
+    "JUnit.KnightMoveTests.executor": "Debug",
+    "JUnit.KnightMoveTests.knightBlocked.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCaptureEnemy.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardBottomLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardBottomRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardTopLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardTopRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardBottom.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardTop.executor": "Debug",
+    "JUnit.KnightMoveTests.knightMiddleOfBoardBlack.executor": "Debug",
     "JUnit.KnightMoveTests.knightMiddleOfBoardWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnAdvanceBlockedDoubleMoveWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnAdvanceBlockedWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnCaptureWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnInitialMoveWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnPromotionCapture.executor": "Debug",
     "JUnit.RookMoveTests.rookBlocked.executor": "Debug",
     "JUnit.RookMoveTests.rookCaptureEnemy.executor": "Debug",
     "JUnit.RookMoveTests.rookMoveUntilEdge.executor": "Debug",
@@ -82,8 +103,8 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.KnightMoveTests.knightCaptureEnemy">
-    <configuration name="KnightMoveTests.knightBlocked" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.QueenMoveTests.queenBlocked">
+    <configuration name="PawnMoveTests.pawnAdvanceBlockedDoubleMoveWhite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -92,14 +113,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.KnightMoveTests" />
-      <option name="METHOD_NAME" value="knightBlocked" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.PawnMoveTests" />
+      <option name="METHOD_NAME" value="pawnAdvanceBlockedDoubleMoveWhite" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KnightMoveTests.knightCaptureEnemy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PawnMoveTests.pawnCaptureWhite" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -108,14 +129,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.KnightMoveTests" />
-      <option name="METHOD_NAME" value="knightCaptureEnemy" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.PawnMoveTests" />
+      <option name="METHOD_NAME" value="pawnCaptureWhite" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KnightMoveTests.knightCornerOfBoardBottomLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QueenMoveTests.queenBlocked" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -124,14 +145,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.KnightMoveTests" />
-      <option name="METHOD_NAME" value="knightCornerOfBoardBottomLeft" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.QueenMoveTests" />
+      <option name="METHOD_NAME" value="queenBlocked" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KnightMoveTests.knightCornerOfBoardTopLeft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QueenMoveTests.queenCaptureEnemy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -140,14 +161,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.KnightMoveTests" />
-      <option name="METHOD_NAME" value="knightCornerOfBoardTopLeft" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.QueenMoveTests" />
+      <option name="METHOD_NAME" value="queenCaptureEnemy" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="KnightMoveTests.knightCornerOfBoardTopRight" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="QueenMoveTests.queenMoveUntilEdge" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -156,8 +177,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.KnightMoveTests" />
-      <option name="METHOD_NAME" value="knightCornerOfBoardTopRight" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.QueenMoveTests" />
+      <option name="METHOD_NAME" value="queenMoveUntilEdge" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -165,11 +186,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.KnightMoveTests.knightCaptureEnemy" />
-        <item itemvalue="JUnit.KnightMoveTests.knightBlocked" />
-        <item itemvalue="JUnit.KnightMoveTests.knightCornerOfBoardBottomLeft" />
-        <item itemvalue="JUnit.KnightMoveTests.knightCornerOfBoardTopLeft" />
-        <item itemvalue="JUnit.KnightMoveTests.knightCornerOfBoardTopRight" />
+        <item itemvalue="JUnit.QueenMoveTests.queenBlocked" />
+        <item itemvalue="JUnit.QueenMoveTests.queenCaptureEnemy" />
+        <item itemvalue="JUnit.QueenMoveTests.queenMoveUntilEdge" />
+        <item itemvalue="JUnit.PawnMoveTests.pawnCaptureWhite" />
+        <item itemvalue="JUnit.PawnMoveTests.pawnAdvanceBlockedDoubleMoveWhite" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +213,7 @@
       <workItem from="1705471679780" duration="6000" />
       <workItem from="1705517644139" duration="1721000" />
       <workItem from="1705521602590" duration="4086000" />
-      <workItem from="1705764772336" duration="14380000" />
+      <workItem from="1705764772336" duration="16309000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
