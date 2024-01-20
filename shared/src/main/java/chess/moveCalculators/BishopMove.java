@@ -20,7 +20,9 @@ public class BishopMove extends MoveCalculator {
         while (row <= 8 && col <= 8) {
             ChessPosition potentialLanding = new ChessPosition(row, col);
             if (board.getPiece(potentialLanding) != null) {
-                if (board.getPiece(potentialLanding).getTeamColor() == pieceColor) {
+                System.out.println("Row: " + row);
+                System.out.print("Col: " + col);
+                if (board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                     moves.add(new ChessMove(position, potentialLanding));
                 }
                 break;
@@ -35,7 +37,7 @@ public class BishopMove extends MoveCalculator {
         while (row >= 1 && col >= 1) {
             ChessPosition potentialLanding = new ChessPosition(row, col);
             if (board.getPiece(potentialLanding) != null) {
-                if (board.getPiece(potentialLanding).getTeamColor() == pieceColor) {
+                if (board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                     moves.add(new ChessMove(position, potentialLanding));
                 }
                 break;
@@ -51,7 +53,7 @@ public class BishopMove extends MoveCalculator {
         while (row <= 8 && col >= 1) {
             ChessPosition potentialLanding = new ChessPosition(row, col);
             if (board.getPiece(potentialLanding) != null) {
-                if (board.getPiece(potentialLanding).getTeamColor() == pieceColor) {
+                if (board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                     moves.add(new ChessMove(position, potentialLanding));
                 }
                 break;
@@ -67,7 +69,7 @@ public class BishopMove extends MoveCalculator {
         while (row >= 1 && col <= 8) {
             ChessPosition potentialLanding = new ChessPosition(row, col);
             if (board.getPiece(potentialLanding) != null) {
-                if (board.getPiece(potentialLanding).getTeamColor() == pieceColor) {
+                if (board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                     moves.add(new ChessMove(position, potentialLanding));
                 }
                 break;

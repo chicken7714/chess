@@ -61,11 +61,27 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BishopMoveTests.bishopCaptureEnemy">
+  <component name="RunManager" selected="JUnit.BishopMoveTests.bishopBlocked">
     <configuration name="All in shared" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BishopMoveTests.bishopBlocked" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.chessTests.chessPieceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.chessTests.chessPieceTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.chessPieceTests.BishopMoveTests" />
+      <option name="METHOD_NAME" value="bishopBlocked" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -104,6 +120,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BishopMoveTests.bishopBlocked" />
         <item itemvalue="JUnit.BishopMoveTests.bishopCaptureEnemy" />
         <item itemvalue="JUnit.BishopMoveTests.bishopMoveUntilEdge" />
         <item itemvalue="JUnit.All in shared" />
