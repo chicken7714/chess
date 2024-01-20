@@ -6,17 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPiece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/ChessPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/BishopMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/BishopMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KingMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KingMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/KnightMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/MoveCalculator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/PawnMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/QueenMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/RookMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/chess/moveCalculators/RookMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +61,7 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BishopMoveTests.bishopMoveUntilEdge">
+  <component name="RunManager" selected="JUnit.BishopMoveTests.bishopCaptureEnemy">
     <configuration name="All in shared" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <option name="PACKAGE_NAME" value="" />
@@ -113,8 +104,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BishopMoveTests.bishopMoveUntilEdge" />
         <item itemvalue="JUnit.BishopMoveTests.bishopCaptureEnemy" />
+        <item itemvalue="JUnit.BishopMoveTests.bishopMoveUntilEdge" />
         <item itemvalue="JUnit.All in shared" />
       </list>
     </recent_temporary>
@@ -138,7 +129,7 @@
       <workItem from="1705471679780" duration="6000" />
       <workItem from="1705517644139" duration="1721000" />
       <workItem from="1705521602590" duration="4086000" />
-      <workItem from="1705764772336" duration="7820000" />
+      <workItem from="1705764772336" duration="8912000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

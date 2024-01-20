@@ -33,4 +33,30 @@ public class ChessPosition {
     public String toString() {
         return getClass().getName() + "[row =" + row + ",col = " + col + "]";
     }
+
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+
+        if (o == this) {
+            return true;
+        }
+
+        if (this.getClass() != o.getClass()) {
+            return false;
+        }
+
+        ChessPosition other = (ChessPosition) o;
+
+        return ((row == other.row) && (col == other.col));
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 1;
+        result = 31*result + row;
+        result = 31*result + col;
+        return result;
+    }
 }
