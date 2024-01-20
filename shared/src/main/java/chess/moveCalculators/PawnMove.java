@@ -16,6 +16,8 @@ public class PawnMove extends MoveCalculator{
     }
 
     public HashSet<ChessMove> generateMoves() {
-        return new HashSet<>();
+        if (pieceColor.equals(ChessGame.TeamColor.WHITE)) {
+        }
+        return moves;
     }
 }
