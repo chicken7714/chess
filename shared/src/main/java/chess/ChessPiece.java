@@ -1,7 +1,7 @@
 package chess;
 
-import java.sql.Array;
-import java.util.ArrayList;
+import chess.moveCalculators.*;
+
 import java.util.Collection;
 
 /**
@@ -54,6 +54,14 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        return new ArrayList<>();
+        MoveCalculator moves = switch (this.type) {
+            case PieceType.KING -> new KingMove(board, myPosition);
+            case PieceType.QUEEN -> new QueenMove(board, myPosition);
+            case PieceType.BISHOP -> new BishopMove(board, myPosition);
+            case PieceType.KNIGHT -> new KnightMove(board, myPosition);
+            case PieceType.ROOK -> new RookMove(board, myPosition);
+            case PieceType.PAWN -> new PawnMove(board, myPosition);
+            };
+        return moves.getMoves();
     }
 }
