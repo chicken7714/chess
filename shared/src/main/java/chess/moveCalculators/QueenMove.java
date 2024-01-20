@@ -14,6 +14,9 @@ public class QueenMove extends MoveCalculator {
     }
 
     public HashSet<ChessMove> generateMoves() {
-        return new HashSet<>();
+        int row = position.getRow();
+        int col = position.getColumn();
+
+        return moves;
     }
 }

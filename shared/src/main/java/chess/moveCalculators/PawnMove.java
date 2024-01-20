@@ -1,9 +1,6 @@
 package chess.moveCalculators;
 
-import chess.ChessBoard;
-import chess.ChessGame;
-import chess.ChessMove;
-import chess.ChessPosition;
+import chess.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -16,8 +13,9 @@ public class PawnMove extends MoveCalculator{
     }
 
     public HashSet<ChessMove> generateMoves() {
-        if (pieceColor.equals(ChessGame.TeamColor.WHITE)) {
-        }
+        int row = position.getRow();
+        int col = position.getColumn();
+
         return moves;
     }
 }
