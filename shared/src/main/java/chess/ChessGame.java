@@ -61,12 +61,23 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
+        HashSet<ChessMove> validMoves = new HashSet<>();
         if (board.getPiece(startPosition) == null) {
             return null;
         } else {
             ChessPiece movingPiece = board.getPiece(startPosition);
-            return movingPiece.pieceMoves(board, startPosition);
+            Collection<ChessMove> potentialMoves = movingPiece.pieceMoves(board, startPosition);
+            for (ChessMove potentialMove : potentialMoves) {
+                ChessGame simulation = new ChessGame();
+                simulation.setBoard(new ChessBoard(board));
+                simulation.board.addPiece(potentialMove.getEndPosition(), movingPiece);
+                simulation.board.removePiece(potentialMove.getStartPosition());
+                if (!simulation.isInCheck(movingPiece.getTeamColor())) {
+                    validMoves.add(potentialMove);
+                }
+            }
         }
+        return validMoves;
     }
 
     /**
@@ -96,18 +107,6 @@ public class ChessGame {
             throw new InvalidMoveException("Invalid Move");
         }
 
-        if (isInCheck) {
-            //Simulate our move
-            ChessGame simulation = new ChessGame();
-            //Creating a copy of the chess board
-            simulation.setBoard(new ChessBoard(board));
-            simulation.board.addPiece(move.getEndPosition(), movingPiece);
-            simulation.board.removePiece(move.getStartPosition());
-            if (simulation.isInCheck(this.teamTurn)) {
-                throw new InvalidMoveException("You are still in check");
-            }
-        }
-
         if (move.getPromotionPiece() == null) {
             board.addPiece(move.getEndPosition(), movingPiece);
         } else {
@@ -134,7 +133,7 @@ public class ChessGame {
                if (pieceAtTile == null || pieceAtTile.getTeamColor() == teamColor) {
                    continue;
                }
-               Collection<ChessMove> potentialMoves = validMoves(new ChessPosition(i, j));
+               Collection<ChessMove> potentialMoves = pieceAtTile.pieceMoves(board, new ChessPosition(i, j));
                for (ChessMove move : potentialMoves) {
                    if (board.getPiece(move.getEndPosition()) == null) {
                        continue;
