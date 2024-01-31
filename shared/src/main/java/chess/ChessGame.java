@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -34,6 +35,17 @@ public class ChessGame {
     }
 
     /**
+     * Switches which teams turn it is
+     */
+    private void switchTeamTurn() {
+        if (this.teamTurn == TeamColor.WHITE) {
+            this.teamTurn = TeamColor.BLACK;
+        } else {
+            this.teamTurn = TeamColor.WHITE;
+        }
+    }
+
+    /**
      * Enum identifying the 2 possible teams in a chess game
      */
     public enum TeamColor {
@@ -52,7 +64,8 @@ public class ChessGame {
         if (board.getPiece(startPosition) == null) {
             return null;
         } else {
-            return board.getPiece(startPosition).pieceMoves(board, startPosition);
+            ChessPiece movingPiece = board.getPiece(startPosition);
+            return movingPiece.pieceMoves(board, startPosition);
         }
     }
 
@@ -63,9 +76,27 @@ public class ChessGame {
      * @throws InvalidMoveException if move is invalid
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
+        boolean validMove = false;
         ChessPiece movingPiece = board.getPiece(move.getStartPosition());
-        board.addPiece(move.getEndPosition(), movingPiece);
-        board.removePiece(move.getStartPosition());
+
+        if (movingPiece.getTeamColor() != this.teamTurn) {
+            throw new InvalidMoveException("Other team's turn");
+        }
+
+        Collection<ChessMove> potentialMoves = validMoves(move.getStartPosition());
+        for (ChessMove element : potentialMoves) {
+            if (move.equals(element)) {
+                validMove = true;
+                break;
+            }
+        }
+        if (!validMove) {
+            throw new InvalidMoveException("Invalid Move");
+        } else {
+            board.addPiece(move.getEndPosition(), movingPiece);
+            board.removePiece(move.getStartPosition());
+            switchTeamTurn();
+        }
     }
 
     /**

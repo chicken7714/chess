@@ -2,9 +2,6 @@ package chess.moveCalculators;
 
 import chess.*;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 
 public class PawnMove extends MoveCalculator{
@@ -19,6 +16,9 @@ public class PawnMove extends MoveCalculator{
         if (pieceColor.equals(ChessGame.TeamColor.WHITE)) {
             for (int i = -1; i <= 1; i++) {
                 ChessPosition potentialLanding = new ChessPosition(row + 1, col + i);
+                if ((col + i) > 8 || (col + i) < 1) {
+                    continue;
+                }
                 if (i == 0) {
                     if (board.getPiece(potentialLanding) == null) {
                         if (row == 7) {
@@ -52,6 +52,9 @@ public class PawnMove extends MoveCalculator{
         if (pieceColor.equals(ChessGame.TeamColor.BLACK)) {
             for (int i = -1; i <= 1; i++) {
                 ChessPosition potentialLanding = new ChessPosition(row - 1, col + i);
+                if ((col + i) > 8 || (col + i) < 1) {
+                    continue;
+                }
                 if (i == 0) {
                     if (board.getPiece(potentialLanding) == null) {
                         if (row == 2) {

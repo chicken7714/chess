@@ -24,10 +24,10 @@ public class KingMove extends MoveCalculator {
                 if (i == 0 && j == 0) {
                     continue;
                 }
-                if ((row + i) >= 8 || (row + i) <= 1) {
+                if ((row + i) > 8 || (row + i) < 1) {
                     continue;
                 }
-                if ((col + j) >= 8 || (col +j) <= 1) {
+                if ((col + j) > 8 || (col +j) < 1) {
                     continue;
                 }
                 ChessPosition potentialLanding = new ChessPosition(row+i, col+j);

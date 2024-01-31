@@ -19,6 +19,24 @@ public class ChessBoard {
     }
 
     /**
+     * Copy constructor for ChessBoard object
+     */
+    public ChessBoard(ChessBoard otherBoard) {
+        this.squares = new ChessPiece[8][8];
+
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j <= 7; j++) {
+                ChessPiece originalPiece = otherBoard.squares[i][j];
+                if (originalPiece != null) {
+                    this.squares[i][j] = new ChessPiece(originalPiece);
+                } else {
+                    this.squares[i][j] = null;
+                }
+            }
+        }
+    }
+
+    /**
      * Adds a chess piece to the chessboard
      *
      * @param position where to add the piece to
@@ -41,19 +59,6 @@ public class ChessBoard {
      */
     public ChessPiece getPiece(ChessPosition position) {
         return squares[position.getRow()-1][position.getColumn()-1];
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ChessBoard that = (ChessBoard) o;
-        return Arrays.deepEquals(squares, that.squares);
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.deepHashCode(squares);
     }
 
     /**
@@ -105,4 +110,18 @@ public class ChessBoard {
         }
         return totalStringBuilder.toString();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ChessBoard that = (ChessBoard) o;
+        return Arrays.deepEquals(squares, that.squares);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(squares);
+    }
+
 }
