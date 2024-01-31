@@ -58,12 +58,14 @@
     "JUnit.ChessBoardTests.defaultGameBoard.executor": "Debug",
     "JUnit.ChessBoardTests.executor": "Debug",
     "JUnit.ChessBoardTests.getAddPiece.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.executor": "Debug",
     "JUnit.ChessGameTests$ValidMoveTests.forcedMove.executor": "Debug",
     "JUnit.ChessGameTests$ValidMoveTests.moveIntoCheck.executor": "Debug",
     "JUnit.ChessGameTests$ValidMoveTests.noPutSelfInDanger.executor": "Debug",
     "JUnit.ChessGameTests$ValidMoveTests.rookPinnedToKing.executor": "Debug",
     "JUnit.ChessGameTests.blackCheck.executor": "Debug",
     "JUnit.ChessGameTests.blackTeamPawnCheckmate.executor": "Debug",
+    "JUnit.ChessGameTests.executor": "Run",
     "JUnit.ChessGameTests.invalidMoves.executor": "Debug",
     "JUnit.ChessGameTests.makeValidMoves.executor": "Debug",
     "JUnit.ChessGameTests.promotionMoves.executor": "Debug",
@@ -136,7 +138,7 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ChessGameTests$ValidMoveTests">
+  <component name="RunManager" selected="JUnit.ChessGameTests">
     <configuration name="ChessGameTests$ValidMoveTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
@@ -152,7 +154,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ChessGameTests.blackTeamPawnCheckmate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ChessGameTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="shared" />
       <extension name="coverage">
         <pattern>
@@ -162,7 +164,22 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
-      <option name="METHOD_NAME" value="blackTeamPawnCheckmate" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ChessGameTests.makeValidMoves" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="shared" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.chessTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
+      <option name="METHOD_NAME" value="makeValidMoves" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -200,29 +217,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ChessGameTests.whiteTeamCheckmate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shared" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.chessTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
-      <option name="METHOD_NAME" value="whiteTeamCheckmate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ChessGameTests" />
+        <item itemvalue="JUnit.ChessGameTests.makeValidMoves" />
         <item itemvalue="JUnit.ChessGameTests$ValidMoveTests" />
         <item itemvalue="JUnit.ChessGameTests.scholarsMate" />
         <item itemvalue="JUnit.ChessGameTests.stalemate" />
-        <item itemvalue="JUnit.ChessGameTests.blackTeamPawnCheckmate" />
-        <item itemvalue="JUnit.ChessGameTests.whiteTeamCheckmate" />
       </list>
     </recent_temporary>
   </component>
@@ -266,7 +267,7 @@
       <workItem from="1706626614334" duration="880000" />
       <workItem from="1706647160742" duration="2858000" />
       <workItem from="1706658867881" duration="3038000" />
-      <workItem from="1706664749062" duration="5690000" />
+      <workItem from="1706664749062" duration="6819000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
