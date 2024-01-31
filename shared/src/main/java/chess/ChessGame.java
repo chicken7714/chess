@@ -77,6 +77,8 @@ public class ChessGame {
      */
     public void makeMove(ChessMove move) throws InvalidMoveException {
         boolean validMove = false;
+        boolean isInCheck = isInCheck(this.teamTurn);
+
         ChessPiece movingPiece = board.getPiece(move.getStartPosition());
 
         if (movingPiece.getTeamColor() != this.teamTurn) {
@@ -92,11 +94,23 @@ public class ChessGame {
         }
         if (!validMove) {
             throw new InvalidMoveException("Invalid Move");
-        } else {
-            board.addPiece(move.getEndPosition(), movingPiece);
-            board.removePiece(move.getStartPosition());
-            switchTeamTurn();
         }
+
+        if (isInCheck) {
+            //Simulate our move
+            ChessGame simulation = new ChessGame();
+            //Creating a copy of the chess board
+            simulation.setBoard(new ChessBoard(board));
+            simulation.board.addPiece(move.getEndPosition(), movingPiece);
+            simulation.board.removePiece(move.getStartPosition());
+            if (simulation.isInCheck(this.teamTurn)) {
+                throw new InvalidMoveException("You are still in check");
+            }
+        }
+
+        board.addPiece(move.getEndPosition(), movingPiece);
+        board.removePiece(move.getStartPosition());
+        switchTeamTurn();
     }
 
     /**
