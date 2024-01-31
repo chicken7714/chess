@@ -108,7 +108,12 @@ public class ChessGame {
             }
         }
 
-        board.addPiece(move.getEndPosition(), movingPiece);
+        if (move.getPromotionPiece() == null) {
+            board.addPiece(move.getEndPosition(), movingPiece);
+        } else {
+            ChessPiece promotionPiece = new ChessPiece(teamTurn, move.getPromotionPiece());
+            board.addPiece(move.getEndPosition(), promotionPiece);
+        }
         board.removePiece(move.getStartPosition());
         switchTeamTurn();
     }
