@@ -15,15 +15,6 @@ public class KnightMove extends MoveCalculator {
     }
 
     public HashSet<ChessMove> generateMoves() {
-        //Every knight has 8 possible moves
-        //Move 1: row+2, col+1
-        //Move 2: row+1, col+2
-        //Move 3: row-1, col+1
-        //Move 4: row-2, col+1
-        //Move 5: row-2, col-1
-        //Move 6: row-1, col-2
-        //Move 7: row+1, col-2
-        //Move 8: row+2, col-1
         int row = position.getRow();
         int col = position.getColumn();
         for (int i = -2; i <= 2; i++) {

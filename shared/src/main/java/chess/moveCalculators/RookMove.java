@@ -21,7 +21,6 @@ public class RookMove extends MoveCalculator {
         for (int i = row + 1; i <= 8; i++) {
             if (pieceChecking(i, col)) break;
         }
-
         for (int i = row - 1; i >= 1; i--) {
             if (pieceChecking(i, col)) break;
         }
@@ -31,6 +30,7 @@ public class RookMove extends MoveCalculator {
         for (int i = col - 1; i >= 1; i--) {
             if (pieceChecking(row, i)) break;
         }
+
         return moves;
     }
 

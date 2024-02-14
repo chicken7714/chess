@@ -20,8 +20,6 @@ public class BishopMove extends MoveCalculator {
         while (row <= 8 && col <= 8) {
             ChessPosition potentialLanding = new ChessPosition(row, col);
             if (board.getPiece(potentialLanding) != null) {
-                System.out.println("Row: " + row);
-                System.out.print("Col: " + col);
                 if (board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                     moves.add(new ChessMove(position, potentialLanding));
                 }
