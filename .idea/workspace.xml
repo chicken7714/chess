@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/model/AuthModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/model/ChessModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/model/UserModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/ChessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/GameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/UserModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +284,7 @@
       <workItem from="1706647160742" duration="2858000" />
       <workItem from="1706658867881" duration="3038000" />
       <workItem from="1706664749062" duration="6819000" />
-      <workItem from="1707939656441" duration="1293000" />
+      <workItem from="1707939656441" duration="7188000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
