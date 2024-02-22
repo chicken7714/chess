@@ -3,42 +3,29 @@ package dataAccess;
 import model.GameModel;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class MemoryGameDAO implements GameDAO {
-    private static HashSet<GameModel> games = new HashSet<>();
+    private static HashMap<Integer, GameModel> games = new HashMap<>();
     @Override
-    public void createGame(GameModel game) {
-        games.add(game);
+    public void createGame(int gameID, GameModel game) {
+        games.put(gameID, game);
     }
 
     @Override
     public GameModel getGame(int gameID) throws DataAccessException {
-        for (GameModel game: games) {
-            if (game.gameID() == gameID) {
-                return game;
-            }
-        }
-        throw new DataAccessException("Game not found!");
+        return games.get(gameID);
     }
 
     @Override
     public Collection<GameModel> listGames() {
-        return games;
+        return games.values();
     }
 
     @Override
     public void updateGame(GameModel updatedGame, int gameID) throws DataAccessException {
-        boolean isUpdated = false;
-        for (GameModel game : games) {
-            if (game.gameID() == gameID) {
-                game = updatedGame;
-                isUpdated = true;
-            }
-        }
-        if (!isUpdated) {
-            throw new DataAccessException("Game not found");
-        }
+        games.put(gameID, updatedGame);
     }
 
     @Override

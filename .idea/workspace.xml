@@ -5,16 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/ClearRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/ClearResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/ClearService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/ChessModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/GameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/resources/web/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/web/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/resources/web/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/web/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/resources/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/resources/resources/web/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/web/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +69,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.All in server.executor": "Coverage",
     "JUnit.BishopMoveTests.bishopBlocked.executor": "Debug",
@@ -155,14 +160,21 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/src/main/resources/resources" />
       <recent name="$PROJECT_DIR$/server/src/main/resources" />
       <recent name="$PROJECT_DIR$/server/src/test/java/passoffTests" />
       <recent name="$PROJECT_DIR$/server/src/main/java" />
       <recent name="$PROJECT_DIR$/server/src/main" />
-      <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in server">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in server" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <option name="PACKAGE_NAME" value="" />
@@ -217,29 +229,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ChessGameTests.scholarsMate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shared" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.chessTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
-      <option name="METHOD_NAME" value="scholarsMate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in server" />
         <item itemvalue="JUnit.ChessGameTests" />
         <item itemvalue="JUnit.ChessGameTests.makeValidMoves" />
         <item itemvalue="JUnit.ChessGameTests$ValidMoveTests" />
-        <item itemvalue="JUnit.ChessGameTests.scholarsMate" />
       </list>
     </recent_temporary>
   </component>
@@ -284,7 +280,9 @@
       <workItem from="1706647160742" duration="2858000" />
       <workItem from="1706658867881" duration="3038000" />
       <workItem from="1706664749062" duration="6819000" />
-      <workItem from="1707939656441" duration="7188000" />
+      <workItem from="1707939656441" duration="7358000" />
+      <workItem from="1708014420757" duration="2977000" />
+      <workItem from="1708555507542" duration="5290000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
