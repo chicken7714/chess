@@ -1,3 +1,5 @@
 package requestresponse;
 
-public record LoginResponse (String username, String authToken) {}
+import java.util.UUID;
+
+public record LoginResponse (String username, UUID authToken) {}

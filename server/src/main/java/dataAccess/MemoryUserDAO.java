@@ -2,16 +2,16 @@ package dataAccess;
 
 import model.UserModel;
 
+import javax.xml.crypto.Data;
 import java.util.HashMap;
 
 public class MemoryUserDAO implements UserDAO {
     private static HashMap<String, UserModel> users = new HashMap<>();
 
     @Override
-    public void createUser(UserModel user) throws DataAccessException {
+    public void createUser(UserModel user) {
         users.put(user.username(), user);
     }
-
     @Override
     public UserModel getUser(String username) throws DataAccessException {
         return users.get(username);
@@ -20,5 +20,26 @@ public class MemoryUserDAO implements UserDAO {
     @Override
     public void clear() {
         users.clear();
+    }
+
+    public boolean isValidUser(String username, String password) throws DataAccessException {
+        var userModel = users.get(username);
+        if (userModel == null) {
+            throw new DataAccessException("Username doesn't exist");
+        }
+
+        if (userModel.password().equals(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isInDatabase(String username) {
+        if (users.get(username) != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

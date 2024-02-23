@@ -1,0 +1,29 @@
+package handler;
+
+import com.google.gson.Gson;
+import dataAccess.DataAccessException;
+import requestresponse.ErrorResponse;
+import requestresponse.RegisterRequest;
+import requestresponse.RegisterResponse;
+import service.RegisterService;
+import service.UnauthorizedAccessException;
+import spark.Request;
+import spark.Response;
+
+public class RegisterHandler {
+
+    public Object register(Request req, Response res) {
+        var gson = new Gson();
+        var user = gson.fromJson(req.body(), RegisterRequest.class);
+
+        try {
+            RegisterService service = new RegisterService();
+            RegisterResponse response = service.registerUser(user);
+            res.status(200);
+            return gson.toJson(response);
+        } catch (UnauthorizedAccessException e) {
+            res.status(403);
+            return gson.toJson(new ErrorResponse(e.getMessage()));
+        }
+    }
+}

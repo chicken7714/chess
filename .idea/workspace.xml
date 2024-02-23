@@ -5,16 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/RegisterHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/RegisterResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/LogoutService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/UnauthorizedAccessException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/requestresponse/ClearRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/requestresponse/ClearResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/ClearService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/ClearService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Record" />
         <option value="Class" />
       </list>
     </option>
@@ -164,7 +175,7 @@
       <recent name="$PROJECT_DIR$/server/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.StandardAPITests.staticFiles">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="server" />
@@ -195,22 +206,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ChessGameTests.makeValidMoves" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shared" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.chessTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
-      <option name="METHOD_NAME" value="makeValidMoves" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="StandardAPITests.staticFiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -227,13 +222,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StandardAPITests.successLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="successLogin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.StandardAPITests.staticFiles" />
+        <item itemvalue="JUnit.StandardAPITests.successLogin" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.All in server" />
         <item itemvalue="JUnit.ChessGameTests" />
-        <item itemvalue="JUnit.ChessGameTests.makeValidMoves" />
       </list>
     </recent_temporary>
   </component>
@@ -281,7 +292,7 @@
       <workItem from="1707939656441" duration="7358000" />
       <workItem from="1708014420757" duration="2977000" />
       <workItem from="1708555507542" duration="5800000" />
-      <workItem from="1708711481835" duration="2437000" />
+      <workItem from="1708711481835" duration="9701000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

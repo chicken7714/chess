@@ -2,10 +2,13 @@ package dataAccess;
 
 import model.AuthModel;
 
+import java.util.UUID;
+
 public interface AuthDAO {
     void createAuth(AuthModel newAuth);
-    boolean getAuth(AuthModel auth) throws DataAccessException;
-    void deleteAuth(AuthModel auth);
+    UUID getAuth(String username) throws DataAccessException;
+
+    void deleteAuth(UUID authToken) throws DataAccessException;
 
     void clear();
 }

@@ -1,3 +1,5 @@
 package model;
 
-public record AuthModel(String authToken, String username) {}
+import java.util.UUID;
+
+public record AuthModel(UUID authToken, String username) {}
