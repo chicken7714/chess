@@ -1,20 +1,23 @@
 package handler;
 
 import com.google.gson.Gson;
-import requestresponse.ClearRequest;
-import requestresponse.ClearResponse;
 import service.ClearService;
+import spark.Request;
+import spark.Response;
 
 public class ClearHandler {
 
-    String clear() {
-        var serializer = new Gson();
-
+    public Object clear(Request req, Response res) {
         ClearService service = new ClearService();
-        ClearRequest request = new ClearRequest(true);
-        ClearResponse response = service.clear(request);
-
-        return serializer.toJson(response);
+        if (service.clear()) {
+            res.status(200);
+        }
+        else {
+            res.status(500);
+        }
+        var serializer = new Gson();
+        var json = serializer.toJson("");
+        return json;
     }
 
 }

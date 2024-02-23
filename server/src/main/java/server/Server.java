@@ -1,5 +1,7 @@
 package server;
 
+import handler.ClearHandler;
+import service.ClearService;
 import spark.*;
 
 public class Server {
@@ -10,7 +12,7 @@ public class Server {
         Spark.staticFiles.location("web");
 
         // Register your endpoints and handle exceptions here.
-        Spark.get("/db", (req, res) -> "Hello World");
+        Spark.delete("/db", (req, res) -> new ClearHandler().clear(req, res));
         // Spark.awaitInitialization();
         return Spark.port();
     }
