@@ -42,9 +42,13 @@ public class MemoryAuthDAO implements AuthDAO {
         authTokens.clear();
     }
 
-    public void checkValidAuth(UUID authToken) throws DataAccessException{
-        if (authTokens.get(authToken) == null) {
-            throw new DataAccessException("Auth Token not found");
+    public String checkValidAuth(UUID authToken) throws DataAccessException{
+        String matchedUser = null;
+        for (String user : authTokens.keySet()) {
+            if (authTokens.get(user).equals(authToken)) {
+                return user;
+            }
         }
+        throw new DataAccessException("Auth not found");
     }
 }

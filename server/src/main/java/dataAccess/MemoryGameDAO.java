@@ -4,13 +4,18 @@ import model.GameModel;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class MemoryGameDAO implements GameDAO {
     private static HashMap<Integer, GameModel> games = new HashMap<>();
+    private static int idCount = 1;
     @Override
-    public void createGame(int gameID, GameModel game) {
-        games.put(gameID, game);
+    public int createGame(String gameName) {
+        int gameID = idCount;
+        idCount++;
+
+        GameModel newGame = new GameModel(gameID, null, null, gameName);
+        games.put(gameID, newGame);
+        return gameID;
     }
 
     @Override
@@ -24,8 +29,23 @@ public class MemoryGameDAO implements GameDAO {
     }
 
     @Override
-    public void updateGame(GameModel updatedGame, int gameID) throws DataAccessException {
-        games.put(gameID, updatedGame);
+    public void addUser(int gameID, String username, String playerColor) throws DataAccessException {
+        GameModel game = games.get(gameID);
+        String gameName = game.gameName();
+        String blackUsername = game.blackUsername();
+        String whiteUsername = game.whiteUsername();
+
+        if (playerColor.equals("WHITE") && (whiteUsername == null)) {
+            whiteUsername = username;
+            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName);
+            games.put(gameID, newGame);
+        } else if (playerColor.equals("BLACK") && (blackUsername == null)) {
+            blackUsername = username;
+            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName);
+            games.put(gameID, newGame);
+        } else {
+            throw new DataAccessException("Username already taken");
+        }
     }
 
     @Override
