@@ -52,15 +52,23 @@ public class GameHandler {
 
     public Object joinGame(Request req, Response res) {
         var gson = new Gson();
-        UUID authToken = UUID.fromString(req.headers("authorization"));
+        UUID authToken;
+        try {
+            authToken = UUID.fromString(req.headers("authorization"));
+        } catch (IllegalArgumentException e) {
+            res.status(401);
+            return gson.toJson(new ErrorResponse("Error: unauthorized"));
+        }
+
         var requestBody = gson.fromJson(req.body(), JoinGameData.class);
         JoinGameRequest joinGameRequest = new JoinGameRequest(authToken, requestBody.playerColor(), requestBody.gameID());
+        System.out.println(joinGameRequest);
         GameService service = new GameService();
 
         try {
             service.joinGame(joinGameRequest);
             res.status(200);
-            return gson.toJson("{}");
+            return "{}";
         } catch (UnauthorizedAccessException e) {
             res.status(401);
             return gson.toJson(new ErrorResponse("Error: unauthorized"));

@@ -50,18 +50,19 @@ public class GameService {
 
         try {
             username = authDAO.checkValidAuth(authToken);
+            System.out.println(username);
         } catch (DataAccessException e) {
             throw new UnauthorizedAccessException("Unauthorized");
         }
 
-        if ((!request.playerColor().equals("WHITE")) && (!request.playerColor().equals("BLACK"))) {
-            throw new InvalidRequestException("Improper Color Provided");
-        }
-
-        try {
-            gameDAO.addUser(request.gameID(), username, request.playerColor());
-        } catch (DataAccessException e) {
-            throw new UnavailableRequestException("Player color already taken");
+        if (request.playerColor() == null) {
+            // User gets added as a spectator
+        } else if ((request.playerColor().equals("WHITE")) || (request.playerColor().equals("BLACK"))) {
+            try {
+                gameDAO.addUser(request.gameID(), username, request.playerColor());
+            } catch (DataAccessException e) {
+                throw new UnavailableRequestException("Player color already taken");
+            }
         }
     }
 }

@@ -27,7 +27,7 @@ public class LoginService {
             throw new UnauthorizedAccessException("Password not valid");
         } else {
             UUID authToken = generateAuthToken();
-            AuthModel authData = new AuthModel(authToken, request.password());
+            AuthModel authData = new AuthModel(authToken, request.username());
             authDAO.createAuth(authData);
             return new LoginResponse(request.username(), authToken);
         }

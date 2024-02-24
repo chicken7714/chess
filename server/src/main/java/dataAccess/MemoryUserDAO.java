@@ -28,7 +28,7 @@ public class MemoryUserDAO implements UserDAO {
             throw new DataAccessException("Username doesn't exist");
         }
 
-        if (userModel.password().equals(password)) {
+        if (password.equals(userModel.password())) {
             return true;
         } else {
             return false;
