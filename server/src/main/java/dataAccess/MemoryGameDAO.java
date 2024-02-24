@@ -52,4 +52,11 @@ public class MemoryGameDAO implements GameDAO {
     public void clear() {
         games.clear();
     }
+
+    public void isValidGame(int gameID) throws DataAccessException {
+        GameModel game = games.get(gameID);
+        if (game == null) {
+            throw new DataAccessException("Bad gameID");
+        }
+    }
 }

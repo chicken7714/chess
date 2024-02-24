@@ -25,7 +25,7 @@ public class GameHandler {
             return gson.toJson(listGameResponse);
         } catch (UnauthorizedAccessException e) {
             res.status(401);
-            return new ErrorResponse("Error: unauthorized");
+            return gson.toJson(new ErrorResponse("Error: unauthorized"));
         }
     }
 
@@ -62,7 +62,6 @@ public class GameHandler {
 
         var requestBody = gson.fromJson(req.body(), JoinGameData.class);
         JoinGameRequest joinGameRequest = new JoinGameRequest(authToken, requestBody.playerColor(), requestBody.gameID());
-        System.out.println(joinGameRequest);
         GameService service = new GameService();
 
         try {

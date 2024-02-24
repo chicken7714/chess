@@ -50,9 +50,14 @@ public class GameService {
 
         try {
             username = authDAO.checkValidAuth(authToken);
-            System.out.println(username);
         } catch (DataAccessException e) {
             throw new UnauthorizedAccessException("Unauthorized");
+        }
+
+        try {
+            gameDAO.isValidGame(request.gameID());
+        } catch (DataAccessException e) {
+            throw new InvalidRequestException("Bad Game ID");
         }
 
         if (request.playerColor() == null) {

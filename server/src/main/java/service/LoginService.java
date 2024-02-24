@@ -34,7 +34,6 @@ public class LoginService {
     }
 
     private UUID generateAuthToken() {
-        UUID uuid = UUID.randomUUID();
-        return uuid;
+        return UUID.randomUUID();
     }
 }
