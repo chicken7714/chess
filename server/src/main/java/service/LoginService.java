@@ -26,13 +26,7 @@ public class LoginService {
         if (!isValidUser) {
             throw new UnauthorizedAccessException("Password not valid");
         } else {
-            UUID authToken;
-            try {
-                authToken = authDAO.getAuth(request.username());
-
-            } catch (DataAccessException exception) {
-                authToken = generateAuthToken();
-            }
+            UUID authToken = generateAuthToken();
             AuthModel authData = new AuthModel(authToken, request.password());
             authDAO.createAuth(authData);
             return new LoginResponse(request.username(), authToken);

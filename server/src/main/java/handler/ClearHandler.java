@@ -14,7 +14,7 @@ public class ClearHandler {
 
         if (service.clear()) {
             res.status(200);
-            return serializer.toJson("");
+            return "{}";
         }
         else {
             res.status(500);

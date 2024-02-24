@@ -5,6 +5,7 @@ import dataAccess.DataAccessException;
 import requestresponse.ErrorResponse;
 import requestresponse.RegisterRequest;
 import requestresponse.RegisterResponse;
+import service.InvalidRequestException;
 import service.RegisterService;
 import service.UnauthorizedAccessException;
 import spark.Request;
@@ -23,6 +24,9 @@ public class RegisterHandler {
             return gson.toJson(response);
         } catch (UnauthorizedAccessException e) {
             res.status(403);
+            return gson.toJson(new ErrorResponse(e.getMessage()));
+        } catch (InvalidRequestException e) {
+            res.status(400);
             return gson.toJson(new ErrorResponse(e.getMessage()));
         }
     }

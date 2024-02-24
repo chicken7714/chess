@@ -21,7 +21,7 @@ public class LogoutHandler {
         try {
             service.logout(logoutRequest);
             res.status(200);
-            return gson.toJson("");
+            return "{}";
         } catch (UnauthorizedAccessException e) {
             res.status(401);
             return gson.toJson(new ErrorResponse(e.getMessage()));

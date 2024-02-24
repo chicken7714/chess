@@ -5,26 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/handler/RegisterHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/ErrorResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LogoutRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/RegisterRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/RegisterResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/LogoutService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/UnauthorizedAccessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/service/InvalidRequestException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/requestresponse/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/RegisterHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/RegisterHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,94 +63,106 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.All in server.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.BishopMoveTests.bishopBlocked.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.BishopMoveTests.bishopCaptureEnemy.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.BishopMoveTests.bishopMoveUntilEdge.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.BishopMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessBoardTests.defaultGameBoard.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessBoardTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessBoardTests.getAddPiece.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests$ValidMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests$ValidMoveTests.forcedMove.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests$ValidMoveTests.moveIntoCheck.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests$ValidMoveTests.noPutSelfInDanger.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests$ValidMoveTests.rookPinnedToKing.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.blackCheck.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.blackTeamPawnCheckmate.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.ChessGameTests.invalidMoves.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.makeValidMoves.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.promotionMoves.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.scholarsMate.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.stalemate.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.whiteCheck.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessGameTests.whiteTeamCheckmate.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessMoveTests.equalsTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessMoveTests.hashSetTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessMoveTests.hashTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessPositionTests.equalsTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessPositionTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessPositionTests.hashSetTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.ChessPositionTests.hashTest.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KingMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KingMoveTests.kingBlocked.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KingMoveTests.kingCaptureEnemy.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KingMoveTests.kingMoveUntilEdge.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightBlocked.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightCaptureEnemy.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightCornerOfBoardBottomLeft.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightCornerOfBoardBottomRight.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightCornerOfBoardTopLeft.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightCornerOfBoardTopRight.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightEdgeOfBoardBottom.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightEdgeOfBoardLeft.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightEdgeOfBoardRight.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightEdgeOfBoardTop.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightMiddleOfBoardBlack.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.KnightMoveTests.knightMiddleOfBoardWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnAdvanceBlockedDoubleMoveWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnAdvanceBlockedWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnCaptureWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnInitialMoveWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.PawnMoveTests.pawnPromotionCapture.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.QueenMoveTests.queenBlocked.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.QueenMoveTests.queenCaptureEnemy.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.QueenMoveTests.queenMoveUntilEdge.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.RookMoveTests.rookBlocked.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.RookMoveTests.rookCaptureEnemy.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.RookMoveTests.rookMoveUntilEdge.executor&quot;: &quot;Debug&quot;,
-    &quot;JUnit.StandardAPITests.staticFiles.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.passoffTests in shared.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/lee/byu/cs240/chess/server/lib&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.All in server.executor": "Coverage",
+    "JUnit.BishopMoveTests.bishopBlocked.executor": "Debug",
+    "JUnit.BishopMoveTests.bishopCaptureEnemy.executor": "Debug",
+    "JUnit.BishopMoveTests.bishopMoveUntilEdge.executor": "Debug",
+    "JUnit.BishopMoveTests.executor": "Debug",
+    "JUnit.ChessBoardTests.defaultGameBoard.executor": "Debug",
+    "JUnit.ChessBoardTests.executor": "Debug",
+    "JUnit.ChessBoardTests.getAddPiece.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.forcedMove.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.moveIntoCheck.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.noPutSelfInDanger.executor": "Debug",
+    "JUnit.ChessGameTests$ValidMoveTests.rookPinnedToKing.executor": "Debug",
+    "JUnit.ChessGameTests.blackCheck.executor": "Debug",
+    "JUnit.ChessGameTests.blackTeamPawnCheckmate.executor": "Debug",
+    "JUnit.ChessGameTests.executor": "Run",
+    "JUnit.ChessGameTests.invalidMoves.executor": "Debug",
+    "JUnit.ChessGameTests.makeValidMoves.executor": "Debug",
+    "JUnit.ChessGameTests.promotionMoves.executor": "Debug",
+    "JUnit.ChessGameTests.scholarsMate.executor": "Debug",
+    "JUnit.ChessGameTests.stalemate.executor": "Debug",
+    "JUnit.ChessGameTests.whiteCheck.executor": "Debug",
+    "JUnit.ChessGameTests.whiteTeamCheckmate.executor": "Debug",
+    "JUnit.ChessMoveTests.equalsTest.executor": "Debug",
+    "JUnit.ChessMoveTests.executor": "Debug",
+    "JUnit.ChessMoveTests.hashSetTest.executor": "Debug",
+    "JUnit.ChessMoveTests.hashTest.executor": "Debug",
+    "JUnit.ChessPositionTests.equalsTest.executor": "Debug",
+    "JUnit.ChessPositionTests.executor": "Debug",
+    "JUnit.ChessPositionTests.hashSetTest.executor": "Debug",
+    "JUnit.ChessPositionTests.hashTest.executor": "Debug",
+    "JUnit.KingMoveTests.executor": "Debug",
+    "JUnit.KingMoveTests.kingBlocked.executor": "Debug",
+    "JUnit.KingMoveTests.kingCaptureEnemy.executor": "Debug",
+    "JUnit.KingMoveTests.kingMoveUntilEdge.executor": "Debug",
+    "JUnit.KnightMoveTests.executor": "Debug",
+    "JUnit.KnightMoveTests.knightBlocked.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCaptureEnemy.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardBottomLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardBottomRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardTopLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightCornerOfBoardTopRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardBottom.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardLeft.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardRight.executor": "Debug",
+    "JUnit.KnightMoveTests.knightEdgeOfBoardTop.executor": "Debug",
+    "JUnit.KnightMoveTests.knightMiddleOfBoardBlack.executor": "Debug",
+    "JUnit.KnightMoveTests.knightMiddleOfBoardWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnAdvanceBlockedDoubleMoveWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnAdvanceBlockedWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnCaptureWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnInitialMoveWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor": "Debug",
+    "JUnit.PawnMoveTests.pawnPromotionCapture.executor": "Debug",
+    "JUnit.QueenMoveTests.queenBlocked.executor": "Debug",
+    "JUnit.QueenMoveTests.queenCaptureEnemy.executor": "Debug",
+    "JUnit.QueenMoveTests.queenMoveUntilEdge.executor": "Debug",
+    "JUnit.RookMoveTests.rookBlocked.executor": "Debug",
+    "JUnit.RookMoveTests.rookCaptureEnemy.executor": "Debug",
+    "JUnit.RookMoveTests.rookMoveUntilEdge.executor": "Debug",
+    "JUnit.StandardAPITests.executor": "Run",
+    "JUnit.StandardAPITests.failLogout.executor": "Debug",
+    "JUnit.StandardAPITests.failRegister.executor": "Debug",
+    "JUnit.StandardAPITests.goodCreate.executor": "Debug",
+    "JUnit.StandardAPITests.loginInvalidUser.executor": "Debug",
+    "JUnit.StandardAPITests.loginWrongPassword.executor": "Debug",
+    "JUnit.StandardAPITests.multipleClear.executor": "Debug",
+    "JUnit.StandardAPITests.registerTwice.executor": "Debug",
+    "JUnit.StandardAPITests.staticFiles.executor": "Debug",
+    "JUnit.StandardAPITests.successLogin.executor": "Debug",
+    "JUnit.StandardAPITests.successLogout.executor": "Debug",
+    "JUnit.StandardAPITests.successRegister.executor": "Debug",
+    "JUnit.StandardAPITests.uniqueAuthorizationTokens.executor": "Debug",
+    "JUnit.passoffTests in shared.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "extract.method.default.visibility": "private",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/lee/byu/cs240/chess/server/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/server/lib" />
@@ -175,33 +176,35 @@
       <recent name="$PROJECT_DIR$/server/src/main" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests.staticFiles">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+  <component name="RunManager" selected="JUnit.StandardAPITests.successLogin">
+    <configuration name="StandardAPITests.failLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in server" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ChessGameTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="shared" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.chessTests.*" />
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.chessTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.chessTests.ChessGameTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="failLogout" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StandardAPITests.goodCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="goodCreate" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -238,13 +241,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="StandardAPITests.successLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="successLogout" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StandardAPITests.staticFiles" />
         <item itemvalue="JUnit.StandardAPITests.successLogin" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.All in server" />
-        <item itemvalue="JUnit.ChessGameTests" />
+        <item itemvalue="JUnit.StandardAPITests.staticFiles" />
+        <item itemvalue="JUnit.StandardAPITests.goodCreate" />
+        <item itemvalue="JUnit.StandardAPITests.failLogout" />
+        <item itemvalue="JUnit.StandardAPITests.successLogout" />
       </list>
     </recent_temporary>
   </component>
@@ -292,7 +311,8 @@
       <workItem from="1707939656441" duration="7358000" />
       <workItem from="1708014420757" duration="2977000" />
       <workItem from="1708555507542" duration="5800000" />
-      <workItem from="1708711481835" duration="9701000" />
+      <workItem from="1708711481835" duration="10757000" />
+      <workItem from="1708724676658" duration="1415000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

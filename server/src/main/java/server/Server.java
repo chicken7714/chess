@@ -19,7 +19,7 @@ public class Server {
         Spark.delete("/session", (req, res) -> new LogoutHandler().logout(req, res));
         Spark.post("/session", (req, res) -> new LoginHandler().login(req, res));
         Spark.post("/user", (req, res) -> new RegisterHandler().register(req, res));
-        // Spark.awaitInitialization();
+        Spark.awaitInitialization();
         return Spark.port();
     }
 
