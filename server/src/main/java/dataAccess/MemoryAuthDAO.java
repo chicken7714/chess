@@ -41,4 +41,10 @@ public class MemoryAuthDAO implements AuthDAO {
     public void clear() {
         authTokens.clear();
     }
+
+    public void checkValidAuth(UUID authToken) throws DataAccessException{
+        if (authTokens.get(authToken) == null) {
+            throw new DataAccessException("Auth Token not found");
+        }
+    }
 }
