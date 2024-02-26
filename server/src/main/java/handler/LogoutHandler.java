@@ -1,8 +1,8 @@
 package handler;
 
 import com.google.gson.Gson;
-import requestresponse.ErrorResponse;
-import requestresponse.LogoutRequest;
+import response.ErrorResponse;
+import request.LogoutRequest;
 import service.LogoutService;
 import service.UnauthorizedAccessException;
 import spark.Request;

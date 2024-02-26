@@ -4,10 +4,9 @@ import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryUserDAO;
 import model.AuthModel;
-import requestresponse.LoginRequest;
-import requestresponse.LoginResponse;
+import request.LoginRequest;
+import response.LoginResponse;
 
-import javax.xml.crypto.Data;
 import java.util.UUID;
 
 public class LoginService {
@@ -16,7 +15,7 @@ public class LoginService {
         var userDAO = new MemoryUserDAO();
         var authDAO = new MemoryAuthDAO();
 
-        boolean isValidUser = false;
+        boolean isValidUser;
         try {
             isValidUser = userDAO.isValidUser(request.username(), request.password());
         } catch (DataAccessException e) {

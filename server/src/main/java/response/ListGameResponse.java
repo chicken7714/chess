@@ -1,4 +1,4 @@
-package requestresponse;
+package response;
 
 import model.GameModel;
 

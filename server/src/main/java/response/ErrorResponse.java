@@ -1,4 +1,4 @@
-package requestresponse;
+package response;
 
 public record ErrorResponse(String message) {
 }

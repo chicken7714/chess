@@ -1,7 +1,10 @@
 package handler;
 
 import com.google.gson.Gson;
-import requestresponse.*;
+import request.*;
+import response.CreateGameResponse;
+import response.ErrorResponse;
+import response.ListGameResponse;
 import service.GameService;
 import service.InvalidRequestException;
 import service.UnauthorizedAccessException;

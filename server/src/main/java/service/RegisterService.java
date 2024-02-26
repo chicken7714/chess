@@ -1,16 +1,12 @@
 package service;
 
-import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryUserDAO;
 import model.AuthModel;
 import model.UserModel;
-import requestresponse.LoginRequest;
-import requestresponse.LoginResponse;
-import requestresponse.RegisterRequest;
-import requestresponse.RegisterResponse;
+import request.RegisterRequest;
+import response.RegisterResponse;
 
-import javax.xml.crypto.Data;
 import java.util.UUID;
 
 public class RegisterService {

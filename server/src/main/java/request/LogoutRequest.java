@@ -1,4 +1,4 @@
-package requestresponse;
+package request;
 
 import java.util.UUID;
 

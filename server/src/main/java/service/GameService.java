@@ -4,9 +4,10 @@ import dataAccess.DataAccessException;
 import dataAccess.MemoryAuthDAO;
 import dataAccess.MemoryGameDAO;
 import model.GameModel;
-import requestresponse.*;
+import request.*;
+import response.CreateGameResponse;
+import response.ListGameResponse;
 
-import javax.xml.crypto.Data;
 import java.util.Collection;
 import java.util.UUID;
 

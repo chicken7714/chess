@@ -1,10 +1,9 @@
 package handler;
 
 import com.google.gson.Gson;
-import dataAccess.DataAccessException;
-import requestresponse.ErrorResponse;
-import requestresponse.RegisterRequest;
-import requestresponse.RegisterResponse;
+import response.ErrorResponse;
+import request.RegisterRequest;
+import response.RegisterResponse;
 import service.InvalidRequestException;
 import service.RegisterService;
 import service.UnauthorizedAccessException;
