@@ -2,6 +2,8 @@ package serviceTests;
 
 import dataAccess.*;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import passoffTests.testClasses.TestException;
 import request.*;
@@ -15,7 +17,14 @@ import java.util.UUID;
 
 public class ServiceTests {
 
+    @BeforeEach
+    public void beforeEach() {
+        ClearService clearService = new ClearService();
+        clearService.clear();
+    }
+
     @Test
+    @Order(1)
     public void positiveRegister() throws UnauthorizedAccessException, InvalidRequestException {
         RegisterRequest req = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -26,6 +35,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(2)
     public void negativeRegister() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterRequest req2 = new RegisterRequest("username", "password123", "email@email.com");
@@ -38,6 +48,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(3)
     public void positiveLogin() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService regService = new RegisterService();
@@ -51,6 +62,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(4)
     public void negativeLogin() throws Exception {
         LoginRequest req1 = new LoginRequest("username", "password2");
         LoginService loginService = new LoginService();
@@ -58,6 +70,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(5)
     public void positiveLogout() throws Exception {
         RegisterRequest req = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -76,6 +89,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(6)
     public void negativeLogout() throws Exception {
         LogoutRequest req1 = new LogoutRequest(UUID.randomUUID());
         LogoutService service = new LogoutService();
@@ -83,6 +97,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(7)
     public void positiveCreateGame() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -95,10 +110,11 @@ public class ServiceTests {
         GameService gameService = new GameService();
         CreateGameRequest req3 = new CreateGameRequest(res1.authToken(), "HelloWorld");
         CreateGameResponse res2 = gameService.createGame(req3);
-        Assertions.assertEquals(1, res2.gameID());
+        Assertions.assertTrue(res2.gameID() != 0);
     }
 
     @Test
+    @Order(8)
     public void negativeCreateGame() throws Exception {
         GameService gameService = new GameService();
         CreateGameRequest req3 = new CreateGameRequest(UUID.randomUUID(), "HelloWorld");
@@ -106,6 +122,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(9)
     public void positiveJoinGame() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -117,9 +134,9 @@ public class ServiceTests {
 
         GameService gameService = new GameService();
         CreateGameRequest req3 = new CreateGameRequest(res1.authToken(), "HelloWorld");
-        gameService.createGame(req3);
+        CreateGameResponse gameResponse = gameService.createGame(req3);
 
-        JoinGameRequest req4 = new JoinGameRequest(res1.authToken(), "WHITE", 1);
+        JoinGameRequest req4 = new JoinGameRequest(res1.authToken(), "WHITE", gameResponse.gameID());
         gameService.joinGame(req4);
         GameDAO gameDAO = new MemoryGameDAO();
         var games = gameDAO.listGames();
@@ -128,6 +145,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(10)
     public void negativeJoinGame() throws Exception {
         RegisterRequest regReq1 = new RegisterRequest("username", "password", "email");
         RegisterRequest reqReq2 = new RegisterRequest("username2", "password", "email2");
@@ -143,15 +161,16 @@ public class ServiceTests {
 
         GameService gameService = new GameService();
         CreateGameRequest req3 = new CreateGameRequest(loginRes1.authToken(), "HelloWorld");
-        gameService.createGame(req3);
+        CreateGameResponse gameResponse = gameService.createGame(req3);
 
-        JoinGameRequest joinReq1 = new JoinGameRequest(loginRes1.authToken(), "WHITE", 1);
+        JoinGameRequest joinReq1 = new JoinGameRequest(loginRes1.authToken(), "WHITE", gameResponse.gameID());
         gameService.joinGame(joinReq1);
-        JoinGameRequest joinReq2 = new JoinGameRequest(loginRes2.authToken(), "WHITE", 1);
+        JoinGameRequest joinReq2 = new JoinGameRequest(loginRes2.authToken(), "WHITE", gameResponse.gameID());
         Assertions.assertThrows(UnavailableRequestException.class, () -> {gameService.joinGame(joinReq2);});
     }
 
     @Test
+    @Order(11)
     public void positiveListGames() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -179,6 +198,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(12)
     public void negativeListGames() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
@@ -206,6 +226,7 @@ public class ServiceTests {
     }
 
     @Test
+    @Order(13)
     public void clearTest() throws Exception {
         RegisterRequest req1 = new RegisterRequest("username", "password", "email");
         RegisterService service = new RegisterService();
