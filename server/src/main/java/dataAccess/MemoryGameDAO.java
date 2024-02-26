@@ -19,11 +19,6 @@ public class MemoryGameDAO implements GameDAO {
     }
 
     @Override
-    public GameModel getGame(int gameID) throws DataAccessException {
-        return games.get(gameID);
-    }
-
-    @Override
     public Collection<GameModel> listGames() {
         return games.values();
     }
@@ -53,6 +48,7 @@ public class MemoryGameDAO implements GameDAO {
         games.clear();
     }
 
+    @Override
     public void isValidGame(int gameID) throws DataAccessException {
         GameModel game = games.get(gameID);
         if (game == null) {

@@ -9,9 +9,8 @@ import java.util.HashSet;
 
 public interface GameDAO {
     int createGame(String gameName);
-    GameModel getGame(int gameID) throws DataAccessException;
     Collection<GameModel> listGames();
     void addUser(int gameID, String username, String playerColor) throws DataAccessException;
-
     void clear();
+    void isValidGame(int gameID) throws DataAccessException;
 }

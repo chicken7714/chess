@@ -12,16 +12,13 @@ public class MemoryUserDAO implements UserDAO {
     public void createUser(UserModel user) {
         users.put(user.username(), user);
     }
-    @Override
-    public UserModel getUser(String username) throws DataAccessException {
-        return users.get(username);
-    }
 
     @Override
     public void clear() {
         users.clear();
     }
 
+    @Override
     public boolean isValidUser(String username, String password) throws DataAccessException {
         var userModel = users.get(username);
         if (userModel == null) {
@@ -35,6 +32,7 @@ public class MemoryUserDAO implements UserDAO {
         }
     }
 
+    @Override
     public boolean isInDatabase(String username) {
         if (users.get(username) != null) {
             return true;

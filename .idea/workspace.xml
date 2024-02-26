@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryAuthDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryGameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/MemoryUserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +25,7 @@
         <option value="Interface" />
         <option value="Record" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -121,6 +128,19 @@
     "JUnit.RookMoveTests.rookBlocked.executor": "Debug",
     "JUnit.RookMoveTests.rookCaptureEnemy.executor": "Debug",
     "JUnit.RookMoveTests.rookMoveUntilEdge.executor": "Debug",
+    "JUnit.ServiceTests.clearTest.executor": "Run",
+    "JUnit.ServiceTests.negativeCreateGame.executor": "Run",
+    "JUnit.ServiceTests.negativeJoinGame.executor": "Run",
+    "JUnit.ServiceTests.negativeListGames.executor": "Run",
+    "JUnit.ServiceTests.negativeLogin.executor": "Run",
+    "JUnit.ServiceTests.negativeLogout.executor": "Run",
+    "JUnit.ServiceTests.negativeRegister.executor": "Run",
+    "JUnit.ServiceTests.positiveCreateGame.executor": "Run",
+    "JUnit.ServiceTests.positiveJoinGame.executor": "Run",
+    "JUnit.ServiceTests.positiveListGames.executor": "Debug",
+    "JUnit.ServiceTests.positiveLogin.executor": "Run",
+    "JUnit.ServiceTests.positiveLogout.executor": "Run",
+    "JUnit.ServiceTests.positiveRegister.executor": "Run",
     "JUnit.StandardAPITests.badAuthCreate.executor": "Debug",
     "JUnit.StandardAPITests.badAuthJoin.executor": "Debug",
     "JUnit.StandardAPITests.badAuthWatch.executor": "Debug",
@@ -149,6 +169,8 @@
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "extract.method.default.visibility": "private",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
@@ -177,82 +199,89 @@
       <recent name="$PROJECT_DIR$/server/src/main/java" />
       <recent name="$PROJECT_DIR$/server/src/main" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="serviceTests" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests">
-    <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ServiceTests.clearTest">
+    <configuration name="ServiceTests.clearTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.badAuthJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="badAuthJoin" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="clearTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.badColorJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServiceTests.negativeJoinGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="badColorJoin" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="negativeJoinGame" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.badGameIDJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServiceTests.negativeListGames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="badGameIDJoin" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="negativeListGames" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.goodJoin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServiceTests.positiveJoinGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="goodJoin" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="positiveJoinGame" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceTests.positiveListGames" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="serviceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="positiveListGames" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -260,11 +289,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StandardAPITests" />
-        <item itemvalue="JUnit.StandardAPITests.badGameIDJoin" />
-        <item itemvalue="JUnit.StandardAPITests.badColorJoin" />
-        <item itemvalue="JUnit.StandardAPITests.badAuthJoin" />
-        <item itemvalue="JUnit.StandardAPITests.goodJoin" />
+        <item itemvalue="JUnit.ServiceTests.clearTest" />
+        <item itemvalue="JUnit.ServiceTests.negativeListGames" />
+        <item itemvalue="JUnit.ServiceTests.positiveListGames" />
+        <item itemvalue="JUnit.ServiceTests.negativeJoinGame" />
+        <item itemvalue="JUnit.ServiceTests.positiveJoinGame" />
       </list>
     </recent_temporary>
   </component>
@@ -316,6 +345,7 @@
       <workItem from="1708724676658" duration="6968000" />
       <workItem from="1708750467798" duration="29000" />
       <workItem from="1708784561280" duration="4925000" />
+      <workItem from="1708917829006" duration="4467000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
