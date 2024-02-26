@@ -22,10 +22,7 @@ public class PawnMove extends MoveCalculator{
                 if (i == 0) {
                     if (board.getPiece(potentialLanding) == null) {
                         if (row == 7) {
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.BISHOP));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.KNIGHT));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.ROOK));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.QUEEN));
+                            addPromotionMoves(potentialLanding);
                         } else {
                             moves.add(new ChessMove(position, potentialLanding));
                             ChessPosition potentialDouble = new ChessPosition(row + 2, col);
@@ -37,10 +34,7 @@ public class PawnMove extends MoveCalculator{
                 } else {
                     if (board.getPiece(potentialLanding) != null && board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                         if (row == 7) {
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.BISHOP));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.KNIGHT));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.ROOK));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.QUEEN));
+                            addPromotionMoves(potentialLanding);
                         } else {
                             moves.add(new ChessMove(position, potentialLanding));
                         }
@@ -58,10 +52,7 @@ public class PawnMove extends MoveCalculator{
                 if (i == 0) {
                     if (board.getPiece(potentialLanding) == null) {
                         if (row == 2) {
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.BISHOP));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.KNIGHT));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.ROOK));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.QUEEN));
+                            addPromotionMoves(potentialLanding);
                         } else {
                             moves.add(new ChessMove(position, potentialLanding));
                             ChessPosition potentialDouble = new ChessPosition(row - 2, col);
@@ -73,10 +64,7 @@ public class PawnMove extends MoveCalculator{
                 } else {
                     if (board.getPiece(potentialLanding) != null && board.getPiece(potentialLanding).getTeamColor() != pieceColor) {
                         if (row == 2) {
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.BISHOP));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.KNIGHT));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.ROOK));
-                            moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.QUEEN));
+                            addPromotionMoves(potentialLanding);
                         } else {
                             moves.add(new ChessMove(position, potentialLanding));
                         }
@@ -86,5 +74,12 @@ public class PawnMove extends MoveCalculator{
         }
 
         return moves;
+    }
+
+    private void addPromotionMoves(ChessPosition potentialLanding) {
+        moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.BISHOP));
+        moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.KNIGHT));
+        moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.ROOK));
+        moves.add(new ChessMove(position, potentialLanding, ChessPiece.PieceType.QUEEN));
     }
 }
