@@ -1,8 +1,8 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
-import dataAccess.MemoryGameDAO;
+import dataAccess.memoryDAO.MemoryAuthDAO;
+import dataAccess.memoryDAO.MemoryGameDAO;
 import model.GameModel;
 import request.*;
 import response.CreateGameResponse;

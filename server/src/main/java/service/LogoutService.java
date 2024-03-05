@@ -2,7 +2,7 @@ package service;
 
 import dataAccess.AuthDAO;
 import dataAccess.DataAccessException;
-import dataAccess.MemoryAuthDAO;
+import dataAccess.memoryDAO.MemoryAuthDAO;
 import request.LogoutRequest;
 
 import java.util.UUID;

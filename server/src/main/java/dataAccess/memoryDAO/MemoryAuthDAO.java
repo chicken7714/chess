@@ -1,5 +1,7 @@
-package dataAccess;
+package dataAccess.memoryDAO;
 
+import dataAccess.AuthDAO;
+import dataAccess.DataAccessException;
 import model.AuthModel;
 
 import javax.xml.crypto.Data;
