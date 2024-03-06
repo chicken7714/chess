@@ -2,16 +2,15 @@ package service;
 
 import dataAccess.AuthDAO;
 import dataAccess.DataAccessException;
+import dataAccess.SQLAuthDAO;
 import dataAccess.memoryDAO.MemoryAuthDAO;
 import request.LogoutRequest;
 
-import java.util.UUID;
-
 public class LogoutService {
 
-    public boolean logout(LogoutRequest request) throws UnauthorizedAccessException {
+    public boolean logout(LogoutRequest request) throws UnauthorizedAccessException, DataAccessException{
         String authToken = request.authToken();
-        AuthDAO authDAO = new MemoryAuthDAO();
+        AuthDAO authDAO = new SQLAuthDAO();
 
         try {
             authDAO.deleteAuth(authToken);

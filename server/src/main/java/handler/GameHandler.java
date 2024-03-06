@@ -12,8 +12,6 @@ import service.UnavailableRequestException;
 import spark.Request;
 import spark.Response;
 
-import java.util.UUID;
-
 public class GameHandler {
 
     public Object listGames(Request req, Response res) {

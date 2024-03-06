@@ -14,7 +14,7 @@ import java.util.UUID;
 public class RegisterService {
 
     public RegisterResponse registerUser(RegisterRequest request) throws UnauthorizedAccessException,
-                                                                         InvalidRequestException {
+            InvalidRequestException {
         try {
             var userDAO = new SQLUserDAO();
             var authDAO = new SQLAuthDAO();
@@ -50,8 +50,7 @@ public class RegisterService {
     }
 
     private String generateAuthToken() {
-        String uuid = UUID.randomUUID().toString();
-        return uuid;
+        return UUID.randomUUID().toString();
     }
 
     private void createUser(String username, String password, String email) throws DataAccessException {

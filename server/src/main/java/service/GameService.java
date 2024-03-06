@@ -9,7 +9,6 @@ import response.CreateGameResponse;
 import response.ListGameResponse;
 
 import java.util.Collection;
-import java.util.UUID;
 
 public class GameService {
 
@@ -43,7 +42,7 @@ public class GameService {
     }
 
     public void joinGame(JoinGameRequest request) throws UnauthorizedAccessException, InvalidRequestException,
-                                                         UnavailableRequestException {
+            UnavailableRequestException {
         var gameDAO = new MemoryGameDAO();
         var authDAO = new MemoryAuthDAO();
         String authToken = request.authToken();

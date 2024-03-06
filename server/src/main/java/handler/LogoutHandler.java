@@ -1,14 +1,13 @@
 package handler;
 
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import response.ErrorResponse;
 import request.LogoutRequest;
 import service.LogoutService;
 import service.UnauthorizedAccessException;
 import spark.Request;
 import spark.Response;
-
-import java.util.UUID;
 
 public class LogoutHandler {
 
@@ -24,6 +23,9 @@ public class LogoutHandler {
             return "{}";
         } catch (UnauthorizedAccessException e) {
             res.status(401);
+            return gson.toJson(new ErrorResponse(e.getMessage()));
+        } catch (DataAccessException e) {
+            res.status(500);
             return gson.toJson(new ErrorResponse(e.getMessage()));
         }
     }

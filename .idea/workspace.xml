@@ -5,36 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/dataAccessTests/DAOTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/AuthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/GameDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLAuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLAuthDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/memoryDAO/MemoryAuthDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/memoryDAO/MemoryAuthDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/memoryDAO/MemoryUserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/memoryDAO/MemoryUserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/ClearHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/GameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/LoginHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/LogoutHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/model/AuthModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/request/CreateGameRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/request/CreateGameRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/request/JoinGameRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/request/JoinGameRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/request/ListGameRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/request/ListGameRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/request/LogoutRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/request/LogoutRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/response/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/response/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/response/RegisterResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/response/RegisterResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/ClearService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/ClearService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/LogoutService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/LogoutService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/resources/db.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +100,7 @@
     "JUnit.ChessPositionTests.executor": "Debug",
     "JUnit.ChessPositionTests.hashSetTest.executor": "Debug",
     "JUnit.ChessPositionTests.hashTest.executor": "Debug",
+    "JUnit.DAOTests.positiveCreateUser.executor": "Run",
     "JUnit.KingMoveTests.executor": "Debug",
     "JUnit.KingMoveTests.kingBlocked.executor": "Debug",
     "JUnit.KingMoveTests.kingCaptureEnemy.executor": "Debug",
@@ -176,8 +157,8 @@
     "JUnit.StandardAPITests.goodCreate.executor": "Debug",
     "JUnit.StandardAPITests.goodJoin.executor": "Debug",
     "JUnit.StandardAPITests.goodWatch.executor": "Debug",
-    "JUnit.StandardAPITests.loginInvalidUser.executor": "Debug",
-    "JUnit.StandardAPITests.loginWrongPassword.executor": "Debug",
+    "JUnit.StandardAPITests.loginInvalidUser.executor": "Run",
+    "JUnit.StandardAPITests.loginWrongPassword.executor": "Run",
     "JUnit.StandardAPITests.manyWatch.executor": "Debug",
     "JUnit.StandardAPITests.multipleClear.executor": "Debug",
     "JUnit.StandardAPITests.registerTwice.executor": "Run",
@@ -185,7 +166,7 @@
     "JUnit.StandardAPITests.successLogin.executor": "Run",
     "JUnit.StandardAPITests.successLogout.executor": "Run",
     "JUnit.StandardAPITests.successRegister.executor": "Run",
-    "JUnit.StandardAPITests.uniqueAuthorizationTokens.executor": "Debug",
+    "JUnit.StandardAPITests.uniqueAuthorizationTokens.executor": "Run",
     "JUnit.passoffTests in shared.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -230,46 +211,8 @@
       <recent name="serviceTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests.successLogin">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="serviceTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="serviceTests" />
-      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServiceTests.positiveCreateGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="serviceTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="serviceTests" />
-      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
-      <option name="METHOD_NAME" value="positiveCreateGame" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.staticFiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.StandardAPITests.successLogout">
+    <configuration name="StandardAPITests.failRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -279,13 +222,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="staticFiles" />
+      <option name="METHOD_NAME" value="failRegister" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.successLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests.registerTwice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -295,7 +238,55 @@
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
       <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="successLogin" />
+      <option name="METHOD_NAME" value="registerTwice" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StandardAPITests.successLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="successLogout" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StandardAPITests.successRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="successRegister" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StandardAPITests.uniqueAuthorizationTokens" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="METHOD_NAME" value="uniqueAuthorizationTokens" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -303,11 +294,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StandardAPITests.successLogin" />
-        <item itemvalue="JUnit.StandardAPITests.staticFiles" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ServiceTests" />
-        <item itemvalue="JUnit.ServiceTests.positiveCreateGame" />
+        <item itemvalue="JUnit.StandardAPITests.successLogout" />
+        <item itemvalue="JUnit.StandardAPITests.failRegister" />
+        <item itemvalue="JUnit.StandardAPITests.registerTwice" />
+        <item itemvalue="JUnit.StandardAPITests.successRegister" />
+        <item itemvalue="JUnit.StandardAPITests.uniqueAuthorizationTokens" />
       </list>
     </recent_temporary>
   </component>
@@ -367,7 +358,9 @@
       <workItem from="1709584098943" duration="2000" />
       <workItem from="1709585520199" duration="2170000" />
       <workItem from="1709609968079" duration="2844000" />
-      <workItem from="1709698655745" duration="4105000" />
+      <workItem from="1709698655745" duration="4340000" />
+      <workItem from="1709703219842" duration="2000" />
+      <workItem from="1709749898229" duration="1931000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
