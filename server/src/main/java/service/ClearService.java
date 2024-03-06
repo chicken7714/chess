@@ -1,29 +1,30 @@
 package service;
 
+import dataAccess.*;
 import dataAccess.memoryDAO.MemoryAuthDAO;
 import dataAccess.memoryDAO.MemoryGameDAO;
 import dataAccess.memoryDAO.MemoryUserDAO;
 
 public class ClearService {
 
-    public boolean clear() {
+    public boolean clear() throws DataAccessException{
         clearGame();
         clearAuth();
         clearUser();
         return true;
     }
-    private void clearGame() {
-        var gameDao = new MemoryGameDAO();
+    private void clearGame() throws DataAccessException {
+        var gameDao = new SQLGameDAO();
         gameDao.clear();
     }
 
-    private void clearAuth() {
-        var authDao = new MemoryAuthDAO();
+    private void clearAuth() throws DataAccessException {
+        var authDao = new SQLAuthDAO();
         authDao.clear();
     }
 
-    private void clearUser() {
-        var userDao = new MemoryUserDAO();
+    private void clearUser() throws DataAccessException {
+        var userDao = new SQLUserDAO();
         userDao.clear();
     }
 }

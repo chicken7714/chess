@@ -23,8 +23,8 @@ public class LoginHandler {
             res.status(401);
             return gson.toJson(new ErrorResponse("Error: unauthorized"));
         } catch (RuntimeException e) {
-            res.status(401);
-            return gson.toJson(new ErrorResponse("Error: Username not found"));
+            res.status(500);
+            return gson.toJson(new ErrorResponse("Error: SQL Error"));
         }
     }
 }

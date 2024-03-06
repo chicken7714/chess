@@ -11,12 +11,12 @@ public class MemoryUserDAO implements UserDAO {
     private static HashMap<String, UserModel> users = new HashMap<>();
 
     @Override
-    public void createUser(UserModel user) {
+    public void createUser(UserModel user) throws DataAccessException {
         users.put(user.username(), user);
     }
 
     @Override
-    public void clear() {
+    public void clear() throws DataAccessException {
         users.clear();
     }
 
@@ -35,7 +35,7 @@ public class MemoryUserDAO implements UserDAO {
     }
 
     @Override
-    public boolean isInDatabase(String username) {
+    public boolean isInDatabase(String username) throws DataAccessException {
         if (users.get(username) != null) {
             return true;
         } else {

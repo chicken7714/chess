@@ -1,6 +1,7 @@
 package handler;
 
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import response.ErrorResponse;
 import service.ClearService;
 import spark.Request;
@@ -12,14 +13,12 @@ public class ClearHandler {
         var serializer = new Gson();
         ClearService service = new ClearService();
 
-        if (service.clear()) {
-            res.status(200);
+        try {
+            service.clear();
             return "{}";
-        }
-        else {
+        } catch (DataAccessException e) {
             res.status(500);
-            return serializer.toJson(new ErrorResponse("Error: Unknown"));
+            return serializer.toJson(new ErrorResponse(e.getMessage()));
         }
     }
-
 }

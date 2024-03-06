@@ -2,6 +2,8 @@ package dataAccess;
 
 import java.sql.SQLException;
 
+import static java.sql.Statement.RETURN_GENERATED_KEYS;
+
 public class SQLDAO {
 
     private static String[] createStatements = {
@@ -9,16 +11,16 @@ public class SQLDAO {
             CREATE TABLE IF NOT EXISTS user (
             `username` varchar(256) NOT NULL,
             `password` varchar(256) NOT NULL,
-            `email` varchar(256) NOT NULL
+            `email` varchar(256) NOT NULL,
             PRIMARY KEY (`username`)
             )
             """,
             """
             CREATE TABLE IF NOT EXISTS auth (
             `auth` varchar(256) NOT NULL,
-            `username` varchar(256) NOT NULL
-            PRIMARY KEY (`auth`)
-            FOREIGN KEY(username) REFERENCES user(username)
+            `username` varchar(256) NOT NULL,
+            PRIMARY KEY (`auth`),
+            FOREIGN KEY(`username`) REFERENCES `user`(`username`)
             )
             """,
             """
@@ -42,6 +44,28 @@ public class SQLDAO {
             }
         } catch (SQLException e) {
             throw new DataAccessException(e.getMessage());
+        }
+    }
+
+    protected void executeUpdate(String statement, Object... params) throws DataAccessException {
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var ps = conn.prepareStatement(statement, RETURN_GENERATED_KEYS)) {
+                for (var i = 0; i < params.length; i++) {
+                    var param = params[i];
+                    if (param instanceof String p) ps.setString(i + 1, p);
+                    else if (param instanceof Integer p) ps.setInt(i + 1, p);
+                    else if (param == null) ps.setNull(i + 1, 0);
+                }
+                ps.executeUpdate();
+
+                var rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    rs.getInt(1);
+                }
+
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(String.format("unable to update database: %s, %s", statement, e.getMessage()));
         }
     }
 }

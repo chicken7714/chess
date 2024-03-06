@@ -2,5 +2,5 @@ package request;
 
 import java.util.UUID;
 
-public record LogoutRequest (UUID authToken) {
+public record LogoutRequest (String authToken) {
 }

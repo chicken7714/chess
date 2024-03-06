@@ -18,7 +18,7 @@ public class GameHandler {
 
     public Object listGames(Request req, Response res) {
         var gson = new Gson();
-        UUID authToken = UUID.fromString(req.headers("authorization"));
+        String authToken = req.headers("authorization");
         ListGameRequest listGameRequest = new ListGameRequest(authToken);
 
         GameService gameService = new GameService();
@@ -34,7 +34,7 @@ public class GameHandler {
 
     public Object createGame(Request req, Response res) {
         var gson = new Gson();
-        UUID authToken = UUID.fromString(req.headers("authorization"));
+        String authToken = req.headers("authorization");
         var gameName = gson.fromJson(req.body(), CreateGameData.class);
 
         CreateGameRequest createGameRequest = new CreateGameRequest(authToken, gameName.gameName());
@@ -55,9 +55,9 @@ public class GameHandler {
 
     public Object joinGame(Request req, Response res) {
         var gson = new Gson();
-        UUID authToken;
+        String authToken;
         try {
-            authToken = UUID.fromString(req.headers("authorization"));
+            authToken = req.headers("authorization");
         } catch (IllegalArgumentException e) {
             res.status(401);
             return gson.toJson(new ErrorResponse("Error: unauthorized"));

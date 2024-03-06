@@ -2,5 +2,5 @@ package request;
 
 import java.util.UUID;
 
-public record CreateGameRequest (UUID authToken, String gameName) {
+public record CreateGameRequest (String authToken, String gameName) {
 }

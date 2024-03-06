@@ -1,7 +1,9 @@
 package service;
 
-import dataAccess.memoryDAO.MemoryAuthDAO;
-import dataAccess.memoryDAO.MemoryUserDAO;
+import dataAccess.DataAccessException;
+import dataAccess.SQLAuthDAO;
+import dataAccess.SQLUserDAO;
+
 import model.AuthModel;
 import model.UserModel;
 import request.RegisterRequest;
@@ -13,23 +15,30 @@ public class RegisterService {
 
     public RegisterResponse registerUser(RegisterRequest request) throws UnauthorizedAccessException,
                                                                          InvalidRequestException {
-        var userDAO = new MemoryUserDAO();
-        var authDAO = new MemoryAuthDAO();
+        try {
+            var userDAO = new SQLUserDAO();
+            var authDAO = new SQLAuthDAO();
 
-        if (!checkValidRequest(request)) {
-            throw new InvalidRequestException("Error: Invalid Request");
+            if (!checkValidRequest(request)) {
+                throw new InvalidRequestException("Error: Invalid Request");
+            }
+            try {
+                if (userDAO.isInDatabase(request.username())) {
+                    throw new UnauthorizedAccessException("Error: already taken");
+                } else {
+                    createUser(request.username(), request.password(), request.email());
+
+                    String authToken = generateAuthToken();
+                    authDAO.createAuth(new AuthModel(authToken, request.username()));
+
+                    return new RegisterResponse(request.username(), authToken);
+                }
+            } catch (DataAccessException e) {
+                throw new InvalidRequestException(e.getMessage());
+            }
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMessage());
         }
-        if (userDAO.isInDatabase(request.username())) {
-            throw new UnauthorizedAccessException("Error: already taken");
-        } else {
-            createUser(request.username(), request.password(), request.email());
-
-            UUID authToken = generateAuthToken();
-            authDAO.createAuth(new AuthModel(authToken, request.username()));
-
-            return new RegisterResponse(request.username(), authToken);
-        }
-
     }
 
     private boolean checkValidRequest(RegisterRequest request) {
@@ -40,13 +49,13 @@ public class RegisterService {
         }
     }
 
-    private UUID generateAuthToken() {
-        UUID uuid = UUID.randomUUID();
+    private String generateAuthToken() {
+        String uuid = UUID.randomUUID().toString();
         return uuid;
     }
 
-    private void createUser(String username, String password, String email) {
-        var userDAO = new MemoryUserDAO();
+    private void createUser(String username, String password, String email) throws DataAccessException {
+        var userDAO = new SQLUserDAO();
         UserModel user = new UserModel(username, password, email);
         userDAO.createUser(user);
     }

@@ -14,7 +14,7 @@ public class LogoutHandler {
 
     public Object logout(Request req, Response res) {
         var gson = new Gson();
-        UUID authToken = UUID.fromString(req.headers("authorization"));
+        String authToken = req.headers("authorization");
         LogoutRequest logoutRequest = new LogoutRequest(authToken);
 
         LogoutService service = new LogoutService();

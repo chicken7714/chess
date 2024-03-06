@@ -1,11 +1,11 @@
 package server;
 
+import dataAccess.SQLDAO;
 import handler.*;
 import service.ClearService;
 import spark.*;
 
 public class Server {
-
     public int run(int desiredPort) {
         Spark.port(desiredPort);
 

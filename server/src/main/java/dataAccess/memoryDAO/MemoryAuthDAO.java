@@ -9,15 +9,15 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class MemoryAuthDAO implements AuthDAO {
-    private static HashMap<UUID, String> authTokens = new HashMap<>();
+    private static HashMap<String, String> authTokens = new HashMap<>();
 
     @Override
-    public void createAuth(AuthModel newAuth) {
+    public void createAuth(AuthModel newAuth) throws DataAccessException {
         authTokens.put(newAuth.authToken(), newAuth.username());
     }
 
     @Override
-    public void deleteAuth(UUID authToken) throws DataAccessException {
+    public void deleteAuth(String authToken) throws DataAccessException {
         if (authTokens.get(authToken) == null) {
             throw new DataAccessException("Not valid authToken");
         } else {
@@ -26,12 +26,12 @@ public class MemoryAuthDAO implements AuthDAO {
     }
 
     @Override
-    public void clear() {
+    public void clear() throws DataAccessException {
         authTokens.clear();
     }
 
     @Override
-    public String checkValidAuth(UUID authToken) throws DataAccessException{
+    public String checkValidAuth(String authToken) throws DataAccessException{
         String username = authTokens.get(authToken);
         if (username == null) {
             throw new DataAccessException("Not valid authtoken");

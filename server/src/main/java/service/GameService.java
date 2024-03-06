@@ -16,7 +16,7 @@ public class GameService {
     public ListGameResponse listGames(ListGameRequest request) throws UnauthorizedAccessException {
         var authDAO = new MemoryAuthDAO();
         var gamesDAO = new MemoryGameDAO();
-        UUID authToken = request.authToken();
+        String authToken = request.authToken();
 
         try {
             authDAO.checkValidAuth(authToken);
@@ -30,7 +30,7 @@ public class GameService {
     public CreateGameResponse createGame(CreateGameRequest request) throws UnauthorizedAccessException, InvalidRequestException {
         var authDAO = new MemoryAuthDAO();
         var gameDAO = new MemoryGameDAO();
-        UUID authToken = request.authToken();
+        String authToken = request.authToken();
 
         try {
             authDAO.checkValidAuth(authToken);
@@ -46,7 +46,7 @@ public class GameService {
                                                          UnavailableRequestException {
         var gameDAO = new MemoryGameDAO();
         var authDAO = new MemoryAuthDAO();
-        UUID authToken = request.authToken();
+        String authToken = request.authToken();
         String username;
 
         try {

@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ServiceTests {
 
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws DataAccessException {
         ClearService clearService = new ClearService();
         clearService.clear();
     }
@@ -92,7 +92,7 @@ public class ServiceTests {
     @Test
     @Order(6)
     public void negativeLogout() throws Exception {
-        LogoutRequest req1 = new LogoutRequest(UUID.randomUUID());
+        LogoutRequest req1 = new LogoutRequest(UUID.randomUUID().toString());
         LogoutService service = new LogoutService();
         Assertions.assertThrows(UnauthorizedAccessException.class, () -> {service.logout(req1);});
     }
@@ -118,7 +118,7 @@ public class ServiceTests {
     @Order(8)
     public void negativeCreateGame() throws Exception {
         GameService gameService = new GameService();
-        CreateGameRequest req3 = new CreateGameRequest(UUID.randomUUID(), "HelloWorld");
+        CreateGameRequest req3 = new CreateGameRequest(UUID.randomUUID().toString(), "HelloWorld");
         Assertions.assertThrows(UnauthorizedAccessException.class, () -> {gameService.createGame(req3);});
     }
 
@@ -221,7 +221,7 @@ public class ServiceTests {
         gameService.createGame(gameReq4);
         gameService.createGame(gameReq5);
 
-        ListGameRequest listReq1 = new ListGameRequest(UUID.randomUUID());
+        ListGameRequest listReq1 = new ListGameRequest(UUID.randomUUID().toString());
 
         Assertions.assertThrows(UnauthorizedAccessException.class, () -> {gameService.listGames(listReq1);});
     }
