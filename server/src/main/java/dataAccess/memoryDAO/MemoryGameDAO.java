@@ -11,7 +11,7 @@ public class MemoryGameDAO implements GameDAO {
     private static HashMap<Integer, GameModel> games = new HashMap<>();
     private static int idCount = 1;
     @Override
-    public int createGame(String gameName) {
+    public int createGame(String gameName) throws DataAccessException {
         int gameID = idCount;
         idCount++;
 

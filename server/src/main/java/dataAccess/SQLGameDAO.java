@@ -1,5 +1,6 @@
 package dataAccess;
 
+import com.google.gson.Gson;
 import model.GameModel;
 
 import java.util.Collection;
@@ -10,8 +11,17 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
     }
 
     @Override
-    public int createGame(String gameName) {
-        return 0;
+    public int createGame(String gameName) throws DataAccessException {
+        var statement = "INSERT INTO game DEFAULT VALUES";
+        var gameID = executeUpdate(statement);
+
+        GameModel game = new GameModel(gameID, null, null, gameName);
+        var serializer = new Gson();
+        String json = serializer.toJson(game);
+        statement = "UPDATE game SET json=? WHERE gameID=?";
+        executeUpdate(statement, json, gameID);
+
+        return gameID;
     }
 
     @Override

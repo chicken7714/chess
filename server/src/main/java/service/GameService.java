@@ -37,8 +37,12 @@ public class GameService {
             throw new UnauthorizedAccessException("Unauthorized");
         }
 
-        int gameID = gameDAO.createGame(request.gameName());
-        return new CreateGameResponse(gameID);
+        try {
+            int gameID = gameDAO.createGame(request.gameName());
+            return new CreateGameResponse(gameID);
+        } catch (DataAccessException e) {
+            throw new InvalidRequestException(e.getMessage());
+        }
     }
 
     public void joinGame(JoinGameRequest request) throws UnauthorizedAccessException, InvalidRequestException,

@@ -20,8 +20,7 @@ public class SQLDAO {
             CREATE TABLE IF NOT EXISTS auth (
             `auth` varchar(256) NOT NULL,
             `username` varchar(256) NOT NULL,
-            PRIMARY KEY (`auth`),
-            FOREIGN KEY(`username`) REFERENCES `user`(`username`)
+            PRIMARY KEY (`auth`)
             )
             """,
             """

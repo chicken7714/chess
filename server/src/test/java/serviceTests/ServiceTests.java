@@ -32,7 +32,7 @@ public class ServiceTests {
         RegisterResponse res = service.registerUser(req);
 
         Assertions.assertEquals(res.username(), "username");
-        Assertions.assertInstanceOf(UUID.class, res.authToken());
+        Assertions.assertInstanceOf(String.class, res.authToken());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ServiceTests {
         LoginService loginService = new LoginService();
         LoginResponse res = loginService.getUser(req2);
         Assertions.assertEquals(res.username(), "username");
-        Assertions.assertInstanceOf(UUID.class, res.authToken());
+        Assertions.assertInstanceOf(String.class, res.authToken());
     }
 
     @Test

@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public interface GameDAO {
-    int createGame(String gameName);
+    int createGame(String gameName) throws DataAccessException;
     Collection<GameModel> listGames();
     void addUser(int gameID, String username, String playerColor) throws DataAccessException;
     void clear() throws DataAccessException;

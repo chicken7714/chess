@@ -1,6 +1,7 @@
 package dataAccess;
 
 import model.AuthModel;
+import service.UnauthorizedAccessException;
 
 import java.sql.SQLException;
 
@@ -16,9 +17,14 @@ public class SQLAuthDAO extends SQLDAO implements AuthDAO {
     }
 
     @Override
-    public void deleteAuth(String authToken) throws DataAccessException {
-        var statement = "DELETE * FROM auth WHERE auth=?";
-        executeUpdate(statement, authToken);
+    public void deleteAuth(String authToken) throws DataAccessException, UnauthorizedAccessException {
+        if (checkValidAuth(authToken) != null) {
+            var statement = "DELETE FROM auth WHERE auth=?";
+            executeUpdate(statement, authToken);
+        } else {
+            System.out.println("Throwing Invalid");
+            throw new UnauthorizedAccessException("Error: Invalid Auth token");
+        }
     }
 
     @Override
@@ -29,6 +35,7 @@ public class SQLAuthDAO extends SQLDAO implements AuthDAO {
 
     @Override
     public String checkValidAuth(String authToken) throws DataAccessException {
+        System.out.println("Checking auth");
         try (var conn = DatabaseManager.getConnection()) {
             var statement = "SELECT username FROM auth WHERE auth=?";
             try (var ps = conn.prepareStatement(statement)) {
