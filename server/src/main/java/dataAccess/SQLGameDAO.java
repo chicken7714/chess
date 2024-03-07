@@ -15,7 +15,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
     @Override
     public int createGame(String gameName) throws DataAccessException {
         System.out.println("Creating game");
-        var statement = "INSERT INTO game DEFAULT VALUES";
+        var statement = "INSERT INTO game (json) VALUES ('')";
         var gameID = executeUpdate(statement);
         System.out.println("Created game, id = ");
         System.out.println(gameID);
