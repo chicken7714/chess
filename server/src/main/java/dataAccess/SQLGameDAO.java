@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import model.GameModel;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -31,7 +32,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
 
     @Override
     public Collection<GameModel> listGames() throws DataAccessException {
-        HashSet<GameModel> games = new HashSet<>();
+        ArrayList<GameModel> games = new ArrayList<>();
         Gson serializer = new Gson();
         try (var conn = DatabaseManager.getConnection()) {
             var statement = "SELECT json FROM game";
@@ -68,7 +69,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
                             statement = "UPDATE game SET json=? WHERE gameID=?";
                             executeUpdate(statement, newJson, gameID);
                         } else if (playerColor.equals("BLACK") && (game.blackUsername() == null)) {
-                            GameModel newGame = new GameModel(gameID, username, game.whiteUsername(), game.gameName());
+                            GameModel newGame = new GameModel(gameID, game.whiteUsername(), username, game.gameName());
                             var newJson = serializer.toJson(newGame);
                             statement = "UPDATE game SET json=? WHERE gameID=?";
                             executeUpdate(statement, newJson, gameID);

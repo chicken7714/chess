@@ -17,8 +17,11 @@ public class GameService {
         var gamesDAO = new SQLGameDAO();
         String authToken = request.authToken();
 
+        String username = authDAO.checkValidAuth(authToken);
+        if (username == null) {
+            throw new UnauthorizedAccessException("Unauthorized");
+        }
         try {
-            authDAO.checkValidAuth(authToken);
             Collection<GameModel> games = gamesDAO.listGames();
             return new ListGameResponse(games);
         } catch (DataAccessException e) {
@@ -32,9 +35,8 @@ public class GameService {
         var gameDAO = new SQLGameDAO();
         String authToken = request.authToken();
 
-        try {
-            authDAO.checkValidAuth(authToken);
-        } catch (DataAccessException e) {
+        String username = authDAO.checkValidAuth(authToken);
+        if (username == null) {
             throw new UnauthorizedAccessException("Unauthorized");
         }
 
@@ -53,9 +55,8 @@ public class GameService {
         String authToken = request.authToken();
         String username;
 
-        try {
-            username = authDAO.checkValidAuth(authToken);
-        } catch (DataAccessException e) {
+        username = authDAO.checkValidAuth(authToken);
+        if (username==null) {
             throw new UnauthorizedAccessException("Unauthorized");
         }
 

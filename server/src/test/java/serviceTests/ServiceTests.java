@@ -67,7 +67,7 @@ public class ServiceTests {
     public void negativeLogin() throws Exception {
         LoginRequest req1 = new LoginRequest("username", "password2");
         LoginService loginService = new LoginService();
-        Assertions.assertThrows(RuntimeException.class, () -> {loginService.getUser(req1);});
+        Assertions.assertThrows(UnauthorizedAccessException.class, () -> {loginService.getUser(req1);});
     }
 
     @Test
@@ -139,9 +139,9 @@ public class ServiceTests {
 
         JoinGameRequest req4 = new JoinGameRequest(res1.authToken(), "WHITE", gameResponse.gameID());
         gameService.joinGame(req4);
-        GameDAO gameDAO = new MemoryGameDAO();
+        GameDAO gameDAO = new SQLGameDAO();
         var games = gameDAO.listGames();
-        Assertions.assertEquals(games.size(), 1);
+        Assertions.assertEquals(1, games.size());
         Assertions.assertEquals(games.iterator().next().whiteUsername(), "username");
     }
 
@@ -252,7 +252,7 @@ public class ServiceTests {
         ClearService clearService = new ClearService();
         clearService.clear();
 
-        Assertions.assertThrows(RuntimeException.class, () -> {loginService.getUser(req2);});
+        Assertions.assertThrows(UnauthorizedAccessException.class, () -> {loginService.getUser(req2);});
         Assertions.assertThrows(UnauthorizedAccessException.class, () -> {gameService.createGame(gameReq1);});
 
         service.registerUser(req1);

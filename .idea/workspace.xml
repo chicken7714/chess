@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections" />
+    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,6 +120,8 @@
     "JUnit.PawnMoveTests.pawnInitialMoveWhite.executor": "Debug",
     "JUnit.PawnMoveTests.pawnMiddleOfBoardWhite.executor": "Debug",
     "JUnit.PawnMoveTests.pawnPromotionCapture.executor": "Debug",
+    "JUnit.PersistenceTests.executor": "Run",
+    "JUnit.PersistenceTests.persistenceTest.executor": "Run",
     "JUnit.QueenMoveTests.queenBlocked.executor": "Debug",
     "JUnit.QueenMoveTests.queenCaptureEnemy.executor": "Debug",
     "JUnit.QueenMoveTests.queenMoveUntilEdge.executor": "Debug",
@@ -135,23 +142,25 @@
     "JUnit.ServiceTests.positiveLogin.executor": "Run",
     "JUnit.ServiceTests.positiveLogout.executor": "Run",
     "JUnit.ServiceTests.positiveRegister.executor": "Run",
-    "JUnit.StandardAPITests.badAuthCreate.executor": "Debug",
-    "JUnit.StandardAPITests.badAuthJoin.executor": "Debug",
-    "JUnit.StandardAPITests.badAuthWatch.executor": "Debug",
-    "JUnit.StandardAPITests.badColorJoin.executor": "Debug",
-    "JUnit.StandardAPITests.badGameIDJoin.executor": "Debug",
-    "JUnit.StandardAPITests.badGameIDWatch.executor": "Debug",
+    "JUnit.StandardAPITests.badAuthCreate.executor": "Run",
+    "JUnit.StandardAPITests.badAuthJoin.executor": "Run",
+    "JUnit.StandardAPITests.badAuthWatch.executor": "Run",
+    "JUnit.StandardAPITests.badColorJoin.executor": "Run",
+    "JUnit.StandardAPITests.badGameIDJoin.executor": "Run",
+    "JUnit.StandardAPITests.badGameIDWatch.executor": "Run",
     "JUnit.StandardAPITests.clearData.executor": "Run",
     "JUnit.StandardAPITests.executor": "Run",
     "JUnit.StandardAPITests.failLogout.executor": "Run",
     "JUnit.StandardAPITests.failRegister.executor": "Run",
+    "JUnit.StandardAPITests.gamesList.executor": "Run",
     "JUnit.StandardAPITests.goodCreate.executor": "Run",
-    "JUnit.StandardAPITests.goodJoin.executor": "Debug",
-    "JUnit.StandardAPITests.goodWatch.executor": "Debug",
+    "JUnit.StandardAPITests.goodJoin.executor": "Run",
+    "JUnit.StandardAPITests.goodWatch.executor": "Run",
     "JUnit.StandardAPITests.loginInvalidUser.executor": "Run",
     "JUnit.StandardAPITests.loginWrongPassword.executor": "Run",
-    "JUnit.StandardAPITests.manyWatch.executor": "Debug",
+    "JUnit.StandardAPITests.manyWatch.executor": "Run",
     "JUnit.StandardAPITests.multipleClear.executor": "Run",
+    "JUnit.StandardAPITests.noGamesList.executor": "Run",
     "JUnit.StandardAPITests.registerTwice.executor": "Run",
     "JUnit.StandardAPITests.staticFiles.executor": "Run",
     "JUnit.StandardAPITests.successLogin.executor": "Run",
@@ -202,8 +211,8 @@
       <recent name="serviceTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.StandardAPITests.goodCreate">
-    <configuration name="StandardAPITests.failLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ServiceTests">
+    <configuration name="PersistenceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -212,72 +221,70 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="failLogout" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.PersistenceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="serviceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServiceTests.clearTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="serviceTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="clearTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.failRegister" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServiceTests.negativeLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="failRegister" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="negativeLogin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StandardAPITests.goodCreate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServiceTests.positiveJoinGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
+          <option name="PATTERN" value="serviceTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="goodCreate" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.registerTwice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="registerTwice" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="StandardAPITests.successLogout" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="passoffTests.serverTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
-      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
-      <option name="METHOD_NAME" value="successLogout" />
+      <option name="PACKAGE_NAME" value="serviceTests" />
+      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
+      <option name="METHOD_NAME" value="positiveJoinGame" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -285,11 +292,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StandardAPITests.goodCreate" />
-        <item itemvalue="JUnit.StandardAPITests.failLogout" />
-        <item itemvalue="JUnit.StandardAPITests.successLogout" />
-        <item itemvalue="JUnit.StandardAPITests.failRegister" />
-        <item itemvalue="JUnit.StandardAPITests.registerTwice" />
+        <item itemvalue="JUnit.ServiceTests" />
+        <item itemvalue="JUnit.ServiceTests.negativeLogin" />
+        <item itemvalue="JUnit.ServiceTests.positiveJoinGame" />
+        <item itemvalue="JUnit.ServiceTests.clearTest" />
+        <item itemvalue="JUnit.PersistenceTests" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +358,7 @@
       <workItem from="1709609968079" duration="2844000" />
       <workItem from="1709698655745" duration="4340000" />
       <workItem from="1709703219842" duration="2000" />
-      <workItem from="1709749898229" duration="7506000" />
+      <workItem from="1709749898229" duration="8587000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
