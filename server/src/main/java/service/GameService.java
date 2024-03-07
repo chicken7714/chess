@@ -1,8 +1,8 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.memoryDAO.MemoryAuthDAO;
-import dataAccess.memoryDAO.MemoryGameDAO;
+import dataAccess.SQLAuthDAO;
+import dataAccess.SQLGameDAO;
 import model.GameModel;
 import request.*;
 import response.CreateGameResponse;
@@ -12,9 +12,9 @@ import java.util.Collection;
 
 public class GameService {
 
-    public ListGameResponse listGames(ListGameRequest request) throws UnauthorizedAccessException {
-        var authDAO = new MemoryAuthDAO();
-        var gamesDAO = new MemoryGameDAO();
+    public ListGameResponse listGames(ListGameRequest request) throws UnauthorizedAccessException, DataAccessException {
+        var authDAO = new SQLAuthDAO();
+        var gamesDAO = new SQLGameDAO();
         String authToken = request.authToken();
 
         try {
@@ -26,9 +26,10 @@ public class GameService {
         }
     }
 
-    public CreateGameResponse createGame(CreateGameRequest request) throws UnauthorizedAccessException, InvalidRequestException {
-        var authDAO = new MemoryAuthDAO();
-        var gameDAO = new MemoryGameDAO();
+    public CreateGameResponse createGame(CreateGameRequest request) throws UnauthorizedAccessException,
+                                                                           InvalidRequestException, DataAccessException {
+        var authDAO = new SQLAuthDAO();
+        var gameDAO = new SQLGameDAO();
         String authToken = request.authToken();
 
         try {
@@ -46,9 +47,9 @@ public class GameService {
     }
 
     public void joinGame(JoinGameRequest request) throws UnauthorizedAccessException, InvalidRequestException,
-            UnavailableRequestException {
-        var gameDAO = new MemoryGameDAO();
-        var authDAO = new MemoryAuthDAO();
+            UnavailableRequestException, DataAccessException {
+        var gameDAO = new SQLGameDAO();
+        var authDAO = new SQLAuthDAO();
         String authToken = request.authToken();
         String username;
 

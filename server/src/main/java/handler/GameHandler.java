@@ -1,6 +1,7 @@
 package handler;
 
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import request.*;
 import response.CreateGameResponse;
 import response.ErrorResponse;
@@ -27,6 +28,9 @@ public class GameHandler {
         } catch (UnauthorizedAccessException e) {
             res.status(401);
             return gson.toJson(new ErrorResponse("Error: unauthorized"));
+        } catch (DataAccessException e) {
+            res.status(500);
+            return gson.toJson(new ErrorResponse("Error: 500"));
         }
     }
 
@@ -48,6 +52,9 @@ public class GameHandler {
         } catch (InvalidRequestException e) {
             res.status(400);
             return gson.toJson(new ErrorResponse("Error: bad request"));
+        } catch (DataAccessException e) {
+            res.status(500);
+            return gson.toJson(new ErrorResponse("Error: 500"));
         }
     }
 
@@ -78,6 +85,9 @@ public class GameHandler {
         } catch (UnavailableRequestException e) {
             res.status(403);
             return gson.toJson(new ErrorResponse("Error: already taken"));
+        } catch (DataAccessException e) {
+            res.status(500);
+            return gson.toJson(new ErrorResponse("Error: 500"));
         }
 
     }

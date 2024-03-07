@@ -1,9 +1,6 @@
 package service;
 
 import dataAccess.*;
-import dataAccess.memoryDAO.MemoryAuthDAO;
-import dataAccess.memoryDAO.MemoryGameDAO;
-import dataAccess.memoryDAO.MemoryUserDAO;
 
 public class ClearService {
 

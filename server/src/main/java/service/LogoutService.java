@@ -3,7 +3,6 @@ package service;
 import dataAccess.AuthDAO;
 import dataAccess.DataAccessException;
 import dataAccess.SQLAuthDAO;
-import dataAccess.memoryDAO.MemoryAuthDAO;
 import request.LogoutRequest;
 
 import javax.xml.crypto.Data;
