@@ -7,8 +7,7 @@
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/dataAccess/SQLGameDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/serviceTests/ServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/dataAccessTests/DAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/dataAccessTests/DAOTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,8 +93,29 @@
     "JUnit.ChessPositionTests.executor": "Debug",
     "JUnit.ChessPositionTests.hashSetTest.executor": "Debug",
     "JUnit.ChessPositionTests.hashTest.executor": "Debug",
+    "JUnit.DAOTests.authClear.executor": "Run",
+    "JUnit.DAOTests.clearGame.executor": "Run",
+    "JUnit.DAOTests.negativeAddUser.executor": "Run",
+    "JUnit.DAOTests.negativeCheckValidAuth.executor": "Run",
+    "JUnit.DAOTests.negativeCreateAuth.executor": "Run",
+    "JUnit.DAOTests.negativeCreateGame.executor": "Run",
     "JUnit.DAOTests.negativeCreateUser.executor": "Run",
+    "JUnit.DAOTests.negativeDeleteAuth.executor": "Run",
+    "JUnit.DAOTests.negativeIsInDatabase.executor": "Run",
+    "JUnit.DAOTests.negativeIsValidGame.executor": "Run",
+    "JUnit.DAOTests.negativeIsValidUser.executor": "Run",
+    "JUnit.DAOTests.negativeListGames.executor": "Run",
+    "JUnit.DAOTests.positiveAddUser.executor": "Run",
+    "JUnit.DAOTests.positiveCheckValidAuth.executor": "Run",
+    "JUnit.DAOTests.positiveCreateAuth.executor": "Run",
+    "JUnit.DAOTests.positiveCreateGame.executor": "Run",
     "JUnit.DAOTests.positiveCreateUser.executor": "Run",
+    "JUnit.DAOTests.positiveDeleteAuth.executor": "Run",
+    "JUnit.DAOTests.positiveIsInDatabase.executor": "Run",
+    "JUnit.DAOTests.positiveIsValidGame.executor": "Run",
+    "JUnit.DAOTests.positiveIsValiduser.executor": "Run",
+    "JUnit.DAOTests.positiveListGames.executor": "Run",
+    "JUnit.DAOTests.userClear.executor": "Run",
     "JUnit.KingMoveTests.executor": "Debug",
     "JUnit.KingMoveTests.kingBlocked.executor": "Debug",
     "JUnit.KingMoveTests.kingCaptureEnemy.executor": "Debug",
@@ -212,6 +232,37 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.ServiceTests">
+    <configuration name="DAOTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataAccessTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dataAccessTests" />
+      <option name="MAIN_CLASS_NAME" value="dataAccessTests.DAOTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DAOTests.clearGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dataAccessTests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="dataAccessTests" />
+      <option name="MAIN_CLASS_NAME" value="dataAccessTests.DAOTests" />
+      <option name="METHOD_NAME" value="clearGame" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PersistenceTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -242,50 +293,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServiceTests.clearTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="StandardAPITests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="serviceTests.*" />
+          <option name="PATTERN" value="passoffTests.serverTests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="serviceTests" />
-      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
-      <option name="METHOD_NAME" value="clearTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServiceTests.negativeLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="serviceTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="serviceTests" />
-      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
-      <option name="METHOD_NAME" value="negativeLogin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServiceTests.positiveJoinGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="serviceTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="serviceTests" />
-      <option name="MAIN_CLASS_NAME" value="serviceTests.ServiceTests" />
-      <option name="METHOD_NAME" value="positiveJoinGame" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="passoffTests.serverTests" />
+      <option name="MAIN_CLASS_NAME" value="passoffTests.serverTests.StandardAPITests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -293,10 +311,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.ServiceTests" />
-        <item itemvalue="JUnit.ServiceTests.negativeLogin" />
-        <item itemvalue="JUnit.ServiceTests.positiveJoinGame" />
-        <item itemvalue="JUnit.ServiceTests.clearTest" />
         <item itemvalue="JUnit.PersistenceTests" />
+        <item itemvalue="JUnit.StandardAPITests" />
+        <item itemvalue="JUnit.DAOTests" />
+        <item itemvalue="JUnit.DAOTests.clearGame" />
       </list>
     </recent_temporary>
   </component>
@@ -358,7 +376,7 @@
       <workItem from="1709609968079" duration="2844000" />
       <workItem from="1709698655745" duration="4340000" />
       <workItem from="1709703219842" duration="2000" />
-      <workItem from="1709749898229" duration="8587000" />
+      <workItem from="1709749898229" duration="11243000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
