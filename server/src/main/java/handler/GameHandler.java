@@ -19,13 +19,10 @@ public class GameHandler {
         var gson = new Gson();
         String authToken = req.headers("authorization");
         ListGameRequest listGameRequest = new ListGameRequest(authToken);
-        System.out.println(listGameRequest.authToken());
 
         GameService gameService = new GameService();
         try {
             ListGameResponse listGameResponse = gameService.listGames(listGameRequest);
-            System.out.println("GAMES");
-            System.out.println(listGameResponse.toString());
             res.status(200);
             return gson.toJson(listGameResponse);
         } catch (UnauthorizedAccessException e) {

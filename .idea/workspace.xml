@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ResponseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ResponseException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ServerFacade.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ResponseException.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ResponseException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ServerFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ServerFacade/ServerFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/test/java/clientTests/ServerFacadeTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/test/java/clientTests/ServerFacadeTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/handler/GameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/handler/GameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/dataAccessTests/DAOTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/dataAccessTests/DAOTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/src/main/java/request/ListGameRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/shared/src/main/java/request/ListGameRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/service/GameService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,11 +152,17 @@
     "JUnit.RookMoveTests.rookBlocked.executor": "Debug",
     "JUnit.RookMoveTests.rookCaptureEnemy.executor": "Debug",
     "JUnit.RookMoveTests.rookMoveUntilEdge.executor": "Debug",
+    "JUnit.ServerFacadeTests.createGameNeg.executor": "Run",
     "JUnit.ServerFacadeTests.createGamePos.executor": "Run",
+    "JUnit.ServerFacadeTests.joinGameNeg.executor": "Run",
     "JUnit.ServerFacadeTests.joinGamePos.executor": "Run",
+    "JUnit.ServerFacadeTests.listGameNeg.executor": "Run",
     "JUnit.ServerFacadeTests.listGamePos.executor": "Run",
+    "JUnit.ServerFacadeTests.loginNeg.executor": "Run",
     "JUnit.ServerFacadeTests.loginPos.executor": "Run",
+    "JUnit.ServerFacadeTests.logoutNeg.executor": "Run",
     "JUnit.ServerFacadeTests.logoutPos.executor": "Run",
+    "JUnit.ServerFacadeTests.registerNeg.executor": "Run",
     "JUnit.ServerFacadeTests.registerPos.executor": "Run",
     "JUnit.ServerFacadeTests.sampleTest.executor": "Run",
     "JUnit.ServiceTests.clearTest.executor": "Run",
@@ -244,8 +248,8 @@
       <recent name="serviceTests" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ServerFacadeTests.listGamePos">
-    <configuration name="ServerFacadeTests.createGamePos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.ServerFacadeTests">
+    <configuration name="ServerFacadeTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
         <pattern>
@@ -255,13 +259,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="clientTests" />
       <option name="MAIN_CLASS_NAME" value="clientTests.ServerFacadeTests" />
-      <option name="METHOD_NAME" value="createGamePos" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerFacadeTests.listGamePos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServerFacadeTests.loginNeg" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
         <pattern>
@@ -271,7 +274,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="clientTests" />
       <option name="MAIN_CLASS_NAME" value="clientTests.ServerFacadeTests" />
-      <option name="METHOD_NAME" value="listGamePos" />
+      <option name="METHOD_NAME" value="loginNeg" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -293,7 +296,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerFacadeTests.logoutPos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ServerFacadeTests.registerNeg" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
         <pattern>
@@ -303,7 +306,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="clientTests" />
       <option name="MAIN_CLASS_NAME" value="clientTests.ServerFacadeTests" />
-      <option name="METHOD_NAME" value="logoutPos" />
+      <option name="METHOD_NAME" value="registerNeg" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -327,10 +330,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ServerFacadeTests.listGamePos" />
-        <item itemvalue="JUnit.ServerFacadeTests.createGamePos" />
-        <item itemvalue="JUnit.ServerFacadeTests.logoutPos" />
+        <item itemvalue="JUnit.ServerFacadeTests" />
+        <item itemvalue="JUnit.ServerFacadeTests.loginNeg" />
         <item itemvalue="JUnit.ServerFacadeTests.loginPos" />
+        <item itemvalue="JUnit.ServerFacadeTests.registerNeg" />
         <item itemvalue="JUnit.ServerFacadeTests.registerPos" />
       </list>
     </recent_temporary>
@@ -395,7 +398,7 @@
       <workItem from="1709703219842" duration="2000" />
       <workItem from="1709749898229" duration="11719000" />
       <workItem from="1710799297040" duration="3541000" />
-      <workItem from="1710872744712" duration="6144000" />
+      <workItem from="1710872744712" duration="8602000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
@@ -453,6 +456,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="3" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="5" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

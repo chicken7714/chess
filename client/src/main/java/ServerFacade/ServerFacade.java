@@ -49,17 +49,18 @@ public class ServerFacade {
         System.out.println("Auth");
         System.out.println(authToken);
         var path = "/game";
-        return this.makeRequest("GET", path, null, ListGameResponse.class, authToken);
+        return this.makeRequest("GET", path, null, ListGameResponse.class, this.authToken);
     }
 
-    public CreateGameResponse createGame(CreateGameRequest request) throws ResponseException {
+    public CreateGameResponse createGame(String gameName) throws ResponseException {
         var path = "/game";
-        return this.makeRequest("POST", path, request, CreateGameResponse.class, authToken);
+        CreateGameData gameRec = new CreateGameData(gameName);
+        return this.makeRequest("POST", path, gameRec, CreateGameResponse.class, authToken);
     }
 
-    public void joinGame(JoinGameRequest request) throws ResponseException {
+    public void joinGame(JoinGameData data) throws ResponseException {
         var path = "/game";
-        this.makeRequest("PUT", path, request, null, authToken);
+        this.makeRequest("PUT", path, data, null, authToken);
     }
 
     public void clear() throws ResponseException {
@@ -84,16 +85,15 @@ public class ServerFacade {
     }
 
     private static void writeBody(Object request, HttpURLConnection http, String auth) throws IOException {
-        System.out.println("Auth in writebody");
-        System.out.println(auth);
         if (auth != null) {
             http.addRequestProperty("authorization", auth);
-            System.out.println("Added auth");
         }
-        http.addRequestProperty("Content-Type", "application/json");
-        String reqData = new Gson().toJson(request);
-        try (OutputStream reqBody = http.getOutputStream()) {
-            reqBody.write(reqData.getBytes());
+        if (request != null) {
+            http.addRequestProperty("Content-Type", "application/json");
+            String reqData = new Gson().toJson(request);
+            try (OutputStream reqBody = http.getOutputStream()) {
+                reqBody.write(reqData.getBytes());
+            }
         }
     }
 
