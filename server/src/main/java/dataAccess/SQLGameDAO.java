@@ -6,7 +6,6 @@ import model.GameModel;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 public class SQLGameDAO extends SQLDAO implements GameDAO {
     public SQLGameDAO() throws DataAccessException {

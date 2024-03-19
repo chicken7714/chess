@@ -13,6 +13,7 @@ public class ServerFacadeTests {
         server = new Server();
         var port = server.run(0);
         System.out.println("Started test HTTP server on " + port);
+
     }
 
     @AfterAll
@@ -22,7 +23,8 @@ public class ServerFacadeTests {
 
 
     @Test
-    public void sampleTest() {
+    public void registerPos() {
+
         Assertions.assertTrue(true);
     }
 

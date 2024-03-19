@@ -4,7 +4,6 @@ import dataAccess.DataAccessException;
 import dataAccess.UserDAO;
 import model.UserModel;
 
-import javax.xml.crypto.Data;
 import java.util.HashMap;
 
 public class MemoryUserDAO implements UserDAO {

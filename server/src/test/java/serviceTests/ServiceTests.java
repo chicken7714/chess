@@ -2,7 +2,6 @@ package serviceTests;
 
 import dataAccess.*;
 import dataAccess.memoryDAO.MemoryAuthDAO;
-import dataAccess.memoryDAO.MemoryGameDAO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;

@@ -4,9 +4,7 @@ import dataAccess.AuthDAO;
 import dataAccess.DataAccessException;
 import model.AuthModel;
 
-import javax.xml.crypto.Data;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class MemoryAuthDAO implements AuthDAO {
     private static HashMap<String, String> authTokens = new HashMap<>();

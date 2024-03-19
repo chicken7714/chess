@@ -11,13 +11,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import service.InvalidRequestException;
 import service.UnauthorizedAccessException;
-import spark.utils.Assert;
 
-import javax.xml.crypto.Data;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public class DAOTests {

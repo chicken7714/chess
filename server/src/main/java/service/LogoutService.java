@@ -5,8 +5,6 @@ import dataAccess.DataAccessException;
 import dataAccess.SQLAuthDAO;
 import request.LogoutRequest;
 
-import javax.xml.crypto.Data;
-
 public class LogoutService {
 
     public boolean logout(LogoutRequest request) throws UnauthorizedAccessException, DataAccessException{
