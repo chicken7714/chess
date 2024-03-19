@@ -1,3 +1,5 @@
+package ServerFacade;
+
 import com.google.gson.Gson;
 import model.UserModel;
 import request.*;
@@ -37,14 +39,17 @@ public class ServerFacade {
         return resp;
     }
 
-    public void logoutUser(LogoutRequest logout) throws ResponseException {
+    public void logoutUser() throws ResponseException {
         var path = "/session";
-        this.makeRequest("DELETE", path, logout, null, authToken);
+        System.out.println(authToken);
+        this.makeRequest("DELETE", path, null, null, this.authToken);
     }
 
-    public ListGameResponse listGames(ListGameRequest request) throws ResponseException {
+    public ListGameResponse listGames() throws ResponseException {
+        System.out.println("Auth");
+        System.out.println(authToken);
         var path = "/game";
-        return this.makeRequest("GET", path, request, ListGameResponse.class, authToken);
+        return this.makeRequest("GET", path, null, ListGameResponse.class, authToken);
     }
 
     public CreateGameResponse createGame(CreateGameRequest request) throws ResponseException {
@@ -55,6 +60,11 @@ public class ServerFacade {
     public void joinGame(JoinGameRequest request) throws ResponseException {
         var path = "/game";
         this.makeRequest("PUT", path, request, null, authToken);
+    }
+
+    public void clear() throws ResponseException {
+        var path = "/db";
+        this.makeRequest("DELETE", path, null, null, null);
     }
 
     private <T> T makeRequest(String method, String path, Object request, Class<T> responseClass, String auth) throws ResponseException {
@@ -74,15 +84,16 @@ public class ServerFacade {
     }
 
     private static void writeBody(Object request, HttpURLConnection http, String auth) throws IOException {
-        if (request != null) {
-            if (auth != null) {
-                http.addRequestProperty("authorization", auth);
-            }
-            http.addRequestProperty("Content-Type", "application/json");
-            String reqData = new Gson().toJson(request);
-            try (OutputStream reqBody = http.getOutputStream()) {
-                reqBody.write(reqData.getBytes());
-            }
+        System.out.println("Auth in writebody");
+        System.out.println(auth);
+        if (auth != null) {
+            http.addRequestProperty("authorization", auth);
+            System.out.println("Added auth");
+        }
+        http.addRequestProperty("Content-Type", "application/json");
+        String reqData = new Gson().toJson(request);
+        try (OutputStream reqBody = http.getOutputStream()) {
+            reqBody.write(reqData.getBytes());
         }
     }
 

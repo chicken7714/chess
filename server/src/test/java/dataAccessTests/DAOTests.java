@@ -181,6 +181,7 @@ public class DAOTests {
         gamedao.createGame("Badboiz");
         gamedao.createGame("HelloWorld");
         gamedao.createGame("Dijkstra's pawns");
+        System.out.println(gamedao.listGames().toString());
         Assertions.assertEquals(3, gamedao.listGames().size());
     }
 
