@@ -25,12 +25,25 @@ public class ChessClient {
             var tokens = input.toLowerCase().split(" ");
             var cmd = (tokens.length > 0) ? tokens[0] : "help";
             var params = Arrays.copyOfRange(tokens, 1, tokens.length);
-            return switch (cmd) {
-                case "quit" -> quit();
-                case "login" -> login(params);
-                case "register" -> register(params);
-                default -> help();
-            };
+            if (state.equals(State.PRELOGIN)) {
+                return switch (cmd) {
+                    case "quit" -> quit();
+                    case "login" -> login(params);
+                    case "register" -> register(params);
+                    default -> help();
+                };
+            } else if (state.equals(State.POSTLOGIN)) {
+                return switch (cmd) {
+                    case "quit" -> quit();
+                    case "createGame" -> createGame(params);
+                    case "listGames" -> listGames();
+                    case "joinGame" -> joinGame(params);
+                    case "observeGame" -> observeGame(params);
+                    case "logout" -> logout();
+                    default -> help();
+                };
+            }
+            return "";
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -60,6 +73,26 @@ public class ChessClient {
         throw new ResponseException(400, "Expected: <username> <password> <email>");
     }
 
+    private String createGame(String... params) {
+        return "Created Game";
+    }
+
+    private String listGames() {
+        return "My list";
+    }
+
+    private String joinGame(String... params) {
+        return "Joined Game";
+    }
+
+    private String observeGame(String... params) {
+        return "Observing Game";
+    }
+
+    private String logout() {
+        return "Logout";
+    }
+
 
     public String help() {
         if (state.equals(State.PRELOGIN)) {
@@ -72,10 +105,10 @@ public class ChessClient {
         }
         else if (state.equals(State.POSTLOGIN)) {
             return """
-                   -create <NAME>
-                   -list
-                   -join <ID> [WHITE|BLACK|<empty>]
-                   -observe <ID>
+                   -createGame <NAME>
+                   -listGames
+                   -joinGame <ID> [WHITE|BLACK|<empty>]
+                   -observeGame <ID>
                    -logout
                    -quit
                    -help
