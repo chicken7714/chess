@@ -4,29 +4,31 @@ import ServerFacade.ServerFacade;
 import ServerFacade.ResponseException;
 import model.GameModel;
 import model.UserModel;
+import request.JoinGameData;
 import request.LoginRequest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 
 public class ChessClient {
     private final ServerFacade server;
     private final String serverUrl;
     private State state = State.PRELOGIN;
     private String username;
-    private ArrayList<GameModel> gameArray;
+    private HashMap<Integer, GameModel> gameMap;
 
 
     public ChessClient(String serverUrl) {
         this.server = new ServerFacade(serverUrl);
         this.serverUrl = serverUrl;
-
+        this.gameMap = new HashMap<Integer, GameModel>();
     }
 
     public String eval(String input) {
         try {
-            var tokens = input.toLowerCase().split(" ");
+            var tokens = input.split(" ");
             var cmd = (tokens.length > 0) ? tokens[0] : "help";
             var params = Arrays.copyOfRange(tokens, 1, tokens.length);
             if (state.equals(State.PRELOGIN)) {
@@ -39,10 +41,10 @@ public class ChessClient {
             } else if (state.equals(State.POSTLOGIN)) {
                 return switch (cmd) {
                     case "quit" -> quit();
-                    case "creategame" -> createGame(params);
-                    case "listgames" -> listGames();
-                    case "joingame" -> joinGame(params);
-                    case "observegame" -> observeGame(params);
+                    case "createGame" -> createGame(params);
+                    case "listGames" -> listGames();
+                    case "joinGame" -> joinGame(params);
+                    case "observeGame" -> observeGame(params);
                     case "logout" -> logout();
                     default -> help();
                 };
@@ -95,20 +97,33 @@ public class ChessClient {
         int index = 1;
         Collection<GameModel> games = server.listGames();
         StringBuilder stringBuilder = new StringBuilder();
-        for (GameModel game : games) {
+        for (var game : games) {
             String gameString = String.format("%d: Game Name - %s, White Player - %s, Black Player - %s",
                     index, game.gameName(), game.whiteUsername(), game.blackUsername());
             stringBuilder.append(gameString);
             stringBuilder.append("\n");
-            this.gameArray.add(index, game);
+            gameMap.put(index, game);
             index += 1;
         }
+        System.out.println(gameMap.toString());
         return stringBuilder.toString();
     }
 
-    private String joinGame(String... params) {
-        state = State.GAMEPLAY;
-        return "Joined gameID";
+    private String joinGame(String... params) throws ResponseException {
+        if (params.length >= 1) {
+            try {
+                GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
+                System.out.println(params[1]);
+                System.out.println(targetGame.gameID());
+                JoinGameData joinGameData = new JoinGameData(params[1], targetGame.gameID());
+                server.joinGame(joinGameData);
+                state = State.GAMEPLAY;
+                return "Successfully Joined Game";
+            } catch (NumberFormatException e) {
+                throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
+            }
+        }
+        throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
     }
 
     private String observeGame(String... params) {
