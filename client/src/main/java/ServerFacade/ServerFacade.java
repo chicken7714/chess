@@ -1,6 +1,7 @@
 package ServerFacade;
 
 import com.google.gson.Gson;
+import model.GameModel;
 import model.UserModel;
 import request.*;
 import response.CreateGameResponse;
@@ -15,6 +16,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.Collection;
 
 public class ServerFacade {
 
@@ -41,21 +43,20 @@ public class ServerFacade {
 
     public void logoutUser() throws ResponseException {
         var path = "/session";
-        System.out.println(authToken);
         this.makeRequest("DELETE", path, null, null, this.authToken);
     }
 
-    public ListGameResponse listGames() throws ResponseException {
-        System.out.println("Auth");
-        System.out.println(authToken);
+    public Collection<GameModel> listGames() throws ResponseException {
         var path = "/game";
-        return this.makeRequest("GET", path, null, ListGameResponse.class, this.authToken);
+        ListGameResponse resp = this.makeRequest("GET", path, null, ListGameResponse.class, this.authToken);
+        return resp.games();
     }
 
-    public CreateGameResponse createGame(String gameName) throws ResponseException {
+    public int createGame(String gameName) throws ResponseException {
         var path = "/game";
         CreateGameData gameRec = new CreateGameData(gameName);
-        return this.makeRequest("POST", path, gameRec, CreateGameResponse.class, authToken);
+        CreateGameResponse resp =  this.makeRequest("POST", path, gameRec, CreateGameResponse.class, authToken);
+        return resp.gameID();
     }
 
     public void joinGame(JoinGameData data) throws ResponseException {

@@ -2,6 +2,7 @@ package clientTests;
 
 import ServerFacade.ServerFacade;
 import ServerFacade.ResponseException;
+import model.GameModel;
 import model.UserModel;
 import org.junit.jupiter.api.*;
 import request.*;
@@ -10,6 +11,8 @@ import response.ListGameResponse;
 import response.LoginResponse;
 import response.RegisterResponse;
 import server.Server;
+
+import java.util.Collection;
 
 public class ServerFacadeTests {
 
@@ -124,9 +127,8 @@ public class ServerFacadeTests {
         UserModel user = new UserModel("Hello", "password", "henry@gmail.com");
         RegisterResponse resp = facade.registerUser(user);
 
-        CreateGameResponse gameResp = facade.createGame("Chess4Nerds");
-        System.out.println(gameResp.toString());
-        Assertions.assertInstanceOf(Integer.class, gameResp.gameID());
+        int gameResp = facade.createGame("Chess4Nerds");
+        Assertions.assertInstanceOf(Integer.class, gameResp);
     }
 
     @Test
@@ -148,11 +150,11 @@ public class ServerFacadeTests {
         UserModel user = new UserModel("Hello", "password", "henry@gmail.com");
         RegisterResponse resp = facade.registerUser(user);
 
-        CreateGameResponse gameResp = facade.createGame("Chess4Nerds");
-        System.out.println(gameResp.toString());
+        int gameResp = facade.createGame("Chess4Nerds");
+        System.out.println(gameResp);
 
-        ListGameResponse listGame = facade.listGames();
-        Assertions.assertEquals(1, listGame.games().size());
+        Collection<GameModel> listGame = facade.listGames();
+        Assertions.assertEquals(1, listGame.size());
     }
 
     @Test
@@ -174,11 +176,11 @@ public class ServerFacadeTests {
         RegisterResponse resp = facade.registerUser(user);
         String auth = resp.authToken();
 
-        CreateGameResponse gameResp = facade.createGame("Chess4Nerds");
-        Assertions.assertInstanceOf(Integer.class, gameResp.gameID());
+        int gameResp = facade.createGame("Chess4Nerds");
+        Assertions.assertInstanceOf(Integer.class, gameResp);
 
-        Assertions.assertDoesNotThrow(() -> facade.joinGame(new JoinGameData("WHITE", gameResp.gameID())));
-        ListGameResponse listResp = facade.listGames();
+        Assertions.assertDoesNotThrow(() -> facade.joinGame(new JoinGameData("WHITE", gameResp)));
+        Collection<GameModel> listResp = facade.listGames();
         System.out.println(listResp.toString());
     }
 
