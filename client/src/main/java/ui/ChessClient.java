@@ -52,6 +52,7 @@ public class ChessClient {
             else if (state.equals(State.GAMEPLAY)) {
                 return switch (cmd) {
                     case "quit" -> quit();
+                    case "back" -> back();
                     default -> help();
                 };
             }
@@ -134,6 +135,11 @@ public class ChessClient {
         server.logoutUser();
         state = State.PRELOGIN;
         return "Logged out user";
+    }
+
+    private String back() {
+        state = State.POSTLOGIN;
+        return "Returning to Postlogin UI";
     }
 
 
