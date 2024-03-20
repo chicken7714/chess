@@ -26,6 +26,7 @@ public class ChessClient {
             var cmd = (tokens.length > 0) ? tokens[0] : "help";
             var params = Arrays.copyOfRange(tokens, 1, tokens.length);
             return switch (cmd) {
+                case "quit" -> quit();
                 case "login" -> login(params);
                 case "register" -> register(params);
                 default -> help();
@@ -35,8 +36,8 @@ public class ChessClient {
         }
     }
 
-    private void quit() {
-        System.exit(0);
+    private String quit() {
+        return "quit";
     }
 
     private String login(String... params) throws ResponseException {
@@ -61,9 +62,25 @@ public class ChessClient {
 
 
     public String help() {
-        return """
-               - signIn <yourname>
-               - quit
-               """;
+        if (state.equals(State.PRELOGIN)) {
+            return """
+                   -register <username> <password> <email>
+                   -login <username> <password>
+                   -quit
+                   -help
+                   """;
+        }
+        else if (state.equals(State.POSTLOGIN)) {
+            return """
+                   -create <NAME>
+                   -list
+                   -join <ID> [WHITE|BLACK|<empty>]
+                   -observe <ID>
+                   -logout
+                   -quit
+                   -help
+                   """;
+        }
+        return "";
     }
 }
