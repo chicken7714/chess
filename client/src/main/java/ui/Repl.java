@@ -11,6 +11,7 @@ public class Repl {
     }
 
     public void run() {
+        System.out.print(EscapeSequences.SET_TEXT_COLOR_WHITE);
         System.out.println("Welcome to CHESS");
         System.out.println(client.help());
 
@@ -32,6 +33,6 @@ public class Repl {
     }
 
     private void printPrompt() {
-        System.out.print("\n" + EscapeSequences.SET_TEXT_COLOR_LIGHT_GREY + ">>> ");
+        System.out.print("\n>>> ");
     }
 }

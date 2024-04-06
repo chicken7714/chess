@@ -5,7 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessBoardDrawer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/websocket/ServerMessageHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/websocket/WebsocketFacade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/websocket/Connection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/websocket/ConnectionManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/server/websocket/WebsocketHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests/WebSocketTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/serverMessages/ErrorMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/serverMessages/LoadGameMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/serverMessages/NotificationMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/serverMessages/ServerMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/JoinObserverCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/JoinPlayerCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/LeaveCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/MakeMoveCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/ResignCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands/UserGameCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.iml" beforeDir="false" afterPath="$PROJECT_DIR$/client/client.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/EscapeSequences.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/EscapeSequences.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/Repl.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/Repl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/lib/passoff-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/server/lib/passoff-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,6 +84,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.ChessBoardDrawer.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main (1).executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
@@ -220,7 +246,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
@@ -233,11 +259,11 @@
       <recent name="$PROJECT_DIR$/shared/src/test/java/passoffTests/chessTests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/shared/src/main/java" />
-      <recent name="$PROJECT_DIR$/client/src/test/java/clientTests" />
-      <recent name="$PROJECT_DIR$/client/src/main/java/ui" />
+      <recent name="$PROJECT_DIR$/server/lib" />
+      <recent name="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/userCommands" />
+      <recent name="$PROJECT_DIR$/shared/src/main/java/webSocketMessages/serverMessages" />
       <recent name="$PROJECT_DIR$/server/src/test/java/passoffTests/serverTests" />
-      <recent name="$PROJECT_DIR$/server/src/main/java/dataAccess" />
+      <recent name="$PROJECT_DIR$/shared/src/main/java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -276,22 +302,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ServerFacadeTests.createGamePos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="client" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="clientTests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="clientTests" />
-      <option name="MAIN_CLASS_NAME" value="clientTests.ServerFacadeTests" />
-      <option name="METHOD_NAME" value="createGamePos" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ServerFacadeTests.joinGamePos" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="client" />
       <extension name="coverage">
@@ -312,9 +322,8 @@
       <list>
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.ServerFacadeTests.joinGamePos" />
         <item itemvalue="JUnit.ServerFacadeTests" />
-        <item itemvalue="JUnit.ServerFacadeTests.createGamePos" />
+        <item itemvalue="JUnit.ServerFacadeTests.joinGamePos" />
       </list>
     </recent_temporary>
   </component>
@@ -383,6 +392,17 @@
       <workItem from="1710898919875" duration="2962000" />
       <workItem from="1710902460346" duration="1722000" />
       <workItem from="1710904313844" duration="507000" />
+      <workItem from="1710956314136" duration="4902000" />
+      <workItem from="1710961523425" duration="837000" />
+      <workItem from="1711051138877" duration="2000" />
+      <workItem from="1711051276733" duration="2000" />
+      <workItem from="1711070889361" duration="3000" />
+      <workItem from="1711126611949" duration="90000" />
+      <workItem from="1711139249514" duration="1207000" />
+      <workItem from="1711758089681" duration="8000" />
+      <workItem from="1712166073079" duration="2106000" />
+      <workItem from="1712348572931" duration="9239000" />
+      <workItem from="1712422059560" duration="825000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

@@ -18,12 +18,14 @@ public class ChessClient {
     private State state = State.PRELOGIN;
     private String username;
     private HashMap<Integer, GameModel> gameMap;
+    private ChessBoardDrawer chessBoardDrawer;
 
 
     public ChessClient(String serverUrl) {
         this.server = new ServerFacade(serverUrl);
         this.serverUrl = serverUrl;
         this.gameMap = new HashMap<Integer, GameModel>();
+        this.chessBoardDrawer = new ChessBoardDrawer();
     }
 
     public String eval(String input) {
@@ -53,7 +55,7 @@ public class ChessClient {
                 return switch (cmd) {
                     case "quit" -> quit();
                     case "back" -> back();
-                    default -> help();
+                    default -> chessBoardDrawer.generateChessBoard();
                 };
             }
             return "";
@@ -106,7 +108,6 @@ public class ChessClient {
             gameMap.put(index, game);
             index += 1;
         }
-        System.out.println(gameMap.toString());
         return stringBuilder.toString();
     }
 
@@ -114,8 +115,6 @@ public class ChessClient {
         if (params.length >= 1) {
             try {
                 GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
-                System.out.println(params[1]);
-                System.out.println(targetGame.gameID());
                 JoinGameData joinGameData = new JoinGameData(params[1], targetGame.gameID());
                 server.joinGame(joinGameData);
                 state = State.GAMEPLAY;
@@ -127,8 +126,19 @@ public class ChessClient {
         throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
     }
 
-    private String observeGame(String... params) {
-        return "Observing Game";
+    private String observeGame(String... params) throws ResponseException {
+        if (params.length >= 1) {
+            try {
+                GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
+                JoinGameData joinGameData = new JoinGameData(null, targetGame.gameID());
+                server.joinGame(joinGameData);
+                state = State.GAMEPLAY;
+                return String.format("Successfully observing game %s", params[0]);
+            } catch (NumberFormatException e) {
+                throw new ResponseException(400, "Expected <ID>");
+            }
+        }
+        throw new ResponseException(400, "Expected <ID>");
     }
 
     private String logout() throws ResponseException {

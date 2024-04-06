@@ -2,14 +2,23 @@ package server;
 
 import dataAccess.SQLDAO;
 import handler.*;
+import server.websocket.WebsocketHandler;
 import service.ClearService;
 import spark.*;
 
 public class Server {
+    private final WebsocketHandler websocketHandler;
+
+    public Server() {
+        websocketHandler = new WebsocketHandler();
+    }
+
     public int run(int desiredPort) {
         Spark.port(desiredPort);
 
         Spark.staticFiles.location("web");
+
+        Spark.webSocket("/connect", websocketHandler);
 
         // Register your endpoints and handle exceptions here.
         Spark.delete("/db", (req, res) -> new ClearHandler().clear(req, res));
