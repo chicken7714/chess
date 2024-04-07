@@ -41,7 +41,6 @@ public class WebsocketHandler {
 
     private void joinPlayer(Session session, String message) throws IOException {
         JoinPlayerCommand joinPlayerCommand = new Gson().fromJson(message, JoinPlayerCommand.class);
-        System.out.println("JOIN PLAYER WEBSOCKET HANDLER");
         String auth = joinPlayerCommand.getAuthString();
         int gameID = joinPlayerCommand.getGameID();
         ChessGame.TeamColor teamColor = joinPlayerCommand.getTeamColor();
@@ -70,13 +69,11 @@ public class WebsocketHandler {
                 teamColorString = "BLACK";
             }
 
-            System.out.println("LOAD GAME MESSAGE BACK TO OG CLIENT");
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
             connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(loadGameMessage));
             // Server sends a Notification message to all other clients in
             // that game informing them what color the root client is joining as.
 
-            System.out.println("BROADCAST BACK TO EVERYONE ELSE NOTIFICATION");
             connectionManager.broadcast(gameID, auth, new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s had joined as %s", username, teamColorString)));
         } catch (DataAccessException | InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Game ID");
@@ -118,23 +115,23 @@ public class WebsocketHandler {
         ChessMove move = makeMoveCommand.getMove();
         int gameID = makeMoveCommand.getGameID();
         String auth = makeMoveCommand.getAuthString();
+
         WebSocketServices service = new WebSocketServices();
         Gson gson = new Gson();
+
         // Server verifies the validity of the move.
         try {
             String oldGameJson = service.getGame(gameID);
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
             ChessGame game = gameModel.game();
-            try {
-                game.makeMove(move);
-            } catch (InvalidMoveException e) {
-                ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Move");
-                connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
-            }
+
+            game.makeMove(move);
+
             // Game is updated to represent the move. Game is updated in the database.
             GameModel newGameModel = new GameModel(gameModel.gameID(), gameModel.whiteUsername(), gameModel.blackUsername(), gameModel.gameName(), game);
             String newGameJson = gson.toJson(newGameModel);
             service.updateGame(gameID, newGameJson);
+
             // Server sends a LOAD_GAME message to all clients in the game (including the root client)
             // with an updated game.
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, newGameJson);
@@ -147,7 +144,7 @@ public class WebsocketHandler {
             // them what move was made.
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, move + " was made");
             connectionManager.broadcast(gameID, auth, notification);
-        } catch (InvalidRequestException | DataAccessException e) {
+        } catch (InvalidRequestException | DataAccessException | InvalidMoveException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid request");
             connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
         }
