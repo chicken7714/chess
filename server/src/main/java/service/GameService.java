@@ -77,13 +77,4 @@ public class GameService {
             }
         }
     }
-
-    public String getGame(int gameID) throws InvalidRequestException {
-        try {
-            SQLGameDAO gameDAO = new SQLGameDAO();
-            return gameDAO.getGame(gameID);
-        } catch (DataAccessException e) {
-            throw new InvalidRequestException("Game not found");
-        }
-    }
 }

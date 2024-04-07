@@ -120,4 +120,9 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
         }
         throw new DataAccessException("Not a valid request, no game found");
     }
+
+    public void updateGame(int gameID, String gameJson) throws DataAccessException {
+        var statement = "UPDATE game SET json=? WHERE gameID=?";
+        executeUpdate(statement, gameJson, gameID);
+    }
 }
