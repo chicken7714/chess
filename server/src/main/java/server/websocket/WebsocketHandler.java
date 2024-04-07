@@ -2,16 +2,19 @@ package server.websocket;
 
 import chess.ChessGame;
 import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import model.GameModel;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import service.GameService;
 import service.InvalidRequestException;
+import service.WebSocketServices;
 import webSocketMessages.serverMessages.ErrorMessage;
 import webSocketMessages.serverMessages.LoadGameMessage;
 import webSocketMessages.serverMessages.NotificationMessage;
 import webSocketMessages.serverMessages.ServerMessage;
+import webSocketMessages.userCommands.JoinObserverCommand;
 import webSocketMessages.userCommands.JoinPlayerCommand;
 import webSocketMessages.userCommands.UserGameCommand;
 
@@ -27,7 +30,7 @@ public class WebsocketHandler {
         UserGameCommand userGameCommand = new Gson().fromJson(message, UserGameCommand.class);
         switch (userGameCommand.getCommandType()) {
             case JOIN_PLAYER -> joinPlayer((JoinPlayerCommand) userGameCommand);
-            case JOIN_OBSERVER -> joinObserver(userGameCommand);
+            case JOIN_OBSERVER -> joinObserver((JoinObserverCommand) userGameCommand);
             case MAKE_MOVE -> makeMove(userGameCommand);
             case LEAVE -> leave(userGameCommand);
             case RESIGN -> resign(userGameCommand);
@@ -66,10 +69,28 @@ public class WebsocketHandler {
         }
     }
 
-    private void joinObserver(UserGameCommand joinObserverCommand) {
-        //Server sends a LOAD_GAME message back to the root client.
-        //Server sends a Notification message to all other clients
-        // in that game informing them the root client joined as an observer.
+    private void joinObserver(JoinObserverCommand joinObserverCommand) throws IOException {
+        String auth = joinObserverCommand.getAuthString();
+        int gameID = joinObserverCommand.getGameID();
+        WebSocketServices service = new WebSocketServices();
+
+        try {
+            String username = service.getUsername(auth);
+
+            GameService gameService = new GameService();
+            String gameJson = gameService.getGame(gameID);
+
+            //Server sends a LOAD_GAME message back to the root client.
+            ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
+            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson())
+            //Server sends a Notification message to all other clients
+            // in that game informing them the root client joined as an observer.
+            ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s has joined as an observer", username));
+            connectionManager.broadcast(gameID, auth, notification);
+        } catch (InvalidRequestException | DataAccessException e) {
+            ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid request");
+            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+        }
     }
 
     private void makeMove(UserGameCommand makeMoveCommand) {
