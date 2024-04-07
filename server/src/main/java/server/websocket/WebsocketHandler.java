@@ -124,15 +124,12 @@ public class WebsocketHandler {
         // Server verifies the validity of the move.
         try {
             String oldGameJson = service.getGame(gameID);
-            System.out.println(oldGameJson);
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
             ChessGame game = gameModel.game();
-            System.out.println(game.getTeamTurn());
             String username = service.getUsername(auth);
 
             ChessGame.TeamColor turn = game.getTeamTurn();
 
-            System.out.println(turn);
             if (!username.equals(gameModel.whiteUsername()) && turn.equals(ChessGame.TeamColor.WHITE)) {
                 throw new InvalidRequestException("Not your place bro");
             } else if (!username.equals(gameModel.blackUsername()) && turn.equals(ChessGame.TeamColor.BLACK)) {
@@ -214,8 +211,10 @@ public class WebsocketHandler {
             GameModel gameModel = gson.fromJson(gameJson, GameModel.class);
             ChessGame oldGame = gameModel.game();
             String username = service.getUsername(auth);
-            if (!username.equals(gameModel.blackUsername()) || !username.equals(gameModel.whiteUsername())) {
+            if (!(username.equals(gameModel.blackUsername()) || username.equals(gameModel.whiteUsername()))) {
                 throw new InvalidRequestException("Not your place bro");
+            } else if (oldGame.getTeamTurn() == null) {
+                throw new InvalidRequestException("Other player has already lost/resigned");
             }
 
             oldGame.setTeamTurn(null);
