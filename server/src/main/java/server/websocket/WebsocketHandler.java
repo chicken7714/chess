@@ -175,10 +175,10 @@ public class WebsocketHandler {
             String oldGameJson = service.getGame(gameID);
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
 
-            if (gameModel.whiteUsername().equals(username)) {
+            if (gameModel.whiteUsername() != null && gameModel.whiteUsername().equals(username)) {
                 GameModel newGameModel = new GameModel(gameID, null, gameModel.blackUsername(), gameModel.gameName(), gameModel.game());
                 service.updateGame(gameID, gson.toJson(newGameModel));
-            } else if (gameModel.blackUsername().equals(username)) {
+            } else if (gameModel.blackUsername() != null && gameModel.blackUsername().equals(username)) {
                 GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), null, gameModel.gameName(), gameModel.game());
                 service.updateGame(gameID, gson.toJson(newGameModel));
             } else {
