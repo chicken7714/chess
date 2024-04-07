@@ -6,13 +6,17 @@ import model.GameModel;
 import model.UserModel;
 import request.JoinGameData;
 import request.LoginRequest;
+import webSocketMessages.serverMessages.ErrorMessage;
+import webSocketMessages.serverMessages.LoadGameMessage;
+import webSocketMessages.serverMessages.NotificationMessage;
+import webSocketMessages.serverMessages.ServerMessage;
+import websocket.ServerMessageHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class ChessClient {
+public class ChessClient implements ServerMessageHandler {
     private final ServerFacade server;
     private final String serverUrl;
     private State state = State.PRELOGIN;
@@ -174,5 +178,28 @@ public class ChessClient {
                    """;
         }
         return "";
+    }
+
+    @Override
+    public void notify(ServerMessage serverMessage) {
+        switch (serverMessage.getServerMessageType()) {
+            case ERROR -> error((ErrorMessage) serverMessage);
+            case LOAD_GAME -> loadGame((LoadGameMessage) serverMessage);
+            case NOTIFICATION -> notification((NotificationMessage) serverMessage);
+        }
+    }
+
+    @Override
+    public Object updateGame(Object game) {
+        return game;
+    }
+
+    private void error(ErrorMessage message) {
+    }
+
+    private void loadGame(LoadGameMessage loadGame) {
+    }
+
+    private void notification(NotificationMessage notificationMessage) {
     }
 }

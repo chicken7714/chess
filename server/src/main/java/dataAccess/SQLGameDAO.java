@@ -2,6 +2,7 @@ package dataAccess;
 
 import com.google.gson.Gson;
 import model.GameModel;
+import chess.ChessGame;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
         var statement = "INSERT INTO game (json) VALUES ('')";
         var gameID = executeUpdate(statement);
 
-        GameModel game = new GameModel(gameID, null, null, gameName);
+        GameModel game = new GameModel(gameID, null, null, gameName, new ChessGame());
         var serializer = new Gson();
         String json = serializer.toJson(game);
         statement = "UPDATE game SET json=? WHERE gameID=?";
@@ -60,12 +61,12 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
                         var json = rs.getString(1);
                         GameModel game = serializer.fromJson(json, GameModel.class);
                         if (playerColor.equals("WHITE") && (game.whiteUsername() == null)) {
-                            GameModel newGame = new GameModel(gameID, username, game.blackUsername(), game.gameName());
+                            GameModel newGame = new GameModel(gameID, username, game.blackUsername(), game.gameName(), game.game());
                             var newJson = serializer.toJson(newGame);
                             statement = "UPDATE game SET json=? WHERE gameID=?";
                             executeUpdate(statement, newJson, gameID);
                         } else if (playerColor.equals("BLACK") && (game.blackUsername() == null)) {
-                            GameModel newGame = new GameModel(gameID, game.whiteUsername(), username, game.gameName());
+                            GameModel newGame = new GameModel(gameID, game.whiteUsername(), username, game.gameName(), game.game());
                             var newJson = serializer.toJson(newGame);
                             statement = "UPDATE game SET json=? WHERE gameID=?";
                             executeUpdate(statement, newJson, gameID);
@@ -101,5 +102,22 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
         } catch (SQLException e) {
             throw new DataAccessException(e.getMessage());
         }
+    }
+
+    public String getGame(int gameID) throws DataAccessException {
+        try (var conn = DatabaseManager.getConnection()) {
+            var statement = "SELECT json FROM game WHERE gameID=?";
+            try (var ps = conn.prepareStatement(statement)) {
+                ps.setInt(1, gameID);
+                try (var rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        return rs.getString("json");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
+        throw new DataAccessException("Not a valid request, no game found");
     }
 }

@@ -2,36 +2,38 @@ package server.websocket;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.jetty.websocket.api.Session;
 import webSocketMessages.serverMessages.ServerMessage;
 
 public class ConnectionManager {
-    public final ConcurrentHashMap<String, Connection> connections = new ConcurrentHashMap<>();
+    public final ConcurrentHashMap<Integer, HashMap<String, Connection>> connections = new ConcurrentHashMap<>();
 
-    public void add(String authToken, Session session) {
+    public void addSessionToGame(int gameID, String authToken, Session session) {
         var connection = new Connection(authToken, session);
-        connections.put(authToken, connection);
+        connections.get(gameID).put(authToken, connection);
     }
 
-    public void remove(String authToken) {
-        connections.remove(authToken);
+    public void removeSessionFromGame(int gameID, String authToken) {
+        connections.get(gameID).remove(authToken);
     }
 
-    public void broadcast(String excludeAuth, ServerMessage notification) throws IOException {
-        var removeList = new ArrayList<Connection>();
-        for (var c : connections.values()) {
+    public void broadcast(int gameID, String excludeAuth, ServerMessage notification) throws IOException {
+        var authRemoveList = new ArrayList<String>();
+        for (var entry : connections.get(gameID).entrySet()) {
+            var c = entry.getValue();
             if (c.session.isOpen()) {
                 if (!c.authToken.equals(excludeAuth)) {
                     c.send(notification.toString());
                 }
             } else {
-                removeList.add(c);
+                authRemoveList.add(entry.getKey());
             }
         }
 
-        for (var c : removeList) {
-            connections.remove(c.authToken);
+        for (var c : authRemoveList) {
+            connections.get(gameID).remove(c);
         }
     }
 }
