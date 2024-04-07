@@ -43,6 +43,7 @@ public class WebsocketFacade extends Endpoint {
     public void onOpen(Session session, EndpointConfig endpointConfig) {}
 
     public void joinPlayer(String authToken, int gameID, ChessGame.TeamColor teamColor) throws ResponseException {
+        System.out.println("JOIN PLAYER WEBSOCKETFACADE");
         try {
             UserGameCommand joinPlayerCommand = new JoinPlayerCommand(authToken, gameID, teamColor);
             this.session.getBasicRemote().sendText(new Gson().toJson(joinPlayerCommand));

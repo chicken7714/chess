@@ -1,8 +1,10 @@
 package websocket;
 
+import chess.ChessGame;
 import webSocketMessages.serverMessages.ServerMessage;
 
 public interface ServerMessageHandler {
     void notify(ServerMessage serverMessage);
-    Object updateGame(Object game);
+
+    void updateGame(ChessGame game);
 }

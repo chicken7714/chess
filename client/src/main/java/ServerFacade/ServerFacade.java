@@ -59,9 +59,10 @@ public class ServerFacade {
         return resp.gameID();
     }
 
-    public void joinGame(JoinGameData data) throws ResponseException {
+    public String joinGame(JoinGameData data) throws ResponseException {
         var path = "/game";
         this.makeRequest("PUT", path, data, null, authToken);
+        return this.authToken;
     }
 
     public void clear() throws ResponseException {

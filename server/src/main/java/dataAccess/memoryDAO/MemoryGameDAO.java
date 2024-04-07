@@ -1,5 +1,6 @@
 package dataAccess.memoryDAO;
 
+import chess.ChessGame;
 import dataAccess.DataAccessException;
 import dataAccess.GameDAO;
 import model.GameModel;
@@ -15,7 +16,7 @@ public class MemoryGameDAO implements GameDAO {
         int gameID = idCount;
         idCount++;
 
-        GameModel newGame = new GameModel(gameID, null, null, gameName);
+        GameModel newGame = new GameModel(gameID, null, null, gameName, new ChessGame());
         games.put(gameID, newGame);
         return gameID;
     }
@@ -31,14 +32,15 @@ public class MemoryGameDAO implements GameDAO {
         String gameName = game.gameName();
         String blackUsername = game.blackUsername();
         String whiteUsername = game.whiteUsername();
+        ChessGame actualGame = game.game();
 
         if (playerColor.equals("WHITE") && (whiteUsername == null)) {
             whiteUsername = username;
-            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName);
+            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName, actualGame);
             games.put(gameID, newGame);
         } else if (playerColor.equals("BLACK") && (blackUsername == null)) {
             blackUsername = username;
-            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName);
+            GameModel newGame = new GameModel(gameID, whiteUsername, blackUsername, gameName, actualGame);
             games.put(gameID, newGame);
         } else {
             throw new DataAccessException("Username already taken");

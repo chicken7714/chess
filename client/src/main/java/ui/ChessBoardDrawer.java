@@ -1,5 +1,7 @@
 package ui;
 
+import chess.ChessGame;
+
 import java.util.Collections;
 
 public class ChessBoardDrawer {
@@ -19,7 +21,7 @@ public class ChessBoardDrawer {
             EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY, EscapeSequences.EMPTY,
             EscapeSequences.EMPTY);
 
-    public String generateChessBoard() {
+    public String generateChessBoard(ChessGame game) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(columnNameRow);
         stringBuilder.append("   ------------------------------- \n");

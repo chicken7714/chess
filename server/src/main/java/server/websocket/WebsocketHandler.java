@@ -20,6 +20,7 @@ import webSocketMessages.serverMessages.ServerMessage;
 import webSocketMessages.userCommands.*;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 @WebSocket
 public class WebsocketHandler {
@@ -30,18 +31,22 @@ public class WebsocketHandler {
     public void onMessage(Session session, String message) throws IOException {
         UserGameCommand userGameCommand = new Gson().fromJson(message, UserGameCommand.class);
         switch (userGameCommand.getCommandType()) {
-            case JOIN_PLAYER -> joinPlayer((JoinPlayerCommand) userGameCommand);
-            case JOIN_OBSERVER -> joinObserver((JoinObserverCommand) userGameCommand);
-            case MAKE_MOVE -> makeMove((MakeMoveCommand) userGameCommand);
-            case LEAVE -> leave((LeaveCommand) userGameCommand);
-            case RESIGN -> resign((ResignCommand) userGameCommand);
+            case JOIN_PLAYER -> joinPlayer(session, message);
+            case JOIN_OBSERVER -> joinObserver(session, message);
+            case MAKE_MOVE -> makeMove(session, message);
+            case LEAVE -> leave(session, message);
+            case RESIGN -> resign(session, message);
         }
     }
 
-    private void joinPlayer(JoinPlayerCommand joinPlayerCommand) throws IOException {
+    private void joinPlayer(Session session, String message) throws IOException {
+        JoinPlayerCommand joinPlayerCommand = new Gson().fromJson(message, JoinPlayerCommand.class);
+        System.out.println("JOIN PLAYER WEBSOCKET HANDLER");
         String auth = joinPlayerCommand.getAuthString();
         int gameID = joinPlayerCommand.getGameID();
         ChessGame.TeamColor teamColor = joinPlayerCommand.getTeamColor();
+        connectionManager.connections.putIfAbsent(gameID, new HashMap<>());
+        connectionManager.addSessionToGame(gameID, auth, session);
 
         // Server sends a LOAD_GAME message back to the root client.
         try {
@@ -59,10 +64,15 @@ public class WebsocketHandler {
                 teamColorString = "BLACK";
             }
 
+            System.out.println("LOAD GAME MESSAGE BACK TO OG CLIENT");
+            System.out.println(connectionManager.connections.get(gameID));
+            System.out.println(connectionManager.connections.get(gameID).get(auth));
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
             connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(loadGameMessage));
             // Server sends a Notification message to all other clients in
             // that game informing them what color the root client is joining as.
+
+            System.out.println("BROADCAST BACK TO EVERYONE ELSE NOTIFICATION");
             connectionManager.broadcast(gameID, auth, new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s had joined as %s", username, teamColorString)));
         } catch (InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Game ID");
@@ -70,10 +80,12 @@ public class WebsocketHandler {
         }
     }
 
-    private void joinObserver(JoinObserverCommand joinObserverCommand) throws IOException {
+    private void joinObserver(Session session, String message) throws IOException {
+        JoinObserverCommand joinObserverCommand = new Gson().fromJson(message, JoinObserverCommand.class);
         String auth = joinObserverCommand.getAuthString();
         int gameID = joinObserverCommand.getGameID();
         WebSocketServices service = new WebSocketServices();
+        connectionManager.addSessionToGame(gameID, auth, session);
 
         try {
             String username = service.getUsername(auth);
@@ -92,7 +104,8 @@ public class WebsocketHandler {
         }
     }
 
-    private void makeMove(MakeMoveCommand makeMoveCommand) throws IOException {
+    private void makeMove(Session session, String message) throws IOException {
+        MakeMoveCommand makeMoveCommand = new Gson().fromJson(message, MakeMoveCommand.class);
         ChessMove move = makeMoveCommand.getMove();
         int gameID = makeMoveCommand.getGameID();
         String auth = makeMoveCommand.getAuthString();
@@ -131,11 +144,13 @@ public class WebsocketHandler {
         }
     }
 
-    private void leave(LeaveCommand leaveCommand) throws IOException {
+    private void leave(Session session, String message) throws IOException {
+        LeaveCommand leaveCommand = new Gson().fromJson(message, LeaveCommand.class);
         int gameID = leaveCommand.getGameID();
         String auth = leaveCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
         Gson gson = new Gson();
+
         // If a player is leaving, then the game is updated to remove the root client.
         // Game is updated in the database.
         try {
@@ -156,6 +171,7 @@ public class WebsocketHandler {
 
             // Server sends a Notification message to all other clients in that game
             // informing them that the root client left. This applies to both players and observers.
+            connectionManager.removeSessionFromGame(gameID, auth);
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has left the game.");
             connectionManager.broadcast(gameID, auth, notification);
         } catch (DataAccessException | InvalidRequestException e) {
@@ -164,7 +180,8 @@ public class WebsocketHandler {
         }
     }
 
-    private void resign(ResignCommand resignCommand) throws IOException {
+    private void resign(Session session, String message) throws IOException {
+        ResignCommand resignCommand = new Gson().fromJson(message, ResignCommand.class);
         int gameID = resignCommand.getGameID();
         String auth = resignCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
