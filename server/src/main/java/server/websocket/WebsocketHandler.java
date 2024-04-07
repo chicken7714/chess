@@ -34,7 +34,7 @@ public class WebsocketHandler {
             case JOIN_OBSERVER -> joinObserver((JoinObserverCommand) userGameCommand);
             case MAKE_MOVE -> makeMove((MakeMoveCommand) userGameCommand);
             case LEAVE -> leave((LeaveCommand) userGameCommand);
-            case RESIGN -> resign(userGameCommand);
+            case RESIGN -> resign((ResignCommand) userGameCommand);
         }
     }
 
@@ -115,10 +115,9 @@ public class WebsocketHandler {
             service.updateGame(gameID, newGameJson);
             // Server sends a LOAD_GAME message to all clients in the game (including the root client)
             // with an updated game.
-            ServerMessage loadMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, newGameJson);
+            ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, newGameJson);
             var users = connectionManager.connections.get(gameID);
             for (var user : users.entrySet()) {
-                ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, newGameJson);
                 user.getValue().send(new Gson().toJson(loadGameMessage));
             }
 
@@ -165,12 +164,33 @@ public class WebsocketHandler {
         }
     }
 
-    private void resign(UserGameCommand resignCommand) {
-        // Server marks the game as over (no more moves can be made).
-        // Game is updated in the database.
+    private void resign(ResignCommand resignCommand) throws IOException {
+        int gameID = resignCommand.getGameID();
+        String auth = resignCommand.getAuthString();
+        WebSocketServices service = new WebSocketServices();
+        Gson gson = new Gson();
+        try {
+            // Server marks the game as over (no more moves can be made).
+            // Game is updated in the database.
+            String gameJson = service.getGame(gameID);
+            GameModel gameModel = gson.fromJson(gameJson, GameModel.class);
+            ChessGame oldGame = gameModel.game();
+            oldGame.setTeamTurn(null);
+            GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), gameModel.whiteUsername(), gameModel.gameName(), oldGame);
+            service.updateGame(gameID, gson.toJson(newGameModel));
 
-        //Server sends a Notification message to all clients in
-        // that game informing them that the root client resigned.
-        // This applies to both players and observers.
+            //Server sends a Notification message to all clients in
+            // that game informing them that the root client resigned.
+            // This applies to both players and observers.
+            String username = service.getUsername(auth);
+            ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has resigned from the game.");
+            var users = connectionManager.connections.get(gameID); //gives HashMap with keys = authTokens, values = Connections
+            for (var user : users.entrySet()) {
+                user.getValue().send(new Gson().toJson(notification));
+            }
+        } catch (DataAccessException | InvalidRequestException e) {
+            ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid resignation");
+            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+        }
     }
 }
