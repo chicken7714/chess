@@ -54,19 +54,23 @@ public class WebsocketHandler {
             String gameJson = service.getGame(gameID);
             GameModel gameModel = new Gson().fromJson(gameJson, GameModel.class);
 
-            String username = null;
+            String username = service.getUsername(auth);
+            if (username == null) {
+                throw new InvalidRequestException("Invalid auth token");
+            }
+
             String teamColorString = null;
-            if (teamColor == ChessGame.TeamColor.WHITE) {
-                username = gameModel.whiteUsername();
+            if (teamColor == ChessGame.TeamColor.WHITE && !username.equals(gameModel.whiteUsername())) {
+                throw new InvalidRequestException("White username already taken");
+            } else if (teamColor == ChessGame.TeamColor.BLACK && !username.equals(gameModel.blackUsername())) {
+                throw new InvalidRequestException("Black username already taken");
+            } else if (teamColor == ChessGame.TeamColor.WHITE) {
                 teamColorString = "WHITE";
             } else if (teamColor == ChessGame.TeamColor.BLACK) {
-                username = gameModel.blackUsername();
                 teamColorString = "BLACK";
             }
 
             System.out.println("LOAD GAME MESSAGE BACK TO OG CLIENT");
-            System.out.println(connectionManager.connections.get(gameID));
-            System.out.println(connectionManager.connections.get(gameID).get(auth));
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
             connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(loadGameMessage));
             // Server sends a Notification message to all other clients in
@@ -74,7 +78,7 @@ public class WebsocketHandler {
 
             System.out.println("BROADCAST BACK TO EVERYONE ELSE NOTIFICATION");
             connectionManager.broadcast(gameID, auth, new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s had joined as %s", username, teamColorString)));
-        } catch (InvalidRequestException e) {
+        } catch (DataAccessException | InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Game ID");
             connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
         }
@@ -85,10 +89,15 @@ public class WebsocketHandler {
         String auth = joinObserverCommand.getAuthString();
         int gameID = joinObserverCommand.getGameID();
         WebSocketServices service = new WebSocketServices();
+        connectionManager.connections.putIfAbsent(gameID, new HashMap<>());
         connectionManager.addSessionToGame(gameID, auth, session);
 
         try {
             String username = service.getUsername(auth);
+            if (username == null) {
+                throw new InvalidRequestException("Invalid auth token");
+            }
+
             String gameJson = service.getGame(gameID);
 
             //Server sends a LOAD_GAME message back to the root client.
