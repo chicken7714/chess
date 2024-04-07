@@ -5,6 +5,7 @@ import chess.ChessMove;
 import chess.ChessPosition;
 import chess.InvalidMoveException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dataAccess.DataAccessException;
 import model.GameModel;
 import org.eclipse.jetty.websocket.api.Session;
@@ -21,6 +22,7 @@ import webSocketMessages.userCommands.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Objects;
 
 @WebSocket
 public class WebsocketHandler {
@@ -117,13 +119,25 @@ public class WebsocketHandler {
         String auth = makeMoveCommand.getAuthString();
 
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().serializeNulls().create();
 
         // Server verifies the validity of the move.
         try {
             String oldGameJson = service.getGame(gameID);
+            System.out.println(oldGameJson);
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
             ChessGame game = gameModel.game();
+            System.out.println(game.getTeamTurn());
+            String username = service.getUsername(auth);
+
+            ChessGame.TeamColor turn = game.getTeamTurn();
+
+            System.out.println(turn);
+            if (!username.equals(gameModel.whiteUsername()) && turn.equals(ChessGame.TeamColor.WHITE)) {
+                throw new InvalidRequestException("Not your place bro");
+            } else if (!username.equals(gameModel.blackUsername()) && turn.equals(ChessGame.TeamColor.BLACK)) {
+                throw new InvalidRequestException("Not your place bro");
+            }
 
             game.makeMove(move);
 
@@ -155,7 +169,7 @@ public class WebsocketHandler {
         int gameID = leaveCommand.getGameID();
         String auth = leaveCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().serializeNulls().create();
 
         // If a player is leaving, then the game is updated to remove the root client.
         // Game is updated in the database.
@@ -191,13 +205,19 @@ public class WebsocketHandler {
         int gameID = resignCommand.getGameID();
         String auth = resignCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().serializeNulls().create();
+
         try {
             // Server marks the game as over (no more moves can be made).
             // Game is updated in the database.
             String gameJson = service.getGame(gameID);
             GameModel gameModel = gson.fromJson(gameJson, GameModel.class);
             ChessGame oldGame = gameModel.game();
+            String username = service.getUsername(auth);
+            if (!username.equals(gameModel.blackUsername()) || !username.equals(gameModel.whiteUsername())) {
+                throw new InvalidRequestException("Not your place bro");
+            }
+
             oldGame.setTeamTurn(null);
             GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), gameModel.whiteUsername(), gameModel.gameName(), oldGame);
             service.updateGame(gameID, gson.toJson(newGameModel));
@@ -205,7 +225,6 @@ public class WebsocketHandler {
             //Server sends a Notification message to all clients in
             // that game informing them that the root client resigned.
             // This applies to both players and observers.
-            String username = service.getUsername(auth);
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has resigned from the game.");
             var users = connectionManager.connections.get(gameID); //gives HashMap with keys = authTokens, values = Connections
             for (var user : users.entrySet()) {
