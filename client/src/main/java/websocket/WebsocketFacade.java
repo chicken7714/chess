@@ -30,7 +30,7 @@ public class WebsocketFacade extends Endpoint {
             //set message handler
             this.session.addMessageHandler(new MessageHandler.Whole<String>() {
                 @Override
-                public void onMessage(String message) {
+                public synchronized void onMessage(String message) {
                     serverMessageHandler.notify(message);
                 }
             });
