@@ -28,6 +28,7 @@ import java.util.Objects;
 public class WebsocketHandler {
 
     private final ConnectionManager connectionManager = new ConnectionManager();
+    private final Gson gson = new GsonBuilder().serializeNulls().create();
 
     @OnWebSocketMessage
     public synchronized void onMessage(Session session, String message) throws IOException {
@@ -43,7 +44,6 @@ public class WebsocketHandler {
     }
 
     private void joinPlayer(Session session, String message) throws IOException {
-        Gson gson = new GsonBuilder().serializeNulls().create();
         JoinPlayerCommand joinPlayerCommand = gson.fromJson(message, JoinPlayerCommand.class);
         String auth = joinPlayerCommand.getAuthString();
         int gameID = joinPlayerCommand.getGameID();
@@ -86,7 +86,6 @@ public class WebsocketHandler {
     }
 
     private void joinObserver(Session session, String message) throws IOException {
-        Gson gson = new GsonBuilder().serializeNulls().create();
         JoinObserverCommand joinObserverCommand = gson.fromJson(message, JoinObserverCommand.class);
         String auth = joinObserverCommand.getAuthString();
         int gameID = joinObserverCommand.getGameID();
@@ -116,7 +115,6 @@ public class WebsocketHandler {
     }
 
     private void makeMove(String message) throws IOException {
-        Gson gson = new GsonBuilder().serializeNulls().create();
         MakeMoveCommand makeMoveCommand = gson.fromJson(message, MakeMoveCommand.class);
         ChessMove move = makeMoveCommand.getMove();
         int gameID = makeMoveCommand.getGameID();
@@ -196,7 +194,6 @@ public class WebsocketHandler {
     }
 
     private void leave(String message) throws IOException {
-        Gson gson = new GsonBuilder().serializeNulls().create();
         LeaveCommand leaveCommand = gson.fromJson(message, LeaveCommand.class);
         int gameID = leaveCommand.getGameID();
         String auth = leaveCommand.getAuthString();
@@ -229,7 +226,6 @@ public class WebsocketHandler {
     }
 
     private void resign(String message) throws IOException {
-        Gson gson = new GsonBuilder().serializeNulls().create();
         ResignCommand resignCommand = gson.fromJson(message, ResignCommand.class);
         int gameID = resignCommand.getGameID();
         String auth = resignCommand.getAuthString();

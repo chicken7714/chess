@@ -34,6 +34,7 @@ public class ChessClient implements ServerMessageHandler {
     private final ChessBoardDrawer chessBoardDrawer;
     private WebsocketFacade ws;
     private final Scanner scanner;
+    private final Gson gson;
 
 
     public ChessClient(String serverUrl, Scanner scanner) {
@@ -44,6 +45,7 @@ public class ChessClient implements ServerMessageHandler {
         this.scanner = scanner;
         this.ws = null;
         this.teamColor = null;
+        this.gson = new GsonBuilder().serializeNulls().create();
     }
 
     public String eval(String input) {
@@ -300,7 +302,7 @@ public class ChessClient implements ServerMessageHandler {
     @Override
     @OnMessage
     public void notify(String message) {
-        ServerMessage serverMessage = new Gson().fromJson(message, ServerMessage.class);
+        ServerMessage serverMessage = gson.fromJson(message, ServerMessage.class);
 
         switch (serverMessage.getServerMessageType()) {
             case ERROR -> error(message);
@@ -315,14 +317,14 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     private void error(String message) {
-        ErrorMessage errorMessage = new Gson().fromJson(message, ErrorMessage.class);
+        ErrorMessage errorMessage = gson.fromJson(message, ErrorMessage.class);
         System.out.println(errorMessage.getErrorMessage());
         System.out.print(">>> ");
     }
 
     private void loadGame(String message) {
-        LoadGameMessage loadGame = new Gson().fromJson(message, LoadGameMessage.class);
-        GameModel game = new Gson().fromJson(loadGame.getGame(), GameModel.class);
+        LoadGameMessage loadGame = gson.fromJson(message, LoadGameMessage.class);
+        GameModel game = gson.fromJson(loadGame.getGame(), GameModel.class);
 
         updateGame(game.game());
         System.out.println(chessBoardDrawer.generateChessBoard(game.game(), teamColor));
@@ -330,7 +332,7 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     private void notification(String message) {
-        NotificationMessage notificationMessage = new Gson().fromJson(message, NotificationMessage.class);
+        NotificationMessage notificationMessage = gson.fromJson(message, NotificationMessage.class);
 
         System.out.println(notificationMessage.getMessage());
         System.out.print(">>> ");

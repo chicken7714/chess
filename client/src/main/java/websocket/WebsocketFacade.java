@@ -17,6 +17,7 @@ public class WebsocketFacade extends Endpoint {
 
     Session session;
     ServerMessageHandler serverMessageHandler;
+    private final Gson gson = new GsonBuilder().serializeNulls().create();
 
     public WebsocketFacade(String url, ServerMessageHandler serverMessageHandler) throws ResponseException {
         try {
@@ -45,7 +46,6 @@ public class WebsocketFacade extends Endpoint {
     public void joinPlayer(String authToken, int gameID, ChessGame.TeamColor teamColor) throws ResponseException {
         try {
             UserGameCommand joinPlayerCommand = new JoinPlayerCommand(authToken, gameID, teamColor);
-            Gson gson = new GsonBuilder().serializeNulls().create();
             this.session.getBasicRemote().sendText(gson.toJson(joinPlayerCommand));
         } catch (IOException e) {
             throw new ResponseException(500, e.getMessage());
@@ -55,7 +55,6 @@ public class WebsocketFacade extends Endpoint {
     public void joinObserver(String authToken, int gameID) throws ResponseException {
         try {
             UserGameCommand joinObserverCommand = new JoinObserverCommand(authToken, gameID);
-            Gson gson = new GsonBuilder().serializeNulls().create();
             this.session.getBasicRemote().sendText(gson.toJson(joinObserverCommand));
         } catch (IOException e) {
             throw new ResponseException(500, e.getMessage());
@@ -65,7 +64,6 @@ public class WebsocketFacade extends Endpoint {
     public void makeMove(String authToken, int gameID, ChessMove move) throws ResponseException {
         try {
             UserGameCommand makeMoveCommand = new MakeMoveCommand(authToken, gameID, move);
-            Gson gson = new GsonBuilder().serializeNulls().create();
             this.session.getBasicRemote().sendText(gson.toJson(makeMoveCommand));
         } catch (IOException e) {
             throw new ResponseException(500, e.getMessage());
@@ -74,7 +72,6 @@ public class WebsocketFacade extends Endpoint {
 
     public void leaveGame(String authToken, int gameID) throws ResponseException {
         try {
-            Gson gson = new GsonBuilder().serializeNulls().create();
             UserGameCommand leaveCommand = new LeaveCommand(authToken, gameID);
             this.session.getBasicRemote().sendText(gson.toJson(leaveCommand));
         } catch (IOException e) {
@@ -84,7 +81,6 @@ public class WebsocketFacade extends Endpoint {
 
     public void resignGame(String authToken, int gameID) throws ResponseException {
         try {
-            Gson gson = new GsonBuilder().serializeNulls().create();
             UserGameCommand resignCommand = new ResignCommand(authToken, gameID);
 
             this.session.getBasicRemote().sendText(gson.toJson(resignCommand));
