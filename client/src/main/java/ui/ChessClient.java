@@ -166,6 +166,7 @@ public class ChessClient implements ServerMessageHandler {
                 String authToken = server.joinGame(joinGameData);
                 ws.joinObserver(authToken, targetGame.gameID());
                 state = State.GAMEPLAY;
+                this.teamColor = null;
                 this.authToken = authToken;
                 return String.format("Successfully observing game %s", params[0]);
             } catch (NumberFormatException e) {
@@ -200,28 +201,31 @@ public class ChessClient implements ServerMessageHandler {
                 throw new ResponseException(400, "Invalid move input");
             }
 
-            String endPos = params[1].substring(1);
-
-            Map<String, Integer> rowColMap = new HashMap<>();
-            rowColMap.put("a", 1);
-            rowColMap.put("b", 2);
-            rowColMap.put("c", 3);
-            rowColMap.put("d", 4);
-            rowColMap.put("e", 5);
-            rowColMap.put("f", 6);
-            rowColMap.put("g", 7);
-            rowColMap.put("h", 8);
-
-            int startPosCol = rowColMap.get(params[0].substring(0, 1).toLowerCase());
-            int startPosRow = Integer.parseInt(params[0].substring(1));
-            int endPosCol = rowColMap.get(params[1].substring(0, 1).toLowerCase());
-            int endPosRow = Integer.parseInt(params[1].substring(1));
-            ChessMove move = new ChessMove(new ChessPosition(startPosRow, startPosCol), new ChessPosition(endPosRow, endPosCol));
+            ChessMove move = getChessMove(params);
             ws.makeMove(this.authToken, this.gameID, move);
         } else {
             throw new ResponseException(400, "Expected: makeMove <startPos> <endPos>");
         }
         return "";
+    }
+
+    private static ChessMove getChessMove(String[] params) {
+        Map<String, Integer> rowColMap = new HashMap<>();
+        rowColMap.put("a", 1);
+        rowColMap.put("b", 2);
+        rowColMap.put("c", 3);
+        rowColMap.put("d", 4);
+        rowColMap.put("e", 5);
+        rowColMap.put("f", 6);
+        rowColMap.put("g", 7);
+        rowColMap.put("h", 8);
+
+        int startPosCol = rowColMap.get(params[0].substring(0, 1).toLowerCase());
+        int startPosRow = Integer.parseInt(params[0].substring(1));
+        int endPosCol = rowColMap.get(params[1].substring(0, 1).toLowerCase());
+        int endPosRow = Integer.parseInt(params[1].substring(1));
+        ChessMove move = new ChessMove(new ChessPosition(startPosRow, startPosCol), new ChessPosition(endPosRow, endPosCol));
+        return move;
     }
 
     private String resign() throws ResponseException {
