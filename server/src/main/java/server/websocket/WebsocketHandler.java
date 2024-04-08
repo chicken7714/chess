@@ -31,18 +31,20 @@ public class WebsocketHandler {
 
     @OnWebSocketMessage
     public void onMessage(Session session, String message) throws IOException {
-        UserGameCommand userGameCommand = new Gson().fromJson(message, UserGameCommand.class);
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        UserGameCommand userGameCommand = gson.fromJson(message, UserGameCommand.class);
         switch (userGameCommand.getCommandType()) {
             case JOIN_PLAYER -> joinPlayer(session, message);
             case JOIN_OBSERVER -> joinObserver(session, message);
-            case MAKE_MOVE -> makeMove(session, message);
-            case LEAVE -> leave(session, message);
-            case RESIGN -> resign(session, message);
+            case MAKE_MOVE -> makeMove(message);
+            case LEAVE -> leave(message);
+            case RESIGN -> resign(message);
         }
     }
 
     private void joinPlayer(Session session, String message) throws IOException {
-        JoinPlayerCommand joinPlayerCommand = new Gson().fromJson(message, JoinPlayerCommand.class);
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        JoinPlayerCommand joinPlayerCommand = gson.fromJson(message, JoinPlayerCommand.class);
         String auth = joinPlayerCommand.getAuthString();
         int gameID = joinPlayerCommand.getGameID();
         ChessGame.TeamColor teamColor = joinPlayerCommand.getTeamColor();
@@ -53,7 +55,7 @@ public class WebsocketHandler {
         try {
             WebSocketServices service = new WebSocketServices();
             String gameJson = service.getGame(gameID);
-            GameModel gameModel = new Gson().fromJson(gameJson, GameModel.class);
+            GameModel gameModel = gson.fromJson(gameJson, GameModel.class);
 
             String username = service.getUsername(auth);
             if (username == null) {
@@ -72,19 +74,20 @@ public class WebsocketHandler {
             }
 
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(loadGameMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(loadGameMessage));
             // Server sends a Notification message to all other clients in
             // that game informing them what color the root client is joining as.
 
             connectionManager.broadcast(gameID, auth, new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s had joined as %s", username, teamColorString)));
         } catch (DataAccessException | InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Game ID");
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
         }
     }
 
     private void joinObserver(Session session, String message) throws IOException {
-        JoinObserverCommand joinObserverCommand = new Gson().fromJson(message, JoinObserverCommand.class);
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        JoinObserverCommand joinObserverCommand = gson.fromJson(message, JoinObserverCommand.class);
         String auth = joinObserverCommand.getAuthString();
         int gameID = joinObserverCommand.getGameID();
         WebSocketServices service = new WebSocketServices();
@@ -101,25 +104,25 @@ public class WebsocketHandler {
 
             //Server sends a LOAD_GAME message back to the root client.
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, gameJson);
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(loadGameMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(loadGameMessage));
             //Server sends a Notification message to all other clients
             // in that game informing them the root client joined as an observer.
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s has joined as an observer", username));
             connectionManager.broadcast(gameID, auth, notification);
         } catch (InvalidRequestException | DataAccessException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid request");
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
         }
     }
 
-    private void makeMove(Session session, String message) throws IOException {
-        MakeMoveCommand makeMoveCommand = new Gson().fromJson(message, MakeMoveCommand.class);
+    private void makeMove(String message) throws IOException {
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        MakeMoveCommand makeMoveCommand = gson.fromJson(message, MakeMoveCommand.class);
         ChessMove move = makeMoveCommand.getMove();
         int gameID = makeMoveCommand.getGameID();
         String auth = makeMoveCommand.getAuthString();
 
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new GsonBuilder().serializeNulls().create();
 
         // Server verifies the validity of the move.
         try {
@@ -129,6 +132,10 @@ public class WebsocketHandler {
             String username = service.getUsername(auth);
 
             ChessGame.TeamColor turn = game.getTeamTurn();
+
+            if (turn == null) {
+                throw new InvalidRequestException("Game has already been won/resigned");
+            }
 
             if (!username.equals(gameModel.whiteUsername()) && turn.equals(ChessGame.TeamColor.WHITE)) {
                 throw new InvalidRequestException("Not your place bro");
@@ -148,7 +155,7 @@ public class WebsocketHandler {
             ServerMessage loadGameMessage = new LoadGameMessage(ServerMessage.ServerMessageType.LOAD_GAME, newGameJson);
             var users = connectionManager.connections.get(gameID);
             for (var user : users.entrySet()) {
-                user.getValue().send(new Gson().toJson(loadGameMessage));
+                user.getValue().send(gson.toJson(loadGameMessage));
             }
 
             // Server sends a Notification message to all other clients in that game informing
@@ -157,16 +164,16 @@ public class WebsocketHandler {
             connectionManager.broadcast(gameID, auth, notification);
         } catch (InvalidRequestException | DataAccessException | InvalidMoveException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid request");
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
         }
     }
 
-    private void leave(Session session, String message) throws IOException {
-        LeaveCommand leaveCommand = new Gson().fromJson(message, LeaveCommand.class);
+    private void leave(String message) throws IOException {
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        LeaveCommand leaveCommand = gson.fromJson(message, LeaveCommand.class);
         int gameID = leaveCommand.getGameID();
         String auth = leaveCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new GsonBuilder().serializeNulls().create();
 
         // If a player is leaving, then the game is updated to remove the root client.
         // Game is updated in the database.
@@ -183,7 +190,7 @@ public class WebsocketHandler {
                 service.updateGame(gameID, gson.toJson(newGameModel));
             } else {
                 ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Username leaving");
-                connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+                connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
             }
 
             // Server sends a Notification message to all other clients in that game
@@ -193,16 +200,16 @@ public class WebsocketHandler {
             connectionManager.broadcast(gameID, auth, notification);
         } catch (DataAccessException | InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid username leaving game");
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
         }
     }
 
-    private void resign(Session session, String message) throws IOException {
-        ResignCommand resignCommand = new Gson().fromJson(message, ResignCommand.class);
+    private void resign(String message) throws IOException {
+        Gson gson = new GsonBuilder().serializeNulls().create();
+        ResignCommand resignCommand = gson.fromJson(message, ResignCommand.class);
         int gameID = resignCommand.getGameID();
         String auth = resignCommand.getAuthString();
         WebSocketServices service = new WebSocketServices();
-        Gson gson = new GsonBuilder().serializeNulls().create();
 
         try {
             // Server marks the game as over (no more moves can be made).
@@ -218,7 +225,7 @@ public class WebsocketHandler {
             }
 
             oldGame.setTeamTurn(null);
-            GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), gameModel.whiteUsername(), gameModel.gameName(), oldGame);
+            GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), gameModel.blackUsername(), gameModel.gameName(), oldGame);
             service.updateGame(gameID, gson.toJson(newGameModel));
 
             //Server sends a Notification message to all clients in
@@ -227,11 +234,11 @@ public class WebsocketHandler {
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has resigned from the game.");
             var users = connectionManager.connections.get(gameID); //gives HashMap with keys = authTokens, values = Connections
             for (var user : users.entrySet()) {
-                user.getValue().send(new Gson().toJson(notification));
+                user.getValue().send(gson.toJson(notification));
             }
         } catch (DataAccessException | InvalidRequestException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid resignation");
-            connectionManager.connections.get(gameID).get(auth).send(new Gson().toJson(errorMessage));
+            connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
         }
     }
 }

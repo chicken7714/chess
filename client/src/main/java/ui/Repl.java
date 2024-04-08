@@ -5,9 +5,11 @@ import ui.EscapeSequences;
 
 public class Repl {
     private final ChessClient client;
+    private Scanner scanner;
 
     public Repl(String serverUrl) {
-        client = new ChessClient(serverUrl);
+        scanner = new Scanner(System.in);
+        client = new ChessClient(serverUrl, scanner);
     }
 
     public void run() {
@@ -15,7 +17,6 @@ public class Repl {
         System.out.println("Welcome to CHESS");
         System.out.println(client.help());
 
-        Scanner scanner = new Scanner(System.in);
         var result = "";
         while (!result.equals("quit")) {
             printPrompt();

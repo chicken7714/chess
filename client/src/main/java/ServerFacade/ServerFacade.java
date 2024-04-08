@@ -1,6 +1,7 @@
 package ServerFacade;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.GameModel;
 import model.UserModel;
 import request.*;
@@ -92,7 +93,8 @@ public class ServerFacade {
         }
         if (request != null) {
             http.addRequestProperty("Content-Type", "application/json");
-            String reqData = new Gson().toJson(request);
+            Gson gson = new GsonBuilder().serializeNulls().create();
+            String reqData = gson.toJson(request);
             try (OutputStream reqBody = http.getOutputStream()) {
                 reqBody.write(reqData.getBytes());
             }
@@ -112,7 +114,8 @@ public class ServerFacade {
             try (InputStream respBody = http.getInputStream()) {
                 InputStreamReader reader = new InputStreamReader(respBody);
                 if (responseClass != null) {
-                    response = new Gson().fromJson(reader, responseClass);
+                    Gson gson = new GsonBuilder().serializeNulls().create();
+                    response = gson.fromJson(reader, responseClass);
                 }
             }
         }

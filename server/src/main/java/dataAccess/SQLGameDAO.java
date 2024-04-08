@@ -1,6 +1,7 @@
 package dataAccess;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.GameModel;
 import chess.ChessGame;
 
@@ -19,7 +20,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
         var gameID = executeUpdate(statement);
 
         GameModel game = new GameModel(gameID, null, null, gameName, new ChessGame());
-        var serializer = new Gson();
+        var serializer = new GsonBuilder().serializeNulls().create();
         String json = serializer.toJson(game);
         statement = "UPDATE game SET json=? WHERE gameID=?";
         executeUpdate(statement, json, gameID);
@@ -30,7 +31,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
     @Override
     public Collection<GameModel> listGames() throws DataAccessException {
         ArrayList<GameModel> games = new ArrayList<>();
-        Gson serializer = new Gson();
+        Gson serializer = new GsonBuilder().serializeNulls().create();
         try (var conn = DatabaseManager.getConnection()) {
             var statement = "SELECT json FROM game";
             try (var ps = conn.prepareStatement(statement)) {
@@ -50,7 +51,7 @@ public class SQLGameDAO extends SQLDAO implements GameDAO {
 
     @Override
     public void addUser(int gameID, String username, String playerColor) throws DataAccessException {
-        var serializer = new Gson();
+        var serializer = new GsonBuilder().serializeNulls().create();
 
         try (var conn = DatabaseManager.getConnection()) {
             var statement = "SELECT json FROM game WHERE gameID=?";

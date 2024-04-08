@@ -3,7 +3,10 @@ package ui;
 import ServerFacade.ServerFacade;
 import ServerFacade.ResponseException;
 import chess.ChessGame;
+import chess.ChessMove;
+import chess.ChessPosition;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import model.GameModel;
 import model.UserModel;
 import request.JoinGameData;
@@ -15,9 +18,8 @@ import webSocketMessages.serverMessages.ServerMessage;
 import websocket.ServerMessageHandler;
 import websocket.WebsocketFacade;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
+import javax.websocket.OnMessage;
+import java.util.*;
 
 public class ChessClient implements ServerMessageHandler {
     private final ServerFacade server;
@@ -30,13 +32,16 @@ public class ChessClient implements ServerMessageHandler {
     private WebsocketFacade ws;
     private ChessGame game;
     private int gameID;
+    private ChessGame.TeamColor teamColor = null;
+    private Scanner scanner;
 
 
-    public ChessClient(String serverUrl) {
+    public ChessClient(String serverUrl, Scanner scanner) {
         this.server = new ServerFacade(serverUrl);
         this.serverUrl = serverUrl;
         this.gameMap = new HashMap<Integer, GameModel>();
         this.chessBoardDrawer = new ChessBoardDrawer();
+        this.scanner = scanner;
     }
 
     public String eval(String input) {
@@ -126,14 +131,12 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     private String joinGame(String... params) throws ResponseException {
-        System.out.println("JOIN GAME CHESS CLIENT");
         if (params.length >= 1) {
             try {
                 GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
                 JoinGameData joinGameData = new JoinGameData(params[1], targetGame.gameID());
                 String authToken = server.joinGame(joinGameData);
                 this.authToken = authToken;
-                this.gameID = joinGameData.gameID();
 
                 ChessGame.TeamColor teamColor = null;
                 if (params[1].equals("WHITE")) {
@@ -141,11 +144,15 @@ public class ChessClient implements ServerMessageHandler {
                 } else if (params[1].equals("BLACK")) {
                     teamColor = ChessGame.TeamColor.BLACK;
                 }
+
+                ws = new WebsocketFacade(serverUrl, this);
+                this.teamColor = teamColor;
+                this.gameID = joinGameData.gameID();
                 ws.joinPlayer(authToken,targetGame.gameID(), teamColor);
                 state = State.GAMEPLAY;
                 return "Successfully Joined Game";
             } catch (NumberFormatException e) {
-                throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
+                throw new ResponseException(400, "Expected <ID> [WHITE|BLACK]");
             }
         }
         throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
@@ -159,6 +166,7 @@ public class ChessClient implements ServerMessageHandler {
                 String authToken = server.joinGame(joinGameData);
                 ws.joinObserver(authToken, targetGame.gameID());
                 state = State.GAMEPLAY;
+                this.authToken = authToken;
                 return String.format("Successfully observing game %s", params[0]);
             } catch (NumberFormatException e) {
                 throw new ResponseException(400, "Expected <ID>");
@@ -174,21 +182,60 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     private String redraw() {
-        return chessBoardDrawer.generateChessBoard(this.game);
+        return chessBoardDrawer.generateChessBoard(this.game, this.teamColor);
     }
 
     private String leave() throws ResponseException {
         ws.leaveGame(this.authToken, this.gameID);
+        state = State.POSTLOGIN;
         return "You have left the game";
     }
 
-    private String makeMove(String... params) {
+    private String makeMove(String... params) throws ResponseException {
+        if (params.length >= 2) {
+            if (params[0].length() > 2 || params[1].length() > 2) {
+                throw new ResponseException(400, "Start and end positions only can be 2 characters long");
+            }
+            if (!params[0].matches("^[a-h][1-8]$") || !params[1].matches("^[a-h][1-8]$")) {
+                throw new ResponseException(400, "Invalid move input");
+            }
+
+            String endPos = params[1].substring(1);
+
+            Map<String, Integer> rowColMap = new HashMap<>();
+            rowColMap.put("a", 1);
+            rowColMap.put("b", 2);
+            rowColMap.put("c", 3);
+            rowColMap.put("d", 4);
+            rowColMap.put("e", 5);
+            rowColMap.put("f", 6);
+            rowColMap.put("g", 7);
+            rowColMap.put("h", 8);
+
+            int startPosCol = rowColMap.get(params[0].substring(0, 1).toLowerCase());
+            int startPosRow = Integer.parseInt(params[0].substring(1));
+            int endPosCol = rowColMap.get(params[1].substring(0, 1).toLowerCase());
+            int endPosRow = Integer.parseInt(params[1].substring(1));
+            ChessMove move = new ChessMove(new ChessPosition(startPosRow, startPosCol), new ChessPosition(endPosRow, endPosCol));
+            ws.makeMove(this.authToken, this.gameID, move);
+        } else {
+            throw new ResponseException(400, "Expected: makeMove <startPos> <endPos>");
+        }
         return "";
     }
 
     private String resign() throws ResponseException {
-        ws.resignGame(this.authToken, this.gameID);
-        return "You have resigned from the game";
+        System.out.println("Are you sure you want to resign? (yes/no)");
+        System.out.print(">>> ");
+        String line = scanner.nextLine();
+
+        if (line.equals("yes")) {
+            ws.resignGame(this.authToken, this.gameID);
+            return "You have resigned from the game";
+        } else {
+            return "Cancelling resignation";
+        }
+
     }
 
     private String highlight(String... params) {
@@ -207,7 +254,7 @@ public class ChessClient implements ServerMessageHandler {
             return """
                    -createGame <NAME> (creates a new game of chess)
                    -listGames (list all the games that have been created, must list games before joining/observing)
-                   -joinGame <ID> [WHITE|BLACK|<empty>] (join a game of chess with the given ID)
+                   -joinGame <ID> [WHITE|BLACK] (join a game of chess with the given ID)
                    -observeGame <ID> (observe a game of chess with the given ID)
                    -logout (logs you out of the application)
                    -quit (terminates the application, does not log you out!)
@@ -217,9 +264,9 @@ public class ChessClient implements ServerMessageHandler {
             return """
                    -redraw (redraws chess board)
                    -leave (removes player from game)
-                   -makeMove [startPos] [endPos] (makes the given move on the chess board)
+                   -makeMove <startPos> <endPos> (makes the given move on the chess board)
                    -resign (you forfeit current game and it becomes unplayable)
-                   -highlight [startPos] (highlights all possible moves with piece given by startPos)
+                   -highlight <startPos> (highlights all possible moves with piece given by startPos)
                    -help
                    """;
         }
@@ -227,11 +274,14 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     @Override
-    public void notify(ServerMessage serverMessage) {
+    @OnMessage
+    public void notify(String message) {
+        ServerMessage serverMessage = new Gson().fromJson(message, ServerMessage.class);
+
         switch (serverMessage.getServerMessageType()) {
-            case ERROR -> error((ErrorMessage) serverMessage);
-            case LOAD_GAME -> loadGame((LoadGameMessage) serverMessage);
-            case NOTIFICATION -> notification((NotificationMessage) serverMessage);
+            case ERROR -> error(message);
+            case LOAD_GAME -> loadGame(message);
+            case NOTIFICATION -> notification(message);
         }
     }
 
@@ -240,17 +290,23 @@ public class ChessClient implements ServerMessageHandler {
         this.game = game;
     }
 
-    private void error(ErrorMessage message) {
-        System.out.println(message.getErrorMessage());
+    private void error(String message) {
+        ErrorMessage errorMessage = new Gson().fromJson(message, ErrorMessage.class);
+        System.out.println(errorMessage.getErrorMessage());
     }
 
-    private void loadGame(LoadGameMessage loadGame) {
+    private void loadGame(String message) {
+        System.out.println(message);
+        LoadGameMessage loadGame = new Gson().fromJson(message, LoadGameMessage.class);
         GameModel game = new Gson().fromJson(loadGame.getGame(), GameModel.class);
+
         updateGame(game.game());
-        System.out.println(chessBoardDrawer.generateChessBoard(game.game()));
+        System.out.println(chessBoardDrawer.generateChessBoard(game.game(), teamColor));
     }
 
-    private void notification(NotificationMessage notificationMessage) {
+    private void notification(String message) {
+        NotificationMessage notificationMessage = new Gson().fromJson(message, NotificationMessage.class);
+
         System.out.println(notificationMessage.getMessage());
     }
 }
