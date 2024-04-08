@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/websocket/WebsocketFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/websocket/WebsocketFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/server/websocket/WebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/server/websocket/WebsocketHandler.java" afterDir="false" />
     </list>
@@ -355,8 +355,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.WebSocketTests" />
-        <item itemvalue="Application.Main(1)" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Main(1)" />
         <item itemvalue="JUnit.WebSocketTests.leaveGame" />
         <item itemvalue="JUnit.WebSocketTests.multipleLobbies" />
       </list>
@@ -441,7 +441,7 @@
       <workItem from="1712504011754" duration="22955000" />
       <workItem from="1712595839373" duration="4518000" />
       <workItem from="1712602388987" duration="7463000" />
-      <workItem from="1712611661459" duration="1066000" />
+      <workItem from="1712611661459" duration="3014000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />

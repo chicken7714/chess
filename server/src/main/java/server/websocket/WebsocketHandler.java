@@ -162,27 +162,27 @@ public class WebsocketHandler {
             connectionManager.broadcast(gameID, auth, notification);
 
             if (game.isInCheckmate(ChessGame.TeamColor.WHITE)) {
-                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.whiteUsername(), gameModel.blackUsername()));
+                NotificationMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.whiteUsername(), gameModel.blackUsername()));
                 for (var user : users.entrySet()) {
                     user.getValue().send(gson.toJson(notification2));
                 }
             } else if (game.isInCheckmate(ChessGame.TeamColor.BLACK)) {
-                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.blackUsername(), gameModel.whiteUsername()));
+                NotificationMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.blackUsername(), gameModel.whiteUsername()));
                 for (var user : users.entrySet()) {
                     user.getValue().send(gson.toJson(notification2));
                 }
-            } else if (game.isInCheckmate(ChessGame.TeamColor.WHITE)) {
-                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.whiteUsername()));
+            } else if (game.isInCheck(ChessGame.TeamColor.WHITE)) {
+                NotificationMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.whiteUsername()));
                 for (var user : users.entrySet()) {
                     user.getValue().send(gson.toJson(notification2));
                 }
-            } else if (game.isInCheckmate(ChessGame.TeamColor.BLACK)) {
-                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.blackUsername()));
+            } else if (game.isInCheck(ChessGame.TeamColor.BLACK)) {
+                NotificationMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.blackUsername()));
                 for (var user : users.entrySet()) {
                     user.getValue().send(gson.toJson(notification2));
                 }
             } else if (game.isInStalemate(ChessGame.TeamColor.BLACK)) {
-                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, "The game is in stalemate");
+                NotificationMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, "The game is in stalemate");
                 for (var user : users.entrySet()) {
                     user.getValue().send(gson.toJson(notification2));
                 }
