@@ -298,7 +298,7 @@ public class ChessClient implements ServerMessageHandler {
 
     @Override
     @OnMessage
-    public void notify(String message) {
+    public synchronized void notify(String message) {
         ServerMessage serverMessage = new Gson().fromJson(message, ServerMessage.class);
 
         switch (serverMessage.getServerMessageType()) {

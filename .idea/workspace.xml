@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections" />
+    <list default="true" id="e2127a23-f6c5-4361-9314-19f7fd19bf87" name="Changes" comment="fix(tests) compare collections">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -270,7 +272,7 @@
       <recent name="serviceTests" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main(1)">
+  <component name="RunManager" selected="JUnit.WebSocketTests">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="client" />
@@ -349,9 +351,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.WebSocketTests" />
         <item itemvalue="Application.Main(1)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.WebSocketTests" />
         <item itemvalue="JUnit.WebSocketTests.leaveGame" />
         <item itemvalue="JUnit.WebSocketTests.multipleLobbies" />
       </list>
@@ -435,7 +437,7 @@
       <workItem from="1712422059560" duration="26933000" />
       <workItem from="1712504011754" duration="22955000" />
       <workItem from="1712595839373" duration="4518000" />
-      <workItem from="1712602388987" duration="5755000" />
+      <workItem from="1712602388987" duration="6541000" />
     </task>
     <task id="LOCAL-00001" summary="fix(tests) removed extra credit tests">
       <option name="closed" value="true" />
@@ -494,11 +496,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="5" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/main/java/ui/ChessClient.java</url>
-          <line>318</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
