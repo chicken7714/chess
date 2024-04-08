@@ -160,8 +160,35 @@ public class WebsocketHandler {
 
             // Server sends a Notification message to all other clients in that game informing
             // them what move was made.
-            ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, move + " was made");
+            ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, move + " was made.");
             connectionManager.broadcast(gameID, auth, notification);
+
+            if (game.isInCheckmate(ChessGame.TeamColor.WHITE)) {
+                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.whiteUsername(), gameModel.blackUsername()));
+                for (var user : users.entrySet()) {
+                    user.getValue().send(gson.toJson(notification2));
+                }
+            } else if (game.isInCheckmate(ChessGame.TeamColor.BLACK)) {
+                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in checkmate. %s has won", gameModel.blackUsername(), gameModel.whiteUsername()));
+                for (var user : users.entrySet()) {
+                    user.getValue().send(gson.toJson(notification2));
+                }
+            } else if (game.isInCheckmate(ChessGame.TeamColor.WHITE)) {
+                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.whiteUsername()));
+                for (var user : users.entrySet()) {
+                    user.getValue().send(gson.toJson(notification2));
+                }
+            } else if (game.isInCheckmate(ChessGame.TeamColor.BLACK)) {
+                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, String.format("%s is in check.", gameModel.blackUsername()));
+                for (var user : users.entrySet()) {
+                    user.getValue().send(gson.toJson(notification2));
+                }
+            } else if (game.isInStalemate(ChessGame.TeamColor.BLACK)) {
+                ServerMessage notification2 = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, "The game is in stalemate");
+                for (var user : users.entrySet()) {
+                    user.getValue().send(gson.toJson(notification2));
+                }
+            }
         } catch (InvalidRequestException | DataAccessException | InvalidMoveException e) {
             ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid request");
             connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
@@ -179,8 +206,13 @@ public class WebsocketHandler {
         // Game is updated in the database.
         try {
             String username = service.getUsername(auth);
-            String oldGameJson = service.getGame(gameID);
+            System.out.println("passed username");
+            System.out.println(message);
+            System.out.println(gameID);
+            System.out.println(auth);
+            String oldGameJson = service.getGame(gameID);;
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
+            System.out.println("passed gameModel");
 
             if (gameModel.whiteUsername() != null && gameModel.whiteUsername().equals(username)) {
                 GameModel newGameModel = new GameModel(gameID, null, gameModel.blackUsername(), gameModel.gameName(), gameModel.game());
@@ -188,13 +220,11 @@ public class WebsocketHandler {
             } else if (gameModel.blackUsername() != null && gameModel.blackUsername().equals(username)) {
                 GameModel newGameModel = new GameModel(gameID, gameModel.whiteUsername(), null, gameModel.gameName(), gameModel.game());
                 service.updateGame(gameID, gson.toJson(newGameModel));
-            } else {
-                ServerMessage errorMessage = new ErrorMessage(ServerMessage.ServerMessageType.ERROR, "Error: Invalid Username leaving");
-                connectionManager.connections.get(gameID).get(auth).send(gson.toJson(errorMessage));
             }
 
             // Server sends a Notification message to all other clients in that game
             // informing them that the root client left. This applies to both players and observers.
+            System.out.println("Removing from session and sending notification");
             connectionManager.removeSessionFromGame(gameID, auth);
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has left the game.");
             connectionManager.broadcast(gameID, auth, notification);

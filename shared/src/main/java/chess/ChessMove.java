@@ -50,8 +50,9 @@ public class ChessMove {
         return this.promotionPiece;
     }
 
+    @Override
     public String toString() {
-        return getClass().getName() + "[startPosition =" + startPosition.toString() + ",endPosition = " + endPosition + "]";
+        return startPosition.toString() + " to " + endPosition.toString();
     }
 
     @Override

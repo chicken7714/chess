@@ -1,5 +1,9 @@
 package chess;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+
 /**
  * Represents a single square position on a chess board
  * <p>
@@ -31,7 +35,17 @@ public class ChessPosition {
     }
 
     public String toString() {
-        return getClass().getName() + "[row =" + row + ",col = " + col + "]";
+        HashMap<Integer, String> colMap = new HashMap<Integer, String>();
+        colMap.put(1, "a");
+        colMap.put(2, "b");
+        colMap.put(3, "c");
+        colMap.put(4, "d");
+        colMap.put(5, "e");
+        colMap.put(6, "f");
+        colMap.put(7, "g");
+        colMap.put(8, "h");
+
+        return colMap.get(this.col) + this.row;
     }
 
     public boolean equals(Object o) {

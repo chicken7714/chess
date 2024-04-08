@@ -42,6 +42,7 @@ public class ChessClient implements ServerMessageHandler {
         this.gameMap = new HashMap<Integer, GameModel>();
         this.chessBoardDrawer = new ChessBoardDrawer();
         this.scanner = scanner;
+        this.ws = null;
     }
 
     public String eval(String input) {
@@ -58,7 +59,6 @@ public class ChessClient implements ServerMessageHandler {
                 };
             } else if (state.equals(State.POSTLOGIN)) {
                 return switch (cmd) {
-                    case "quit" -> quit();
                     case "createGame" -> createGame(params);
                     case "listGames" -> listGames();
                     case "joinGame" -> joinGame(params);
@@ -131,7 +131,7 @@ public class ChessClient implements ServerMessageHandler {
     }
 
     private String joinGame(String... params) throws ResponseException {
-        if (params.length >= 1) {
+        if (params.length >= 2) {
             try {
                 GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
                 JoinGameData joinGameData = new JoinGameData(params[1], targetGame.gameID());
@@ -155,7 +155,7 @@ public class ChessClient implements ServerMessageHandler {
                 throw new ResponseException(400, "Expected <ID> [WHITE|BLACK]");
             }
         }
-        throw new ResponseException(400, "Expected <ID> [WHITE|BLACK|<empty>]");
+        throw new ResponseException(400, "Expected <ID> [WHITE|BLACK]");
     }
 
     private String observeGame(String... params) throws ResponseException {
@@ -164,9 +164,13 @@ public class ChessClient implements ServerMessageHandler {
                 GameModel targetGame = gameMap.get(Integer.parseInt(params[0]));
                 JoinGameData joinGameData = new JoinGameData(null, targetGame.gameID());
                 String authToken = server.joinGame(joinGameData);
+                if (this.ws == null) {
+                    ws = new WebsocketFacade(serverUrl, this);
+                }
                 ws.joinObserver(authToken, targetGame.gameID());
                 state = State.GAMEPLAY;
                 this.teamColor = null;
+                this.gameID = targetGame.gameID();
                 this.authToken = authToken;
                 return String.format("Successfully observing game %s", params[0]);
             } catch (NumberFormatException e) {
@@ -194,14 +198,12 @@ public class ChessClient implements ServerMessageHandler {
 
     private String makeMove(String... params) throws ResponseException {
         if (params.length >= 2) {
-            if (params[0].length() > 2 || params[1].length() > 2) {
-                throw new ResponseException(400, "Start and end positions only can be 2 characters long");
-            }
-            if (!params[0].matches("^[a-h][1-8]$") || !params[1].matches("^[a-h][1-8]$")) {
-                throw new ResponseException(400, "Invalid move input");
-            }
+            checkValidMove(params[0]);
+            checkValidMove(params[1]);
 
-            ChessMove move = getChessMove(params);
+            ChessPosition startPos = getChessPos(params[0]);
+            ChessPosition endPos = getChessPos(params[1]);
+            ChessMove move = new ChessMove(startPos, endPos);
             ws.makeMove(this.authToken, this.gameID, move);
         } else {
             throw new ResponseException(400, "Expected: makeMove <startPos> <endPos>");
@@ -209,7 +211,7 @@ public class ChessClient implements ServerMessageHandler {
         return "";
     }
 
-    private static ChessMove getChessMove(String[] params) {
+    private static ChessPosition getChessPos(String param) {
         Map<String, Integer> rowColMap = new HashMap<>();
         rowColMap.put("a", 1);
         rowColMap.put("b", 2);
@@ -220,15 +222,15 @@ public class ChessClient implements ServerMessageHandler {
         rowColMap.put("g", 7);
         rowColMap.put("h", 8);
 
-        int startPosCol = rowColMap.get(params[0].substring(0, 1).toLowerCase());
-        int startPosRow = Integer.parseInt(params[0].substring(1));
-        int endPosCol = rowColMap.get(params[1].substring(0, 1).toLowerCase());
-        int endPosRow = Integer.parseInt(params[1].substring(1));
-        ChessMove move = new ChessMove(new ChessPosition(startPosRow, startPosCol), new ChessPosition(endPosRow, endPosCol));
-        return move;
+        int posCol = rowColMap.get(param.substring(0, 1).toLowerCase());
+        int posRow = Integer.parseInt(param.substring(1));
+        return new ChessPosition(posRow, posCol);
     }
 
     private String resign() throws ResponseException {
+        if (teamColor == null) {
+            return "You are observing, not able to resign";
+        }
         System.out.println("Are you sure you want to resign? (yes/no)");
         System.out.print(">>> ");
         String line = scanner.nextLine();
@@ -242,8 +244,26 @@ public class ChessClient implements ServerMessageHandler {
 
     }
 
-    private String highlight(String... params) {
-        return "";
+    private String highlight(String... params) throws ResponseException {
+        if (params.length >= 1) {
+            checkValidMove(params[0]);
+            ChessPosition startPos = getChessPos(params[0]);
+            Collection<ChessMove> validMoves = this.game.validMoves(startPos);
+
+            return this.chessBoardDrawer.highlightBoard(this.game, startPos, validMoves, this.teamColor);
+
+        } else {
+            throw new ResponseException(400, "Expected: highlight <startPos>");
+        }
+    }
+
+    private void checkValidMove(String param) throws ResponseException {
+        if (param.length() > 2) {
+            throw new ResponseException(400, "Start and end positions only can be 2 characters long");
+        }
+        if (!param.matches("^[a-h][1-8]$")) {
+            throw new ResponseException(400, "Invalid move input");
+        }
     }
 
     public String help() {
@@ -261,14 +281,13 @@ public class ChessClient implements ServerMessageHandler {
                    -joinGame <ID> [WHITE|BLACK] (join a game of chess with the given ID)
                    -observeGame <ID> (observe a game of chess with the given ID)
                    -logout (logs you out of the application)
-                   -quit (terminates the application, does not log you out!)
                    -help
                    """;
         } else if (state.equals(State.GAMEPLAY)) {
             return """
                    -redraw (redraws chess board)
                    -leave (removes player from game)
-                   -makeMove <startPos> <endPos> (makes the given move on the chess board)
+                   -makeMove <startPos> <endPos> (put column letter first then row number second (i.e. a2 a3))
                    -resign (you forfeit current game and it becomes unplayable)
                    -highlight <startPos> (highlights all possible moves with piece given by startPos)
                    -help
@@ -297,20 +316,22 @@ public class ChessClient implements ServerMessageHandler {
     private void error(String message) {
         ErrorMessage errorMessage = new Gson().fromJson(message, ErrorMessage.class);
         System.out.println(errorMessage.getErrorMessage());
+        System.out.print(">>> ");
     }
 
     private void loadGame(String message) {
-        System.out.println(message);
         LoadGameMessage loadGame = new Gson().fromJson(message, LoadGameMessage.class);
         GameModel game = new Gson().fromJson(loadGame.getGame(), GameModel.class);
 
         updateGame(game.game());
         System.out.println(chessBoardDrawer.generateChessBoard(game.game(), teamColor));
+        System.out.print(">>> ");
     }
 
     private void notification(String message) {
         NotificationMessage notificationMessage = new Gson().fromJson(message, NotificationMessage.class);
 
         System.out.println(notificationMessage.getMessage());
+        System.out.print(">>> ");
     }
 }
