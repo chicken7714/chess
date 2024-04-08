@@ -18,12 +18,7 @@ public class ChessBoardDrawer {
             EscapeSequences.EMPTY);
 
     public String generateChessBoard(ChessGame game, ChessGame.TeamColor teamColor) {
-        String[][] boardIcons = new String[8][8];
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
-                boardIcons[i - 1][j - 1] = getPieceIcon(game.getBoard().getPiece(new ChessPosition(i, j)));
-            }
-        }
+        String [][] boardIcons = initializeBoardIcons(game);
 
         if (teamColor == null || teamColor == ChessGame.TeamColor.WHITE) {
             return generateWhiteBoard(boardIcons);
@@ -33,18 +28,23 @@ public class ChessBoardDrawer {
     }
 
     public String highlightBoard(ChessGame game, ChessPosition startPos, Collection<ChessMove> validMoves, ChessGame.TeamColor teamColor) {
-        String[][] boardIcons = new String[8][8];
-        for (int i = 1; i <= 8; i++) {
-            for (int j = 1; j <= 8; j++) {
-                boardIcons[i - 1][j - 1] = getPieceIcon(game.getBoard().getPiece(new ChessPosition(i, j)));
-            }
-        }
+        String[][] boardIcons = initializeBoardIcons(game);
 
         if (teamColor == null || teamColor == ChessGame.TeamColor.WHITE) {
             return highlightWhiteBoard(boardIcons, startPos, validMoves);
         } else {
             return highlightBlackBoard(boardIcons, startPos, validMoves);
         }
+    }
+
+    private String[][] initializeBoardIcons(ChessGame game) {
+        String[][] boardIcons = new String[8][8];
+        for (int i = 1; i <= 8; i++) {
+            for (int j = 1; j <= 8; j++) {
+                boardIcons[i - 1][j - 1] = getPieceIcon(game.getBoard().getPiece(new ChessPosition(i, j)));
+            }
+        }
+        return boardIcons;
     }
 
     private String generateWhiteBoard(String[][] boardIcons) {

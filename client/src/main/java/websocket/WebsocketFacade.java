@@ -74,8 +74,8 @@ public class WebsocketFacade extends Endpoint {
 
     public void leaveGame(String authToken, int gameID) throws ResponseException {
         try {
-            UserGameCommand leaveCommand = new LeaveCommand(authToken, gameID);
             Gson gson = new GsonBuilder().serializeNulls().create();
+            UserGameCommand leaveCommand = new LeaveCommand(authToken, gameID);
             this.session.getBasicRemote().sendText(gson.toJson(leaveCommand));
         } catch (IOException e) {
             throw new ResponseException(500, e.getMessage());
@@ -84,8 +84,9 @@ public class WebsocketFacade extends Endpoint {
 
     public void resignGame(String authToken, int gameID) throws ResponseException {
         try {
-            UserGameCommand resignCommand = new ResignCommand(authToken, gameID);
             Gson gson = new GsonBuilder().serializeNulls().create();
+            UserGameCommand resignCommand = new ResignCommand(authToken, gameID);
+
             this.session.getBasicRemote().sendText(gson.toJson(resignCommand));
         } catch (IOException e) {
             throw new ResponseException(500, e.getMessage());
