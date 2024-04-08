@@ -22,7 +22,6 @@ public class SQLAuthDAO extends SQLDAO implements AuthDAO {
             var statement = "DELETE FROM auth WHERE auth=?";
             executeUpdate(statement, authToken);
         } else {
-            System.out.println("Throwing Invalid");
             throw new UnauthorizedAccessException("Error: Invalid Auth token");
         }
     }
@@ -35,7 +34,6 @@ public class SQLAuthDAO extends SQLDAO implements AuthDAO {
 
     @Override
     public String checkValidAuth(String authToken) throws DataAccessException {
-        System.out.println("Checking auth");
         try (var conn = DatabaseManager.getConnection()) {
             var statement = "SELECT username FROM auth WHERE auth=?";
             try (var ps = conn.prepareStatement(statement)) {

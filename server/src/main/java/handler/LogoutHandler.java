@@ -22,7 +22,6 @@ public class LogoutHandler {
             res.status(200);
             return "{}";
         } catch (UnauthorizedAccessException e) {
-            System.out.println("Setting status to 401");
             res.status(401);
             return gson.toJson(new ErrorResponse(e.getMessage()));
         } catch (DataAccessException e) {

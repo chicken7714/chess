@@ -30,7 +30,7 @@ public class WebsocketHandler {
     private final ConnectionManager connectionManager = new ConnectionManager();
 
     @OnWebSocketMessage
-    public void onMessage(Session session, String message) throws IOException {
+    public synchronized void onMessage(Session session, String message) throws IOException {
         Gson gson = new GsonBuilder().serializeNulls().create();
         UserGameCommand userGameCommand = gson.fromJson(message, UserGameCommand.class);
         switch (userGameCommand.getCommandType()) {
@@ -206,13 +206,8 @@ public class WebsocketHandler {
         // Game is updated in the database.
         try {
             String username = service.getUsername(auth);
-            System.out.println("passed username");
-            System.out.println(message);
-            System.out.println(gameID);
-            System.out.println(auth);
             String oldGameJson = service.getGame(gameID);;
             GameModel gameModel = gson.fromJson(oldGameJson, GameModel.class);
-            System.out.println("passed gameModel");
 
             if (gameModel.whiteUsername() != null && gameModel.whiteUsername().equals(username)) {
                 GameModel newGameModel = new GameModel(gameID, null, gameModel.blackUsername(), gameModel.gameName(), gameModel.game());
@@ -224,7 +219,6 @@ public class WebsocketHandler {
 
             // Server sends a Notification message to all other clients in that game
             // informing them that the root client left. This applies to both players and observers.
-            System.out.println("Removing from session and sending notification");
             connectionManager.removeSessionFromGame(gameID, auth);
             ServerMessage notification = new NotificationMessage(ServerMessage.ServerMessageType.NOTIFICATION, username + " has left the game.");
             connectionManager.broadcast(gameID, auth, notification);

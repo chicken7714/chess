@@ -16,7 +16,6 @@ public class GameService {
         var authDAO = new SQLAuthDAO();
         var gamesDAO = new SQLGameDAO();
         String authToken = request.authToken();
-        System.out.print("WE IN LISTING GAMES");
 
         String username = authDAO.checkValidAuth(authToken);
         if (username == null) {

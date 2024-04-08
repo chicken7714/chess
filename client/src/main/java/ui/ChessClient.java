@@ -27,13 +27,13 @@ public class ChessClient implements ServerMessageHandler {
     private State state = State.PRELOGIN;
     private String username;
     private String authToken;
-    private HashMap<Integer, GameModel> gameMap;
-    private ChessBoardDrawer chessBoardDrawer;
-    private WebsocketFacade ws;
     private ChessGame game;
     private int gameID;
-    private ChessGame.TeamColor teamColor = null;
-    private Scanner scanner;
+    private ChessGame.TeamColor teamColor;
+    private HashMap<Integer, GameModel> gameMap;
+    private final ChessBoardDrawer chessBoardDrawer;
+    private WebsocketFacade ws;
+    private final Scanner scanner;
 
 
     public ChessClient(String serverUrl, Scanner scanner) {
@@ -43,6 +43,7 @@ public class ChessClient implements ServerMessageHandler {
         this.chessBoardDrawer = new ChessBoardDrawer();
         this.scanner = scanner;
         this.ws = null;
+        this.teamColor = null;
     }
 
     public String eval(String input) {
